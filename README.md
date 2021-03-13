@@ -17,6 +17,8 @@ Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcılar�
 
 Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link ile kolayca katılımcı davet edebilirsiniz.
 
+> **Eklenmesi Düşünülen Özellikler**
+
 ## Sunucu Gereksinimleri
 
 Aşağıdaki uzantıların yüklü olduğu PHP 7.3 veya üstü sürüm gereklidir:
