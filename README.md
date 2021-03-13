@@ -17,6 +17,20 @@ Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcılar�
 
 Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link ile kolayca katılımcı davet edebilirsiniz.
 
+## Sunucu Gereksinimleri
+
+Aşağıdaki uzantıların yüklü olduğu PHP 7.3 veya üstü sürüm gereklidir:
+
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [libcurl](http://php.net/manual/en/curl.requirements.php) HTTP \ CURLRequest kitaplığını kullanmayı planlıyorsanız
+
+Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olun:
+
+- json (varsayılan olarak etkindir - kapatmayın)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
+- xml (varsayılan olarak etkindir - kapatmayın)
+
 
 ## Yardım Alınan Kaynaklar
 
