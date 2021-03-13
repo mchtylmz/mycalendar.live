@@ -17,3 +17,9 @@ Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcılar�
 
 Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link ile kolayca katılımcı davet edebilirsiniz.
 
+
+## Yardım Alınan Kaynaklar
+
+- [CodeIgniter4](https://codeigniter.com/user_guide/intro/index.html)
+- [w3schools / PHP](https://www.w3schools.com/php)
+- [geeksforgeeks / PHP](https://www.geeksforgeeks.org/hard/php/)
