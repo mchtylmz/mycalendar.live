@@ -1,0 +1,6 @@
+CRITICAL - 2021-03-13 15:45:58 --> The framework needs the following extension(s) installed and loaded: {0}.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(224): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(172): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/bootstrap.php(159): CodeIgniter\CodeIgniter->initialize()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(53): require('/Users/mucahity...')
+#4 {main}

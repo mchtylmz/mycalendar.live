@@ -3,6 +3,7 @@ Kişisel, takım veya grup olarak etkinlikleri organize etmeyi sağlamayı amaç
 
 Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir. 
 > **Özellikler**
+- Kullanıcı girişi, üye olma, şifremi unuttum, profil sayfası
 - Etkinlik ekleme, düzenleme
 - Yaklaşan etkinlikler ile ilgili sms, email ile bilgilendirme alma
 - Etkinlik için not, mesaj ekleme
