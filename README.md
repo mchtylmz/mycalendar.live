@@ -1,20 +1,19 @@
 # mycalendar.live
 Kişisel, takım veya grup olarak etkinlikleri organize etmeyi sağlamayı amaçlayan web projesidir.
 
-Etkinlik notlarını, dosyalarını, mesajlarını ve katılımcıları organize etmeyi kolaylaştıran web projesidir. 
+Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir. 
+> **Özellikler**
 - Etkinlik ekleme, düzenleme
-- Yaklaşan etkinlikler ile ilgili bilgilendirme alma
-- Etkinlik için not, mesajlaşma özelliği
+- Yaklaşan etkinlikler ile ilgili sms, email ile bilgilendirme alma
+- Etkinlik için not, mesaj ekleme
 - Etkinlik katılımcı yönetimi
-- Etkinlik Google Meet, Youtube video veya canlı yayın, Zoom, Twitch, Dailymotion ekleyebilme
+- Etkinlik Google Meet, Youtube video veya canlı yayın, Zoom, Twitch, Dailymotion linki ekleme
 - Online etkinlik oluşturma, Fiziksel etkinlik için Google Maps ile konum seçebilme
-- Etkinlik takvimi ile takibi kolaylaştırma
-- Karanlık mod özelliği ile kullanıcı dostu ekran deneyimi
+- Etkinlik takvimi ile etkinlikleri bir arada görme
+- Koyu mod özelliği ile kullanıcı dostu ekran deneyimi
 - Sınırsız etkinlik ekleme ve katılabilme ile kendi zamanını organize etme
-- İstendiği zaman etkinlikten ayrılabilme
-- Etkinlikleri herkese açık veya gizli yapabilme ile özel etkinlik oluşturabilme
-- İş planı ile yapılan işi takip edebilme
-- İş planında not, dosya, mesaj ile güçlendirme
+- İstendiği zaman etkinlikten çıkabilme
+- Etkinlikleri herkese açık veya gizli olarak düzenleme ile özel etkinlik oluşturabilme
 
-Etkinliklerinizi herkese açık paylaşarak kolayca katılımcı davet edebilirsiniz.
+Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link ile kolayca katılımcı davet edebilirsiniz.
 
