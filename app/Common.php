@@ -10,6 +10,9 @@ if (!function_exists('is_method')) {
 if (! function_exists('assets_url')) {
 	function assets_url(string $assets) : string
 	{
+    if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
+      $assets .= '?v=0.' . time();
+    }
 		return site_url('assets/' . $assets);
 	}
 }
@@ -17,6 +20,9 @@ if (! function_exists('assets_url')) {
 if (!function_exists('uploads_url')) {
 	function uploads_url(string $uploads) : string
 	{
+    if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
+      $uploads .= '?v=0.' . time();
+    }
     return site_url('uploads/' . $uploads);
 	}
 }
@@ -24,14 +30,15 @@ if (!function_exists('uploads_url')) {
 if (! function_exists('auth_check')) {
  function auth_check() : bool
  {
-   return false;
+   return session()->get('logged_in') && session()->get('user_id');
  }
 }
 
-if (!function_exists('session_user')){
-	function session_user(string $name = '') : string
+if (!function_exists('auth_user')){
+	function auth_user(string $name) : string
 	{
-		return session()->userdata[$name] ?? null;
+    
+		return session()->user_id ?? null;
 	}
 }
 
@@ -40,7 +47,7 @@ if (!function_exists('site_setting')) {
   {
     $cache_name = "settings_$name";
     // is exists cache
-		$cache_value = cache($cache_name)
+		$cache_value = cache($cache_name);
     if (!$cache_value) {
       // settings value
       $settingsModel = new \App\Models\SettingsModel;
@@ -147,7 +154,7 @@ if (!function_exists('turkish_long_date')) {
 if (!function_exists('generate_permalink')) {
   function generate_permalink(string $string, array $options = []) : string
   {
-     $string = mb_convert_encoding(string $string, 'UTF-8', mb_list_encodings());
+     $string = mb_convert_encoding($string, 'UTF-8', mb_list_encodings());
      $defaults = array(
          'delimiter' => '-',
          'limit' => null,

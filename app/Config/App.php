@@ -23,7 +23,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'https://mycalendar.live/';
+	public $baseURL = 'https://mcht.zeynart.com/ci4/';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -36,7 +36,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $indexPage = 'index.php';
+	public $indexPage = '';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -231,7 +231,7 @@ class App extends BaseConfig
 	 *
 	 * @var boolean
 	 */
-	public $sessionRegenerateDestroy = treu;
+	public $sessionRegenerateDestroy = true;
 
 	/**
 	 * --------------------------------------------------------------------------

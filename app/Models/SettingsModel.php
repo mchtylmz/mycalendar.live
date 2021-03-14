@@ -30,7 +30,7 @@ class SettingsModel extends Model
     public function get(string $name) : string
     {
       $setting = $this->select('value')->where('name', clean_string($name))->first();
-      return $setting->value ?? null;
+      return $setting->value ?? '';
     }
 
     /*

@@ -31,11 +31,11 @@ class Database extends Config
 	 * @var array
 	 */
 	public $default = [
-		'DSN'      => '',
+		'DSN'      => 'pgsql:host=localhost;port=3306;dbname=mchtzeynart_ci4',
 		'hostname' => 'localhost',
-		'username' => '',
-		'password' => '',
-		'database' => '',
+		'username' => 'mchtzeynart_ci4',
+		'password' => 'ilUs4Wt7DWNPFhhc064',
+		'database' => 'mchtzeynart_ci4',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
