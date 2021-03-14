@@ -9,6 +9,7 @@ class Home extends BaseController
 		d(
 			env('CI_ENVIRONMENT')
 		);
+
 		return view('welcome_message');
 	}
 }

@@ -1,4 +1,20 @@
 <?=$this->extend("layout/base_layout")?>
 <?=$this->section("page_content")?>
-page_content _register
+<?php d(
+	session('error')
+); ?>
+<?php echo form_open('auth/register'); ?>
+
+<input type="text" name="first_name" placeholder="İsim" value="<?=old('first_name')?>" autocomplete="off" required>
+<br>
+<input type="text" name="last_name" placeholder="Soyisim" value="<?=old('last_name')?>" autocomplete="off" required>
+<br>
+<input type="email" name="email" placeholder="E-posta Adresi" value="<?=old('email')?>" autocomplete="off" required>
+<br>
+<input type="password" name="password" placeholder="Şifre" autocomplete="off" required>
+<br>
+<button type="submit" name="button">Kayıt Ol</button>
+
+<?php echo form_close(); ?>
+
 <?=$this->endSection()?>

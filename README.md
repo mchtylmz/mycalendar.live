@@ -1,7 +1,7 @@
 # mycalendar.live
 Kişisel, takım veya grup olarak etkinlikleri organize etmeyi sağlamayı amaçlayan web projesidir.
 
-Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir. 
+Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir.
 > **Özellikler**
 - Kullanıcı girişi, üye olma, şifremi unuttum, profil sayfası
 - Etkinlik ekleme, düzenleme
@@ -37,6 +37,6 @@ Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olu
 
 ## Yardım Alınan Kaynaklar
 
-- [CodeIgniter4](https://codeigniter.com/user_guide/intro/index.html)
+- [CodeIgniter4.1.1](https://codeigniter.com/user_guide/intro/index.html)
 - [w3schools / PHP](https://www.w3schools.com/php)
 - [geeksforgeeks / PHP](https://www.geeksforgeeks.org/hard/php/)

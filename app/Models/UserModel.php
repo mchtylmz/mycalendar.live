@@ -23,7 +23,6 @@ class UserModel extends Model
       'insert'   => [
         'first_name'  => 'required|alpha_space|min_length[2]',
         'last_name'   => 'required|alpha_space|min_length[2]',
-        'phone'       => 'numeric|min_length[5]',
         'email'       => 'required|valid_email|is_unique[users.email,id,{id}]',
         'password'    => 'required|min_length[6]'
       ],

@@ -14,7 +14,7 @@ class Auth extends BaseController
 		return view('auth/login');
 	}
 
-	public function login_post()
+	public function loginPost()
 	{
 		return redirect()->to('/auth/login')->withInput()->with('error', 'error');
 	}
@@ -24,9 +24,19 @@ class Auth extends BaseController
 		return view('auth/register');
 	}
 
+	public function registerPost()
+	{
+		return redirect()->to('/auth/register')->withInput()->with('error', 'error');
+	}
+
 	public function forgotPassword()
 	{
-		return view('auth/forgot_password');
+		return view('auth/forgotPassword');
+	}
+
+	public function forgotPasswordPost()
+	{
+		return redirect()->to('/auth/forgotPassword')->withInput()->with('error', 'error');
 	}
 
 	public function logout()

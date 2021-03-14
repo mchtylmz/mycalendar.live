@@ -35,7 +35,9 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Auth::index');
 
 // Post
-$routes->post('auth/login', 'Auth::login_post');
+$routes->post('auth/login', 'Auth::loginPost');
+$routes->post('auth/register', 'Auth::registerPost');
+$routes->post('auth/forgotPassword', 'Auth::forgotPasswordPost');
 
 // Group
 $routes->group('', ['filter' => 'auth'], function($routes) {
