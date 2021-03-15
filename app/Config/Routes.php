@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Auth');
+$routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,28 +32,32 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Auth::index');
+$routes->get('/', 'Auth\Auth::index');
 
 // Auth Group
-$routes->group('auth', function($routes) {
+$routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Auth'], function($routes) {
 	// GET
-	$routes->get('login', 'Auth::login', ['as' => 'login']);
-	$routes->get('register', 'Auth::register', ['as' => 'register']);
-	$routes->get('forgot-password', 'Auth::forgotPassword', ['as' => 'forgot.password']);
-	$routes->get('reset-password/(:alphanum)', 'Auth::resetPassword/$1', ['as' => 'reset.password']);
-	$routes->get('logout', 'Auth::logout', ['as' => 'logout']);
+	$routes->get('', 'Auth::index', ['as' => 'auth.index']);
+	$routes->get('login', 'Login::index', ['as' => 'auth.login']);
+	$routes->get('register', 'Register::index', ['as' => 'auth.register']);
+	$routes->get('forgot-password', 'ForgotPassword::index', ['as' => 'auth.forgotpassword']);
+	$routes->get('reset-password/(:alphanum)', 'ResetPassword::get/$1', ['as' => 'auth.resetpassword']);
+
 	// POST
-	$routes->post('login', 'Auth::loginPost');
-	$routes->post('register', 'Auth::registerPost');
-	$routes->post('forgot-password', 'Auth::forgotPasswordPost');
-	$routes->post('reset-password/(:alphanum)', 'Auth::resetPasswordPost/$1');
+	$routes->post('login', 'Login::post');
+	$routes->post('register', 'Register::post');
+	$routes->post('forgot-password', 'ForgotPassword::post');
+	$routes->post('reset-password/(:alphanum)', 'ResetPassword::post/$1');
+
+	// MATCH
+	$routes->match(['get', 'post'], 'logout', 'Auth::logout', ['as' => 'auth.logout']);
 });
 
 // Panel Group
 $routes->group('', ['filter' => 'auth'], function($routes) {
 	// user panel
 	// get
-	$routes->get('calendar', 'Home::index', ['as' => 'my_calendar']);
+	$routes->get('calendar', 'Home::index', ['as' => 'my.calendar']);
 	// post
 });
 

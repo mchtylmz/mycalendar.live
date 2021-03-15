@@ -12,5 +12,9 @@
 <button type="submit" name="button">Şifre Yenile</button>
 
 <?php echo form_close(); ?>
+<br>
 
+<a href="<?= site_url(route_to('auth.login')) ?>">
+		Giriş
+</a>
 <?=$this->endSection()?>

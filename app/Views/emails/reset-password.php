@@ -18,10 +18,10 @@
                 <spacer size="16"></spacer>
                 <p class="textcenter" style="font-family:Lato,sans-serif;text-align:center">Hi <?php echo $fullname; ?></p>
                 <p class="textcenter" style="font-family:Lato,sans-serif;text-align:center">It happens. Click the link below to reset your password.</p>
-                <a href="<?= site_url(route_to('reset.password', $reset_token)) ?>">
+                <a href="<?= site_url(route_to('auth.resetpassword', $reset_token)) ?>">
                     <button class="large expand" href="#" style="font-family:Lato,sans-serif;height:50px;left:50%;margin:20px -100px;position:relative;top:50%;width:200px">Şifre Sıfırla</button>
                 </a>
-                <p class="textcenter" style="font-family:Lato,sans-serif;text-align:center">Or copy and paste : <span style="color:#FF0000"><?= site_url(route_to('reset.password', $reset_token)) ?></span> into your browsers address bar.</p>
+                <p class="textcenter" style="font-family:Lato,sans-serif;text-align:center">Or copy and paste : <span style="color:#FF0000"><?= site_url(route_to('auth.resetpassword', $reset_token)) ?></span> into your browsers address bar.</p>
                 <p style="font-family:Lato,sans-serif"></p>
             </columns>
         </row>
