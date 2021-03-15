@@ -34,18 +34,29 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
 
-// Post
-$routes->post('auth/login', 'Auth::loginPost');
-$routes->post('auth/register', 'Auth::registerPost');
-$routes->post('auth/forgotPassword', 'Auth::forgotPasswordPost');
-
-// Group
-$routes->group('', ['filter' => 'auth'], function($routes) {
-	//
-	$routes->get('deneme', 'Auth::register');
-
-	//
+// Auth Group
+$routes->group('auth', function($routes) {
+	// GET
+	$routes->get('login', 'Auth::login', ['as' => 'login']);
+	$routes->get('register', 'Auth::register', ['as' => 'register']);
+	$routes->get('forgot-password', 'Auth::forgotPassword', ['as' => 'forgot.password']);
+	$routes->get('reset-password/(:alphanum)', 'Auth::resetPassword/$1', ['as' => 'reset.password']);
+	$routes->get('logout', 'Auth::logout', ['as' => 'logout']);
+	// POST
+	$routes->post('login', 'Auth::loginPost');
+	$routes->post('register', 'Auth::registerPost');
+	$routes->post('forgot-password', 'Auth::forgotPasswordPost');
+	$routes->post('reset-password/(:alphanum)', 'Auth::resetPasswordPost/$1');
 });
+
+// Panel Group
+$routes->group('', ['filter' => 'auth'], function($routes) {
+	// user panel
+	// get
+	$routes->get('calendar', 'Home::index', ['as' => 'my_calendar']);
+	// post
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

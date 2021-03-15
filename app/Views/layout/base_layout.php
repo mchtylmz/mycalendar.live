@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--
- @mchtylmz149
--->
+<!-- @mchtylmz149 -->
 <html lang="tr" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -22,6 +20,9 @@
 
 <!-- Custom Header Code -->
 <?=$this->renderSection("header_code")?>
+<style media="screen">
+  input {width: 100%; height: 48px; margin: 20px;}
+</style>
 <!-- Script -->
 <script type="text/javascript">
  var _base_url  = "<?=site_url()?>";

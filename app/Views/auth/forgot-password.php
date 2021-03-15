@@ -1,11 +1,8 @@
 <?=$this->extend("layout/base_layout")?>
 <?=$this->section("page_content")?>
 
-
-<?php d(
-	session('error')
-); ?>
-<?php echo form_open('auth/forgotPassword'); ?>
+<?= view('layout/alert.php'); ?>
+<?php echo form_open(route_to('forgot-password')); ?>
 
 <input type="email" name="email" placeholder="E-posta Adresi" value="<?=old('email')?>" autocomplete="off" required>
 <br>

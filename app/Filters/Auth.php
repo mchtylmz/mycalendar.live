@@ -10,9 +10,9 @@ class Auth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if(!session()->get('logged_in') || !session()->get('user_id')){
+        if(!auth_check()){
 					session()->destroy();
-					return redirect()->to('/auth/login');
+					return redirect()->route('login');
         }
     }
 

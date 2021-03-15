@@ -1,9 +1,17 @@
 <?php
 
 if (!function_exists('is_method')) {
- function is_method(string $method = 'GET')
+ function is_method(string $method = 'GET') : bool
  {
    return service('request')->getMethod(true) == strtoupper($method);
+ }
+}
+
+if (!function_exists('post_method')) {
+ function post_method(bool $exit = false)
+ {
+   if (!is_method('POST'))
+    return $exit ? exit():redirect()->back();
  }
 }
 
@@ -37,7 +45,7 @@ if (! function_exists('auth_check')) {
 if (!function_exists('auth_user')){
 	function auth_user(string $name) : string
 	{
-    
+
 		return session()->user_id ?? null;
 	}
 }
