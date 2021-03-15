@@ -20,6 +20,10 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 
 > **Eklenmesi Düşünülen Özellikler**
 
+## Veritabanı Modeli
+
+![diagram](https://github.com/mchtylmz/mycalendar.live/blob/master/diagram.png?raw=true)
+
 ## Sunucu Gereksinimleri
 
 Aşağıdaki uzantıların yüklü olduğu PHP 7.3 veya üstü sürüm gereklidir:

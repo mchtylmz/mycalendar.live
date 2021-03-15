@@ -69,7 +69,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $defaultLocale = 'en';
+	public $defaultLocale = 'tr';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class App extends BaseConfig
 	 *
 	 * @var string[]
 	 */
-	public $supportedLocales = ['en'];
+	public $supportedLocales = ['en', 'tr'];
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -338,7 +338,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $CSRFTokenName = 'mycalendar_csrf';
+	public $CSRFTokenName = 'mycalendar_token';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -364,7 +364,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $CSRFCookieName = 'mycalendar_cki_csrf';
+	public $CSRFCookieName = 'mycalendar_cki_token';
 
 	/**
 	 * --------------------------------------------------------------------------

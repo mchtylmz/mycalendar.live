@@ -34,7 +34,7 @@ class ForgotPassword extends Auth
 
 		// send reset password link
 		$email = new \App\Libraries\Email;
-		$sendEmail = $email->to('mucahityilmaz.mail@yandex.com')->reset_password_link([
+		$sendEmail = $email->to($user->email)->reset_password_link([
 			'fullname'    => $user->getFullname(),
 			'reset_token' => $user->reset_token
 		]);
