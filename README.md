@@ -22,7 +22,7 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 
 ## Veritabanı Modeli
 
-![diagram](https://github.com/mchtylmz/mycalendar.live/blob/master/diagram.png?raw=true)
+![diagram](https://github.com/mchtylmz/mycalendar.live/blob/main/diagram.png?raw=true)
 
 ## Sunucu Gereksinimleri
 
