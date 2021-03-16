@@ -6,6 +6,8 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		$data['PageTitle'] = 'Etkinliklerim';
+
+		return view('index', $data);
 	}
 }

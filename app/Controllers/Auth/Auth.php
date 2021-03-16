@@ -19,10 +19,4 @@ class Auth extends BaseController
 		}
 		return redirect()->route('auth.login');
 	}
-
-	public function logout()
-	{
-		session()->destroy();
-		return redirect()->route('auth.login');
-	}
 }

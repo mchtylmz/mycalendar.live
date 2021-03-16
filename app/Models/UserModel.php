@@ -27,23 +27,18 @@ class UserModel extends Model
       'insert'   => [
         'first_name'  => 'required|string|min_length[2]',
         'last_name'   => 'required|string|min_length[2]',
-        'email'       => 'required|valid_email|is_unique[users.email,id,{id}]',
+        'email'       => 'required|valid_email|is_unique[users.email,email,{email}]',
         'password'    => 'required|min_length[6]'
       ],
       'update'   => [
-        'id'	        => 'required|is_natural_no_zero',
         'first_name'  => 'string|min_length[2]',
         'last_name'   => 'string|min_length[2]',
-        'phone'       => 'numeric',
-        'email'       => 'valid_email|is_unique[users.email,id,{id}]',
+        'phone'       => 'numeric|permit_empty',
+        'email'       => 'valid_email|is_unique[users.email,email,{email}]',
       ],
       'changePassword' => [
         'password'    => 'required|min_length[6]',
         'repassword'  => 'required|min_length[6]|matches[password]',
-      ],
-      'changeImage' => [
-        'id'	        => 'required|is_natural_no_zero',
-        'image'       => 'required',
       ]
     ];
     protected $validationMessages = [];

@@ -42,23 +42,36 @@ $routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Aut
 	$routes->get('register', 'Register::index', ['as' => 'auth.register']);
 	$routes->get('forgot-password', 'ForgotPassword::index', ['as' => 'auth.forgotpassword']);
 	$routes->get('reset-password/(:alphanum)', 'ResetPassword::get/$1', ['as' => 'auth.resetpassword']);
-
 	// POST
 	$routes->post('login', 'Login::post');
 	$routes->post('register', 'Register::post');
 	$routes->post('forgot-password', 'ForgotPassword::post');
 	$routes->post('reset-password/(:alphanum)', 'ResetPassword::post/$1');
-
-	// MATCH
-	$routes->match(['get', 'post'], 'logout', 'Auth::logout', ['as' => 'auth.logout']);
 });
 
-// Panel Group
+// User Logged Group
 $routes->group('', ['filter' => 'auth'], function($routes) {
-	// user panel
 	// get
 	$routes->get('calendar', 'Home::index', ['as' => 'my.calendar']);
 	// post
+
+	// Account Group
+	$routes->group('account', function($routes) {
+		// get
+		$routes->get('profile', 'Account::profile', ['as' => 'account.profile']);
+		$routes->get('change-password', 'Account::changePassword', ['as' => 'account.changePassword']);
+		$routes->get('logout', 'Account::logout', ['as' => 'account.logout']);
+		// post
+		$routes->post('update-profile', 'Account::updateProfile', ['as' => 'account.updateProfile']);
+		$routes->post('change-password', 'Account::changePasswordPost', ['as' => 'account.changePassword']);
+	});
+
+	// Settings Group
+	$routes->group('system', function($routes) {
+		// get
+		$routes->get('settings', 'Settings::index', ['as' => 'system.settings']);
+		// post
+	});
 });
 
 /*

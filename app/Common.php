@@ -35,6 +35,13 @@ if (!function_exists('uploads_url')) {
 	}
 }
 
+if (!function_exists('get_gravatar')) {
+	function get_gravatar(string $email) : string
+	{
+    return 'https://www.gravatar.com/avatar/' . md5($email) . '?s=256';
+	}
+}
+
 if (! function_exists('auth_check')) {
  function auth_check() : bool
  {
@@ -43,10 +50,13 @@ if (! function_exists('auth_check')) {
 }
 
 if (!function_exists('auth_user')){
-	function auth_user(string $name) : string
+	function auth_user($user_id = null) 
 	{
-
-		return session()->user_id ?? null;
+    if (auth_check()) {
+      $user = new \App\Models\UserModel();
+      return $user->where('id', clean_number($user_id ?? session('user_id')))->first();
+    }
+    return null;
 	}
 }
 
@@ -68,7 +78,7 @@ if (!function_exists('site_setting')) {
 }
 
 if (! function_exists('clean_number')) {
- function clean_number($number) : number
+ function clean_number($number) : int
  {
    return intval(clean_string($number));
  }
@@ -80,6 +90,13 @@ if (! function_exists('clean_string')) {
    $string = htmlspecialchars(str_replace("\xc2\xa0", '', trim($string)), ENT_QUOTES, 'UTF-8');
    return remove_invisible_characters($string);
  }
+}
+
+if (!function_exists('update_last_seen')){
+	function update_last_seen() : void
+	{
+    // auth_user
+	}
 }
 
 if (!function_exists('case_converter')) {

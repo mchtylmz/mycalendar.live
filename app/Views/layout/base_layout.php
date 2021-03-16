@@ -21,7 +21,7 @@
 <!-- Custom Header Code -->
 <?=$this->renderSection("header_code")?>
 <style media="screen">
-  input {width: 100%; height: 48px; margin: 20px;}
+  input {width: 400px; height: 36px; margin: 5px 20px;}
 </style>
 <!-- Script -->
 <script type="text/javascript">
@@ -31,6 +31,7 @@
 </script>
 </head>
 <body>
+<?=$this->renderSection("nav")?>
 <?=$this->renderSection("page_content")?>
 <!-- Custom Footer Code -->
 <?=$this->renderSection("footer_code")?>
