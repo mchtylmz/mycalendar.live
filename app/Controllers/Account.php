@@ -6,19 +6,21 @@ use \App\Models\UserModel;
 
 class Account extends BaseController
 {
-	public function __construct()
+    /**
+     * @var UserModel
+     */
+    protected $user;
+
+    public function __construct()
 	{
 		$this->user = new UserModel();
 		d(
-			$this->user->find(session('user_id'))
-		);
+		    auth_user()
+        );
 	}
 
 	public function profile()
 	{
-		d(
-			session()->get()
-		);
 		$data['user'] = auth_user();
 
 		return view('account/profile', $data);
@@ -35,39 +37,23 @@ class Account extends BaseController
 			'id'  	     => clean_number(session('user_id')),
 			'first_name' => $this->request->getPost('first_name'),
 			'last_name'  => $this->request->getPost('last_name'),
-			'phone' 	   => $this->request->getPost('phone'),
-			'email' 	   => $this->request->getPost('email'),
+			'phone' 	 => $this->request->getPost('phone'),
+			'email' 	 => $this->request->getPost('email'),
 		];
-		if (!$this->user->save($new_data)) {
-			// error
-			return redirect()->back()->withInput()->with('errors', $this->user->errors());
-		}
-		dd(
-			$path = $this->request->getFile('image')->store('users/', 'user_')
-		);
-		// image
-		if ($image = $this->request->getFile('image')) {
-			if (!$image->isValid()) {
-				// image error
-				return redirect()->back()->with('error', $image->getErrorString());
-			}
-			// upload
-			$image->move(WRITEPATH . 'uploads/users', $image->getRandomName());
-			// image update
+        // image
+        if ($image = $this->request->getFile('image')) {
+            if ($image->isValid() && !$image->hasMoved()) {
+                $image->move(ROOTPATH . 'assets/uploads/users/', $image->getRandomName(), true);
+                $new_data['image'] = 'users/' . $image->getName();
+            }
+        }
 
-d(
-	$image->getName()
-);
-d(
-	$image->getBasename()
-);
-d(
-	$image->getPath()
-);
-			dd(
-				$image
-			);
-		}
+        try {
+            if (!$this->user->save($new_data))
+                return redirect()->back()->withInput()->with('errors', $this->user->errors());
+        } catch (\ReflectionException $e) {
+            return redirect()->back()->withInput()->with('error', lang('Account.error'));
+        }
 
 		// success
         return redirect()->back()->with('success', lang('Account.success'));

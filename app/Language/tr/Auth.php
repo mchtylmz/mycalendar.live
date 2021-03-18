@@ -4,6 +4,8 @@
 return [
 	// General
 	'invalidRequest' => 'Geçersiz URL',
+    'error' => 'Başarısız',
+    'success' => 'Başarılı',
 	// Auth - Login
 	'login' => [
 		'error'   => 'E-posta veya Şifre Hatalı!',

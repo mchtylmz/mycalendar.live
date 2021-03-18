@@ -11,7 +11,7 @@
 <meta name="keywords" content="<?=site_setting('keywords')?>">
 <meta name="author" content="mchtylmz149, mucahityilmaz.mail@gmail.com">
 <meta name="copyright" content="Copyright <?=date('Y')?>">
-<title><?=(isset($PageTitle) ? $PageTitle . ' - ':'') . site_setting('title')?></title>
+<title><?=(isset($PageTitle) ? $PageTitle . ' - ':'') . site_setting('title')?></title>
 <!-- Favicon -->
 <link rel="icon" href="<?=uploads_url(site_setting('favicon'))?>">
 <!-- Fonts -->

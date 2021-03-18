@@ -28,12 +28,10 @@ if (! function_exists('assets_url')) {
 if (!function_exists('uploads_url')) {
 	function uploads_url(string $uploads) : string
 	{
-        if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
-          $uploads .= '?v=0.' . time();
-        }
-        return site_url('uploads/' . $uploads);
+        return assets_url('uploads/' . $uploads);
 	}
 }
+
 
 if (!function_exists('get_gravatar')) {
 	function get_gravatar(string $email) : string
@@ -50,7 +48,7 @@ if (! function_exists('auth_check')) {
 }
 
 if (!function_exists('auth_user')){
-	function auth_user($user_id = null) 
+	function auth_user($user_id = null)
 	{
         if (auth_check()) {
           $user = new \App\Models\UserModel();
@@ -95,7 +93,10 @@ if (! function_exists('clean_string')) {
 if (!function_exists('update_last_seen')){
 	function update_last_seen() : void
 	{
-        // auth_user
+        if (auth_check()) {
+          $userModel = new \App\Models\UserModel();
+          $userModel->updateLastSeen(session('user_id'));
+        }
 	}
 }
 

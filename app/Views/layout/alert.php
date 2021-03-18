@@ -3,8 +3,6 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-
-        <h4 class="alert-heading">Well done!</h4>
         <p><?= session('success') ?></p>
     </div>
 <?php endif ?>
@@ -14,8 +12,6 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-
-        <h4 class="alert-heading">Sorry there was a problem!</h4>
         <p><?= session('error') ?></p>
     </div>
 <?php endif ?>
@@ -25,9 +21,6 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-
-        <h4 class="alert-heading">Sorry there were multiple errors!</h4>
-
         <ul class="">
             <?php foreach (session('errors') as $error) : ?>
             <li><?= $error ?></li>
