@@ -23,7 +23,6 @@ class ResetPassword extends Auth
 
 		$getRule = $this->user->getRule('changePassword');
 		if (!$this->validate($getRule)) {
-			// error
 			return redirect()->back()->withInput()->with('error', lang('Auth.resetPassword.passwordMismatch'));
 		}
 
@@ -38,6 +37,6 @@ class ResetPassword extends Auth
 		}
 
 		// success
-    return redirect()->route('auth.login')->with('success', lang('Auth.resetPassword.success'));
+        return redirect()->route('auth.login')->with('success', lang('Auth.resetPassword.success'));
 	}
 }

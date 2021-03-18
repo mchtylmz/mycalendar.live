@@ -11,8 +11,8 @@ class Auth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if(!auth_check()) {
-					session()->destroy();
-					return redirect()->route('auth.login');
+            session()->destroy();
+            return redirect()->route('auth.login');
         }
     }
 

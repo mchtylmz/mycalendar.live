@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Auth;
 
+use Exception;
+
 class ForgotPassword extends Auth
 {
 
@@ -21,18 +23,20 @@ class ForgotPassword extends Auth
 
 		$user = $this->user->where('email', $this->request->getPost('email'))->first();
 		if (!$user) {
-			// error
-      return redirect()->back()->with('error', lang('Auth.forgotPassword.email'));
-    }
+		    // error
+            return redirect()->back()->with('error', lang('Auth.forgotPassword.email'));
+        }
 
 		// reset token
 		$user->reset_token = random_string('alnum', 24);
-		if (!$this->user->save($user)) {
-			// error
-			return redirect()->back()->withInput()->with('error', lang('Auth.email.errorPasswordSendLink'));
-		}
+        try {
+            if (!$this->user->save($user))
+                throw new Exception(lang('Auth.email.errorPasswordSendLink'));
+        } catch (Exception $e) {
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
+        }
 
-		// send reset password link
+        // send reset password link
 		$email = new \App\Libraries\Email;
 		$sendEmail = $email->to($user->email)->reset_password_link([
 			'fullname'    => $user->getFullname(),
@@ -43,7 +47,7 @@ class ForgotPassword extends Auth
 			return redirect()->back()->withInput()->with('error', lang('Auth.email.errorPasswordSendLink'));
 		}
 		// success
-    return redirect()->route('auth.login')->with('success', lang('Auth.forgotPassword.success'));
+        return redirect()->route('auth.login')->with('success', lang('Auth.forgotPassword.success'));
 	}
 
 }

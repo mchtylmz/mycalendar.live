@@ -76,12 +76,20 @@ class UserModel extends Model
       if ($password != $repassword) {
         return false;
       }
-      return $this->update($id, ['password' => $password, 'reset_token' => null]) ? true:false;
+      try {
+          return $this->update($id, ['password' => $password, 'reset_token' => null]);
+      } catch (\ReflectionException $e) {
+          return false;
+      }
     }
 
     public function updateLastSeen(int $id) : void
     {
-      $this->update($id, ['last_seen' => date('Y-m-d H:i:s')]);
+        try {
+            $this->update($id, ['last_seen' => date('Y-m-d H:i:s')]);
+        } catch (\ReflectionException $e) {
+
+        }
     }
 
     public function login(string $email, string $password)

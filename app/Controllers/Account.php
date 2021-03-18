@@ -70,7 +70,7 @@ d(
 		}
 
 		// success
-    return redirect()->back()->with('success', lang('Account.success'));
+        return redirect()->back()->with('success', lang('Account.success'));
 	}
 
 

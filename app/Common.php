@@ -18,9 +18,9 @@ if (!function_exists('post_method')) {
 if (! function_exists('assets_url')) {
 	function assets_url(string $assets) : string
 	{
-    if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
-      $assets .= '?v=0.' . time();
-    }
+        if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
+          $assets .= '?v=0.' . time();
+        }
 		return site_url('assets/' . $assets);
 	}
 }
@@ -28,94 +28,94 @@ if (! function_exists('assets_url')) {
 if (!function_exists('uploads_url')) {
 	function uploads_url(string $uploads) : string
 	{
-    if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
-      $uploads .= '?v=0.' . time();
-    }
-    return site_url('uploads/' . $uploads);
+        if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
+          $uploads .= '?v=0.' . time();
+        }
+        return site_url('uploads/' . $uploads);
 	}
 }
 
 if (!function_exists('get_gravatar')) {
 	function get_gravatar(string $email) : string
 	{
-    return 'https://www.gravatar.com/avatar/' . md5($email) . '?s=256';
+        return 'https://www.gravatar.com/avatar/' . md5($email) . '?s=256';
 	}
 }
 
 if (! function_exists('auth_check')) {
- function auth_check() : bool
- {
-   return session()->get('logged_in') && session()->get('user_id');
- }
+     function auth_check() : bool
+     {
+        return session()->get('logged_in') && session()->get('user_id');
+     }
 }
 
 if (!function_exists('auth_user')){
 	function auth_user($user_id = null) 
 	{
-    if (auth_check()) {
-      $user = new \App\Models\UserModel();
-      return $user->where('id', clean_number($user_id ?? session('user_id')))->first();
-    }
-    return null;
+        if (auth_check()) {
+          $user = new \App\Models\UserModel();
+          return $user->where('id', clean_number($user_id ?? session('user_id')))->first();
+        }
+        return null;
 	}
 }
 
 if (!function_exists('site_setting')) {
   function site_setting(string $name) : string
   {
-    $cache_name = "settings_$name";
-    // is exists cache
-		$cache_value = cache($cache_name);
-    if (!$cache_value) {
-      // settings value
-      $settingsModel = new \App\Models\SettingsModel;
-      $cache_value = $settingsModel->get($name);
-      // Save into the cache for 30 minutes
-      cache()->save($cache_name, $cache_value, 1800);
-    } // not found
-    return $cache_value;
+      $cache_name = "settings_$name";
+      // is exists cache
+      $cache_value = cache($cache_name);
+      if (!$cache_value) {
+          // settings value
+          $settingsModel = new \App\Models\SettingsModel;
+          $cache_value = $settingsModel->get($name);
+          // Save into the cache for 30 minutes
+          cache()->save($cache_name, $cache_value, 1800);
+      } // not found
+      return $cache_value;
   }
 }
 
 if (! function_exists('clean_number')) {
- function clean_number($number) : int
- {
-   return intval(clean_string($number));
- }
+     function clean_number($number) : int
+     {
+       return intval(clean_string($number));
+     }
 }
 
 if (! function_exists('clean_string')) {
- function clean_string($string) : string
- {
-   $string = htmlspecialchars(str_replace("\xc2\xa0", '', trim($string)), ENT_QUOTES, 'UTF-8');
-   return remove_invisible_characters($string);
- }
+     function clean_string($string) : string
+     {
+       $string = htmlspecialchars(str_replace("\xc2\xa0", '', trim($string)), ENT_QUOTES, 'UTF-8');
+       return remove_invisible_characters($string);
+     }
 }
 
 if (!function_exists('update_last_seen')){
 	function update_last_seen() : void
 	{
-    // auth_user
+        // auth_user
 	}
 }
 
 if (!function_exists('case_converter')) {
   function case_converter(string $keyword, string $transform = 'lowercase') : string
   {
-		$low = [
-      'a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z','q','w','x'
-    ];
-		$upp = [
-      'A','B','C','Ç','D','E','F','G','Ğ','H','I','İ','J','K','L','M','N','O','Ö','P','R','S','Ş','T','U','Ü','V','Y','Z','Q','W','X'
-    ];
-		if($transform == 'uppercase' || $transform == 'u') {
-			$keyword = str_replace( $low, $upp, $keyword );
-			$keyword = function_exists( 'mb_strtoupper' ) ? mb_strtoupper( $keyword ) : $keyword;
-		} elseif($transform == 'lowercase' || $transform == 'l') {
-			$keyword = str_replace( $upp, $low, $keyword );
-			$keyword = function_exists( 'mb_strtolower' ) ? mb_strtolower( $keyword ) : $keyword;
-		}
-		return $keyword;
+      $low = [
+          'a','b','c','ç','d','e','f','g','ğ','h','ı','i','j','k','l','m','n','o','ö','p','r','s','ş','t','u','ü','v','y','z','q','w','x'
+      ];
+      $upp = [
+        'A','B','C','Ç','D','E','F','G','Ğ','H','I','İ','J','K','L','M','N','O','Ö','P','R','S','Ş','T','U','Ü','V','Y','Z','Q','W','X'
+      ];
+      if($transform == 'uppercase' || $transform == 'u') {
+          $keyword = str_replace( $low, $upp, $keyword );
+          $keyword = function_exists( 'mb_strtoupper' ) ? mb_strtoupper( $keyword ) : $keyword;
+      } elseif($transform == 'lowercase' || $transform == 'l') {
+          $keyword = str_replace( $upp, $low, $keyword );
+          $keyword = function_exists( 'mb_strtolower' ) ? mb_strtolower( $keyword ) : $keyword;
+      }
+      return $keyword;
 	}
   // case_converter
 }

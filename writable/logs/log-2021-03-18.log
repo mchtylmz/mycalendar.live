@@ -1,0 +1,225 @@
+CRITICAL - 2021-03-18 12:22:55 --> The framework needs the following extension(s) installed and loaded: {0}.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(224): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(172): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/bootstrap.php(159): CodeIgniter\CodeIgniter->initialize()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(53): require('/Users/mucahity...')
+#4 {main}
+CRITICAL - 2021-03-18 12:23:51 --> The framework needs the following extension(s) installed and loaded: {0}.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(224): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(172): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/bootstrap.php(159): CodeIgniter\CodeIgniter->initialize()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(53): require('/Users/mucahity...')
+#4 {main}
+CRITICAL - 2021-03-18 13:02:25 --> The framework needs the following extension(s) installed and loaded: {0}.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(224): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(172): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/bootstrap.php(159): CodeIgniter\CodeIgniter->initialize()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(53): require('/Users/mucahity...')
+#4 {main}
+CRITICAL - 2021-03-18 13:20:14 --> The framework needs the following extension(s) installed and loaded: mbstring.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(224): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('mbstring')
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(172): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/bootstrap.php(159): CodeIgniter\CodeIgniter->initialize()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(53): require('/Users/mucahity...')
+#4 {main}
+CRITICAL - 2021-03-18 13:20:14 --> Uncaught Error: Call to undefined function CodeIgniter\CLI\mb_strpos() in /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CLI.php:880
+Stack trace:
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CLI.php(163): CodeIgniter\CLI\CLI::parseCommandLine()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CLI.php(1180): CodeIgniter\CLI\CLI::init()
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Autoloader/Autoloader.php(294): include_once('/Users/mucahity...')
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Autoloader/Autoloader.php(265): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/mucahity...')
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Autoloader/Autoloader.php(228): CodeIgniter\Autoloader\Autoloader->loadInNamespace('CodeIgniter\\CLI...')
+#5 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('CodeIgniter\\CLI...')
+#6 /Users/mucahityilm
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2021-03-18 16:23:48 --> Error connecting to the database: No such file or directory
+CRITICAL - 2021-03-18 16:23:48 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Database.php(88): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Config.php(118): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Seeder.php(101): CodeIgniter\Database\Config::forge(NULL)
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Database/Seed.php(73): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(80): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(58): CodeIgniter\CLI\CommandRunner->index(Array)
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(932): CodeIgniter\CLI\CommandRunner->_remap('index', 'db:seed', 'DevUserSeeder')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\CLI\CommandRunner))
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Console.php(61): CodeIgniter\CodeIgniter->run()
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(66): CodeIgniter\CLI\Console->run()
+#12 {main}
+ERROR - 2021-03-18 16:26:20 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2021-03-18 16:26:20 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Database.php(88): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Config.php(118): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Seeder.php(101): CodeIgniter\Database\Config::forge(NULL)
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Database/Seed.php(73): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(80): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(58): CodeIgniter\CLI\CommandRunner->index(Array)
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(932): CodeIgniter\CLI\CommandRunner->_remap('index', 'db:seed', 'DevUserSeeder')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\CLI\CommandRunner))
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Console.php(61): CodeIgniter\CodeIgniter->run()
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(66): CodeIgniter\CLI\Console->run()
+#12 {main}
+ERROR - 2021-03-18 16:27:05 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:27:05 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Database.php(88): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Config.php(118): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Seeder.php(101): CodeIgniter\Database\Config::forge(NULL)
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Database/Seed.php(73): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(80): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(58): CodeIgniter\CLI\CommandRunner->index(Array)
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(932): CodeIgniter\CLI\CommandRunner->_remap('index', 'db:seed', 'DevUserSeeder')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\CLI\CommandRunner))
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Console.php(61): CodeIgniter\CodeIgniter->run()
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(66): CodeIgniter\CLI\Console->run()
+#12 {main}
+ERROR - 2021-03-18 16:27:20 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:27:20 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Database.php(88): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Config.php(118): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Seeder.php(101): CodeIgniter\Database\Config::forge(NULL)
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Database/Seed.php(73): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(80): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(58): CodeIgniter\CLI\CommandRunner->index(Array)
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(932): CodeIgniter\CLI\CommandRunner->_remap('index', 'db:seed', 'DevUserSeeder')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\CLI\CommandRunner))
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Console.php(61): CodeIgniter\CodeIgniter->run()
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(66): CodeIgniter\CLI\Console->run()
+#12 {main}
+ERROR - 2021-03-18 16:28:04 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:28:04 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Database.php(88): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Config.php(118): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Seeder.php(101): CodeIgniter\Database\Config::forge(NULL)
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Database/Seed.php(73): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(80): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(58): CodeIgniter\CLI\CommandRunner->index(Array)
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(932): CodeIgniter\CLI\CommandRunner->_remap('index', 'db:seed', 'DevUserSeeder')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\CLI\CommandRunner))
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Console.php(61): CodeIgniter\CodeIgniter->run()
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(66): CodeIgniter\CLI\Console->run()
+#12 {main}
+ERROR - 2021-03-18 16:28:05 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:28:05 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Database.php(88): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Config.php(118): CodeIgniter\Database\Database->loadForge(Object(CodeIgniter\Database\MySQLi\Connection))
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/Seeder.php(101): CodeIgniter\Database\Config::forge(NULL)
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Database/Seed.php(73): CodeIgniter\Database\Seeder->__construct(Object(Config\Database))
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(80): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/CommandRunner.php(58): CodeIgniter\CLI\CommandRunner->index(Array)
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(932): CodeIgniter\CLI\CommandRunner->_remap('index', 'db:seed', 'DevUserSeeder')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(CodeIgniter\CLI\CommandRunner))
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CLI/Console.php(61): CodeIgniter\CodeIgniter->run()
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/spark(66): CodeIgniter\CLI\Console->run()
+#12 {main}
+ERROR - 2021-03-18 16:30:02 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:30:02 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseConnection.php(618): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT `value`\n...', Array, false)
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Model.php(247): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/BaseModel.php(624): CodeIgniter\Model->doFirst()
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Models/SettingsModel.php(32): CodeIgniter\BaseModel->first()
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Common.php(72): App\Models\SettingsModel->get('description')
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Views/layout/base_layout.php(10): site_setting('description')
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(220): include('/Users/mucahity...')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(236): CodeIgniter\View\View->render('layout/base_lay...', Array, true)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Common.php(1217): CodeIgniter\View\View->render('auth/login', Array, true)
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Controllers/Auth/Login.php(10): view('auth/login')
+#12 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(936): App\Controllers\Auth\Login->index()
+#13 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#14 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/index.php(46): CodeIgniter\CodeIgniter->run()
+#16 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Server/rewrite.php(45): require_once('/Users/mucahity...')
+#17 {main}
+ERROR - 2021-03-18 16:32:17 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:32:17 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseConnection.php(618): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT `value`\n...', Array, false)
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Model.php(247): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/BaseModel.php(624): CodeIgniter\Model->doFirst()
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Models/SettingsModel.php(32): CodeIgniter\BaseModel->first()
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Common.php(72): App\Models\SettingsModel->get('description')
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Views/layout/base_layout.php(10): site_setting('description')
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(220): include('/Users/mucahity...')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(236): CodeIgniter\View\View->render('layout/base_lay...', Array, true)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Common.php(1217): CodeIgniter\View\View->render('auth/login', Array, true)
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Controllers/Auth/Login.php(10): view('auth/login')
+#12 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(936): App\Controllers\Auth\Login->index()
+#13 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#14 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/index.php(46): CodeIgniter\CodeIgniter->run()
+#16 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Server/rewrite.php(45): require_once('/Users/mucahity...')
+#17 {main}
+ERROR - 2021-03-18 16:32:18 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:32:18 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseConnection.php(618): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT `value`\n...', Array, false)
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Model.php(247): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/BaseModel.php(624): CodeIgniter\Model->doFirst()
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Models/SettingsModel.php(32): CodeIgniter\BaseModel->first()
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Common.php(72): App\Models\SettingsModel->get('description')
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Views/layout/base_layout.php(10): site_setting('description')
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(220): include('/Users/mucahity...')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(236): CodeIgniter\View\View->render('layout/base_lay...', Array, true)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Common.php(1217): CodeIgniter\View\View->render('auth/login', Array, true)
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Controllers/Auth/Login.php(10): view('auth/login')
+#12 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(936): App\Controllers\Auth\Login->index()
+#13 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#14 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/index.php(46): CodeIgniter\CodeIgniter->run()
+#16 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Server/rewrite.php(45): require_once('/Users/mucahity...')
+#17 {main}
+ERROR - 2021-03-18 16:32:20 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:32:20 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseConnection.php(618): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT `value`\n...', Array, false)
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Model.php(247): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/BaseModel.php(624): CodeIgniter\Model->doFirst()
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Models/SettingsModel.php(32): CodeIgniter\BaseModel->first()
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Common.php(72): App\Models\SettingsModel->get('description')
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Views/layout/base_layout.php(10): site_setting('description')
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(220): include('/Users/mucahity...')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(236): CodeIgniter\View\View->render('layout/base_lay...', Array, true)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Common.php(1217): CodeIgniter\View\View->render('auth/login', Array, true)
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Controllers/Auth/Login.php(10): view('auth/login')
+#12 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(936): App\Controllers\Auth\Login->index()
+#13 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#14 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/index.php(46): CodeIgniter\CodeIgniter->run()
+#16 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Server/rewrite.php(45): require_once('/Users/mucahity...')
+#17 {main}
+ERROR - 2021-03-18 16:33:24 --> Error connecting to the database: The server requested authentication method unknown to the client
+CRITICAL - 2021-03-18 16:33:24 --> Unable to connect to the database.
+#0 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseConnection.php(618): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT `value`\n...', Array, false)
+#2 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Model.php(247): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/BaseModel.php(624): CodeIgniter\Model->doFirst()
+#4 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Models/SettingsModel.php(32): CodeIgniter\BaseModel->first()
+#5 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Common.php(72): App\Models\SettingsModel->get('description')
+#6 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Views/layout/base_layout.php(10): site_setting('description')
+#7 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(220): include('/Users/mucahity...')
+#8 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/View/View.php(236): CodeIgniter\View\View->render('layout/base_lay...', Array, true)
+#10 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Common.php(1217): CodeIgniter\View\View->render('auth/login', Array, true)
+#11 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/app/Controllers/Auth/Login.php(10): view('auth/login')
+#12 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(936): App\Controllers\Auth\Login->index()
+#13 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth\Login))
+#14 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/index.php(46): CodeIgniter\CodeIgniter->run()
+#16 /Users/mucahityilmaz/Desktop/kodluyoruz/Proje/mycalendar.live/system/Commands/Server/rewrite.php(45): require_once('/Users/mucahity...')
+#17 {main}

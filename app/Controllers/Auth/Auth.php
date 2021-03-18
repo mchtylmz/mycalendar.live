@@ -7,7 +7,12 @@ use \App\Models\UserModel;
 
 class Auth extends BaseController
 {
-	public function __construct()
+    /**
+     * @var UserModel
+     */
+    protected $user;
+
+    public function __construct()
 	{
 		$this->user = new UserModel();
 	}
