@@ -23,7 +23,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'https://mcht.zeynart.com/ci4/';
+	public $baseURL = 'https://mycalendar.live/';
 
 	/**
 	 * --------------------------------------------------------------------------

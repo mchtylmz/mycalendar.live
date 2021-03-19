@@ -7,7 +7,8 @@ class Login extends Auth
 
 	public function index()
 	{
-		return view('auth/login');
+	    $data['PageTitle'] = lang('Auth.login.title');
+		return view('auth/login', $data);
 	}
 
 	public function post()

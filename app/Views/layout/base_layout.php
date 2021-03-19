@@ -17,12 +17,12 @@
 <!-- Fonts -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" type="text/css">
 <!-- Plugins -->
-
+<link rel="stylesheet" href="<?=assets_url('css/backend.min.css')?>?v=1.0.1">
+<link rel="stylesheet" href="<?=assets_url('vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')?>">
+<link rel="stylesheet" href="<?=assets_url('vendor/remixicon/fonts/remixicon.css')?>">
+<link rel="stylesheet" href="<?=assets_url('css/style.css')?>">
 <!-- Custom Header Code -->
 <?=$this->renderSection("header_code")?>
-<style media="screen">
-  input {width: 400px; height: 36px; margin: 5px 20px;}
-</style>
 <!-- Script -->
 <script type="text/javascript">
  var _base_url  = "<?=site_url()?>";
@@ -30,10 +30,32 @@
  var _csrfname  = "<?=csrf_token()?>";
 </script>
 </head>
-<body>
+<body class="fixed-top-navbar <?=uri_string() == 'calendar' ? 'top-nav':''?> <?=dark_mode() ? 'dark':''?>">
+<!-- loader Start -->
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<!-- loader END -->
+<!-- Wrapper Start -->
+<div class="wrapper">
 <?=$this->renderSection("nav")?>
 <?=$this->renderSection("page_content")?>
+</div>
+<!-- Wrapper End-->
+<!-- script -->
+<script src="<?=assets_url('js/backend-bundle.min.js')?>"></script>
+<script src="<?=assets_url('js/customizer.js')?>"></script>
+<script src="<?=assets_url('js/app.js')?>"></script>
 <!-- Custom Footer Code -->
 <?=$this->renderSection("footer_code")?>
+<script type="text/javascript">
+    $("form").submit(function () {
+        var btn_submit = "button[type=submit]";
+        $(btn_submit)
+            .attr('prev-text', $(btn_submit).text())
+            .attr('disabled', 'disabled')
+            .html('<i class="fas fa-spinner fa-pulse"></i>');
+    });
+</script>
 </body>
 </html>

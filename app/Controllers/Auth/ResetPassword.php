@@ -12,7 +12,7 @@ class ResetPassword extends Auth
 			return redirect()->to('auth.forgotpassword')->with('error', lang('Auth.invalidRequest'));
 		}
 
-		$data['pageTitle'] = 'Şifre Sıfırlama';
+		$data['PageTitle'] = lang('Auth.resetPassword.title');
 
 		return view('auth/reset-password', $data);
 	}

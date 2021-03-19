@@ -9,7 +9,8 @@ class ForgotPassword extends Auth
 
 	public function index()
 	{
-		return view('auth/forgot-password');
+	    $data['PageTitle'] = lang('Auth.forgotPassword.title');
+		return view('auth/forgot-password', $data);
 	}
 
 	public function post()

@@ -51,8 +51,17 @@ if (!function_exists('auth_user')){
 	function auth_user($user_id = null)
 	{
         if (auth_check()) {
-          $user = new \App\Models\UserModel();
-          return $user->where('id', clean_number($user_id ?? session('user_id')))->first();
+            $user_id = clean_number($user_id ?? session('user_id'));
+            $cache_name = "users_{$user_id}";
+            // is exists cache
+            $user = cache($cache_name);
+            if (!$user) {
+                $user = new \App\Models\UserModel();
+                $user = $user->where('id', $user_id)->first();
+                // Save into the cache for 30 minutes
+                cache()->save($cache_name, $user, 1800);
+            } // not found
+            return $user;
         }
         return null;
 	}
@@ -79,6 +88,14 @@ if (! function_exists('clean_number')) {
      function clean_number($number) : int
      {
        return intval(clean_string($number));
+     }
+}
+
+if (! function_exists('dark_mode')) {
+     function dark_mode() : bool
+     {
+         helper('cookie');
+         return get_cookie('dark') == 'true';
      }
 }
 

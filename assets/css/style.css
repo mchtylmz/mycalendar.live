@@ -1,0 +1,4 @@
+.fa-pulse {
+    -webkit-animation: fa-spin 0.6s steps(8) infinite;
+    animation: fa-spin 0.6s steps(8) infinite;
+}

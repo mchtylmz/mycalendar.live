@@ -1,30 +1,30 @@
 <?php if (session()->has('success')) : ?>
-    <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+    <div class="alert text-white bg-success mb-3" role="alert">
+        <div class="iq-alert-text text-left"><?= session('success') ?></div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+            <i class="ri-close-line"></i>
         </button>
-        <p><?= session('success') ?></p>
     </div>
 <?php endif ?>
 
 <?php if (session()->has('error')) : ?>
-    <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert">
+    <div class="alert text-white bg-danger mb-3" role="alert">
+        <div class="iq-alert-text text-left"><?= session('error') ?></div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+            <i class="ri-close-line"></i>
         </button>
-        <p><?= session('error') ?></p>
     </div>
 <?php endif ?>
 
 <?php if (session()->has('errors')) : ?>
-    <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <ul class="">
+    <div class="alert text-white bg-danger mb-3" role="alert">
+        <div class="iq-alert-text text-left">
             <?php foreach (session('errors') as $error) : ?>
-            <li><?= $error ?></li>
+            <p><?= $error ?></p>
             <?php endforeach ?>
-        </ul>
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ri-close-line"></i>
+        </button>
     </div>
 <?php endif ?>

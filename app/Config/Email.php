@@ -54,14 +54,14 @@ class Email extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $SMTPUser = 'myagroup@yandex.com';
+	public $SMTPUser = 'mycalendar.live@yandex.com';
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var string
 	 */
-	public $SMTPPass = 'nlzszndrioazinvu';
+	public $SMTPPass = 'rqyldneazduuidmi';
 
 	/**
 	 * SMTP Port

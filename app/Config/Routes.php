@@ -60,20 +60,22 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         // get
         $routes->get('profile', 'Account::profile', ['as' => 'account.profile']);
         $routes->get('change-password', 'Account::changePassword', ['as' => 'account.changePassword']);
+        $routes->get('update-profile', 'Account::updateProfile', ['as' => 'account.updateProfile']);
         $routes->get('logout', 'Account::logout', ['as' => 'account.logout']);
         // post
-        $routes->post('update-profile', 'Account::updateProfile', ['as' => 'account.updateProfile']);
+        $routes->post('update-profile', 'Account::updateProfilePost', ['as' => 'account.updateProfile']);
         $routes->post('change-password', 'Account::changePasswordPost', ['as' => 'account.changePassword']);
-    });
-
-    // Settings Group
-    $routes->group('system', function ($routes) {
-        // get
-        $routes->get('settings', 'Settings::index', ['as' => 'system.settings']);
-        // post
     });
 });
 
+// Admin Logged Group
+$routes->group('admin', ['filter' => 'auth,admin', 'namespace' => 'App\Controllers\Admin'], function ($routes) {
+    // get
+    $routes->get('users', 'Users::index', ['as' => 'admin.users']);
+    $routes->get('events', 'Events::index', ['as' => 'admin.events']);
+    $routes->get('settings', 'Settings::index', ['as' => 'admin.settings']);
+    // post
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -60,6 +60,36 @@ class Users extends Migration
                 'constraint' => '200',
                 'null' => true
             ],
+            'about' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'facebook' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'twitter' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'instagram' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'youtube' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'linkedin' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ]
         ]);
         $this->forge->addField("last_seen timestamp NULL DEFAULT NULL");
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");

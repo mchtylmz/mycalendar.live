@@ -11,7 +11,7 @@ class Email
   public function __construct(array $config = [])
   {
   	$this->email = Services::email();
-    $this->email->setFrom('myagroup@yandex.com', 'My A-Group');
+    $this->email->setFrom('mycalendar.live@yandex.com', 'myCalendar.live');
   }
 
   public function to(string $email)

@@ -9,7 +9,8 @@ class Register extends Auth
 
 	public function index()
 	{
-		return view('auth/register');
+	    $data['PageTitle'] = lang('Auth.register.title');
+		return view('auth/register', $data);
 	}
 
 	public function post()
