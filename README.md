@@ -1,4 +1,4 @@
-# mycalendar.live
+# mycalendar.live 
 Kişisel, takım veya grup olarak etkinlikleri organize etmeyi sağlamayı amaçlayan web projesidir.
 
 Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir.
@@ -19,6 +19,13 @@ Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcılar�
 Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link ile kolayca katılımcı davet edebilirsiniz.
 
 > **Eklenmesi Düşünülen Özellikler**
+
+
+## Demo
+
+[mycalendar.live](https://mycalendar.live)
+- Email : (eklenecek)
+- Şifre : (eklenecek)
 
 ## Veritabanı Modeli
 
@@ -44,3 +51,4 @@ Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olu
 - [CodeIgniter4.1.1](https://codeigniter.com/user_guide/intro/index.html)
 - [w3schools / PHP](https://www.w3schools.com/php)
 - [geeksforgeeks / PHP](https://www.geeksforgeeks.org/hard/php/)
+
