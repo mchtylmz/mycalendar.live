@@ -89,6 +89,16 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '500',
                 'null' => true
+            ],
+            'email_notification' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1'],
+                'default' => '1',
+            ],
+            'sms_notification' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1'],
+                'default' => '0',
             ]
         ]);
         $this->forge->addField("last_seen timestamp NULL DEFAULT NULL");

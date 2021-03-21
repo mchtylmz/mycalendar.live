@@ -4,8 +4,8 @@
 return [
 	// General
 	'invalidRequest' => 'Geçersiz URL',
-    'error' => 'Başarısız',
-    'success' => 'Başarılı',
+    'error' => 'İşlem başarısız oldu!.',
+    'success' => 'İşlem başarıyla tamamlandı!.',
 	// Index
 	'index' => [
 		'title'   => 'Etkinliklerim',

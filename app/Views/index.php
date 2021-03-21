@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="col-2 d-xl-none d-lg-none">
                                     <div class="float-sm-right">
-                                        <a href="page-new-event.html" class="btn btn-primary pr-5 position-relative"
+                                        <a href="<?=site_url(route_to('event.new'))?>" class="btn btn-primary pr-5 position-relative"
                                            style="height: 40px;">
                                             Ekle
                                             <span class="event-add-btn" style="height: 40px;">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 d-none d-xl-block d-lg-block">
                     <div class="float-sm-right">
-                        <a href="page-new-event.html" class="btn btn-primary pr-5 position-relative" style="height: 40px;">
+                        <a href="<?=site_url(route_to('event.new'))?>" class="btn btn-primary pr-5 position-relative" style="height: 40px;">
                             Etkinlik Oluştur
                             <span class="event-add-btn" style="height: 40px;">
                                 <i class="fas fa-plus"></i>

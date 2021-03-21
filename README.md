@@ -23,13 +23,13 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 
 ## Demo
 
-[mycalendar.live](https://mycalendar.live)
+[mycalendar.live](https://mycalendar.live){:target="_blank"}
 - Email : (eklenecek)
 - Şifre : (eklenecek)
 
 ## Veritabanı Modeli
 
-![diagram](https://github.com/mchtylmz/mycalendar.live/blob/main/diagram.png?raw=true)
+![diagram](diagram.png?v=3&raw=true)
 
 ## Sunucu Gereksinimleri
 
@@ -51,4 +51,5 @@ Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olu
 - [CodeIgniter4.1.1](https://codeigniter.com/user_guide/intro/index.html)
 - [w3schools / PHP](https://www.w3schools.com/php)
 - [geeksforgeeks / PHP](https://www.geeksforgeeks.org/hard/php/)
+- [jsfiddle / mchtylmz](https://jsfiddle.net/mchtylmz/p45ahwn6/15/)
 

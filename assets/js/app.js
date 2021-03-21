@@ -401,7 +401,9 @@ Index Of Script
         /*---------- */
         $(".dropdown-menu li a").click(function(){
             var selHtml = $(this).html();
-            var selName = $.trim($(this).text())
+            var selName = $.trim($(this).text());
+            var titleName = $.trim($(this).find('h6').text());
+            if (titleName) selName = titleName;
             $(this).parents('.btn-group').find('.search-replace').html(selHtml);
             $(this).parents('.btn-group').find('.search-query').val(selName);
           });

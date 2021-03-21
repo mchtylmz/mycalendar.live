@@ -9,8 +9,8 @@ class SettingsSeeder extends Seeder
 	public function run()
 	{
 		$data = [
-            'name'   => 'site_title',
-            'value'  => 'myCalendar.LIVE'
+            'name'   => 'admin_url',
+            'value'  => 'panel'
         ];
 
         // Simple Queries

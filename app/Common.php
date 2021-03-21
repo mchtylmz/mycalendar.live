@@ -58,8 +58,8 @@ if (!function_exists('auth_user')){
             if (!$user) {
                 $user = new \App\Models\UserModel();
                 $user = $user->where('id', $user_id)->first();
-                // Save into the cache for 30 minutes
-                cache()->save($cache_name, $user, 1800);
+                if ($user)
+                    cache()->save($cache_name, $user, 1800);
             } // not found
             return $user;
         }

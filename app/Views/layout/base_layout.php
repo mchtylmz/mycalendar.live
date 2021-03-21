@@ -46,8 +46,164 @@
 <script src="<?=assets_url('js/backend-bundle.min.js')?>"></script>
 <script src="<?=assets_url('js/customizer.js')?>"></script>
 <script src="<?=assets_url('js/app.js')?>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?=site_setting('google_map_javascript_key')?>&callback=initMap&libraries=&v=weekly" defer></script>
 <!-- Custom Footer Code -->
 <?=$this->renderSection("footer_code")?>
+<script type="text/javascript">
+    let map;
+    let markers = [];
+    window.map_styles = [
+        /*
+      { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+      { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+      { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+      {
+        featureType: "administrative.locality",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#d59563" }],
+      },
+      {
+        featureType: "poi",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#d59563" }],
+      },
+      {
+        featureType: "poi.park",
+        elementType: "geometry",
+        stylers: [{ color: "#263c3f" }],
+      },
+      {
+        featureType: "poi.park",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#6b9a76" }],
+      },
+      {
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [{ color: "#38414e" }],
+      },
+      {
+        featureType: "road",
+        elementType: "geometry.stroke",
+        stylers: [{ color: "#212a37" }],
+      },
+      {
+        featureType: "road",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#9ca5b3" }],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "geometry",
+        stylers: [{ color: "#746855" }],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "geometry.stroke",
+        stylers: [{ color: "#1f2835" }],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#f3d19c" }],
+      },
+      {
+        featureType: "transit",
+        elementType: "geometry",
+        stylers: [{ color: "#2f3948" }],
+      },
+      {
+        featureType: "transit.station",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#d59563" }],
+      },
+      {
+        featureType: "water",
+        elementType: "geometry",
+        stylers: [{ color: "#17263c" }],
+      },
+      {
+        featureType: "water",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#515c6d" }],
+      },
+      {
+        featureType: "water",
+        elementType: "labels.text.stroke",
+        stylers: [{ color: "#17263c" }],
+      },
+        */
+    ];
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 12,
+            center: {lat: 41.008238, lng: 28.978359},
+            styles: map_styles
+        });
+        const geocoder = new google.maps.Geocoder();
+        map.addListener("click", (mapsMouseEvent) => {
+            document.getElementById("latlng").value = mapsMouseEvent.latLng.toUrlValue();
+            geocodeLatLng(geocoder, map, 'map');
+        });
+        document.getElementById("map_search").addEventListener("click", () => {
+            geocodeLatLng(geocoder, map, 'input');
+        });
+    }
+
+
+    function geocodeLatLng(geocoder, map, clickType = 'input') {
+        const input = document.getElementById("latlng").value;
+        const latlngStr = input.split(",", 2);
+        const latlng = {
+            lat: parseFloat(latlngStr[0]),
+            lng: parseFloat(latlngStr[1]),
+        };
+        var address = document.getElementById("address_location").value;
+        var geocode_json = {address: address};
+        if (clickType === 'map') {
+            geocode_json = {location: latlng};
+        }
+        geocoder.geocode(geocode_json, (results, status) => {
+            if (status === "OK") {
+                if (results[0]) {
+                    map.setCenter(results[0].geometry.location);
+                    deleteMarkers();
+                    map.setZoom(14);
+                    const marker = new google.maps.Marker({
+                        position: results[0].geometry.location,
+                        map: map,
+                    });
+                    markers.push(marker);
+                    document.getElementById("address_location").value = results[0].formatted_address;
+                    document.getElementById("latlng").value = results[0].geometry.location.toUrlValue();
+                } else {
+                    window.alert("Sonuç Bulunamadı!");
+                }
+            } else {
+                window.alert("Geocoder şu nedenle başarısız oldu: " + status);
+            }
+        });
+    }
+
+
+    // Sets the map on all markers in the array.
+    function setMapOnAll(map) {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    // Deletes all markers in the array by removing references to them.
+    function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+    }
+</script>
 <script type="text/javascript">
     $("form").submit(function () {
         var btn_submit = "button[type=submit]";

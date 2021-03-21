@@ -19,10 +19,4 @@ class UserEntity extends Entity
 		}
 		return get_gravatar($this->attributes['email']);
 	}
-
-	public function updateLastSeen()
-	{
-		$this->attributes['last_seen'] = date('Y-m-d H:i:s');
-
-	}
 }

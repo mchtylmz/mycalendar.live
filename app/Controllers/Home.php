@@ -10,4 +10,10 @@ class Home extends BaseController
 
 		return view('index', $data);
 	}
+
+	public function events() {
+	   $data['PageTitle'] = 'Etkinliklerim';
+
+		return view('index', $data);
+    }
 }

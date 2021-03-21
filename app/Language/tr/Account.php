@@ -3,8 +3,8 @@
 // override core en language system validation or define your own en language validation message
 return [
 	// General
-	'invalidRequest' => 'Geçersiz İstek',
-	'success' => 'Güncelleme başarılı',
+	'invalidRequest' => 'Geçersiz istek!.',
+	'success' => 'Bilgiler başarıyla kaydedildi!.',
     'submit' => 'Gönder',
     'save' => 'Kaydet',
     'cancel' => 'Vazgeç',
@@ -13,12 +13,16 @@ return [
         'last_name' => 'Soyisim',
         'email' => 'E-posta Adresi',
         'phone' => 'Telefon Numarası',
-        'about' => 'Hakkımda Kısa Bilgi'
+        'about' => 'Hakkımda Kısa Bilgi',
+        'email_notification' => 'Email Bildirimi',
+        'sms_notification' => 'SMS Bildirimi'
     ],
     'profile' => [
         'editTitle' => 'Profili Düzenle',
         'allowed' => 'yüklenebilir',
-        'userInfo' => 'Kullanıcı Bilgileri'
+        'userInfo' => 'Kullanıcı Bilgileri',
+        'sms_notification' => 'Gelişmeleri SMS olarak al',
+        'email_notification' => 'Gelişmeleri email olarak al'
     ],
     'changePassword' => [
         'title' => 'Şifre Değiştir',

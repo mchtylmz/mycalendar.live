@@ -120,6 +120,28 @@
                                         <label for="about"><?= lang('Account.form.about') ?></label>
                                         <textarea data-length="500" class="form-control" id="about" rows="3" maxlength="500" name="about" placeholder="..."><?= old('about') ?? auth_user()->about ?></textarea>
                                     </div>
+                                    <div class="form-group col-md-12 row align-items-center">
+                                        <label class="col-xl-3 col-lg-4 col-md-5 mb-0"
+                                               for="sms_noti"><?= lang('Account.form.sms_notification') ?></label>
+                                        <div class="col-xl-9 col-lg-8 col-md-7">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="sms_noti" name="sms_notification" value="1" <?= auth_user()->sms_notification == '1' ? 'checked' : '' ?>>
+                                                <label class="custom-control-label"
+                                                       for="sms_noti"><?= lang('Account.profile.sms_notification') ?></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 row align-items-center">
+                                        <label class="col-xl-3 col-lg-4 col-md-5 mb-0"
+                                               for="email_noti"><?= lang('Account.form.email_notification') ?></label>
+                                        <div class="col-xl-9 col-lg-8 col-md-7">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="email_noti" name="email_notification" value="1" <?= auth_user()->email_notification == '1' ? 'checked' : '' ?>>
+                                                <label class="custom-control-label"
+                                                       for="email_noti"><?= lang('Account.profile.email_notification') ?></label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><?= lang('Account.save') ?></button>
                                 <?php echo form_close(); ?>

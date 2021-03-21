@@ -2,3 +2,10 @@
     -webkit-animation: fa-spin 0.6s steps(8) infinite;
     animation: fa-spin 0.6s steps(8) infinite;
 }
+.dark .create-workform .search-dropdown-select .btn-group li .item {
+    background-color: #535f6b;
+    color: #FFF !important;
+}
+.dark .create-workform .search-dropdown-select .search-input {
+    color: #FFF !important;
+}

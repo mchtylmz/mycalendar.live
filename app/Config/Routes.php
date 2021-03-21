@@ -33,6 +33,10 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth\Auth::index');
+// Event Group
+$routes->group('event/(:any)/(:num)', function ($routes) {
+    // get
+});
 
 // Auth Group
 $routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Auth'], function ($routes) {
@@ -55,6 +59,15 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     $routes->get('calendar', 'Home::index', ['as' => 'my.calendar']);
     // post
 
+    // Event Group
+    $routes->group('event', function ($routes) {
+        // get
+        $routes->get('new', 'Events::new', ['as' => 'event.new']);
+        $routes->get('edit/(:num)', 'Events::edit/$1', ['as' => 'event.edit']);
+        $routes->get('remove/(:num)', 'Events::remove/$1', ['as' => 'event.remove']);
+        // post
+    });
+
     // Account Group
     $routes->group('account', function ($routes) {
         // get
@@ -69,8 +82,9 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
 });
 
 // Admin Logged Group
-$routes->group('admin', ['filter' => 'auth,admin', 'namespace' => 'App\Controllers\Admin'], function ($routes) {
+$routes->group(site_setting('admin_url'), ['filter' => 'admin', 'namespace' => 'App\Controllers\Admin'], function ($routes) {
     // get
+    $routes->get('', 'Admin::index', ['as' => 'admin']);
     $routes->get('users', 'Users::index', ['as' => 'admin.users']);
     $routes->get('events', 'Events::index', ['as' => 'admin.events']);
     $routes->get('settings', 'Settings::index', ['as' => 'admin.settings']);
