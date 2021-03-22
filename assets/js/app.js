@@ -404,9 +404,39 @@ Index Of Script
             var selName = $.trim($(this).text());
             var titleName = $.trim($(this).find('h6').text());
             if (titleName) selName = titleName;
+            var titleID = $(this).find('h6').data('id');
+            if (!titleID) {
+                titleID = 'other';
+            }
             $(this).parents('.btn-group').find('.search-replace').html(selHtml);
             $(this).parents('.btn-group').find('.search-query').val(selName);
+            showDetail(titleID);
+            if($("input[name=location_id").length <= 0) {
+                $(this).prepend('<input type="hidden" name="location_id">');
+            }
+            $("input[name=location_id").val(titleID);
           });
+
+        function hideDetails() {
+            $('.location-detail').addClass('d-none').hide();
+            $(".location-detail").each(function(index, element) {
+                $(this).find('input').removeAttr('required');
+                $(this).find('textarea').removeAttr('required');
+            });
+        }
+
+        function showDetail(element) {
+            hideDetails();
+            let elm = $('#' + element);
+            elm.removeClass('d-none').show();
+            elm.find('input').attr('required','required');
+            elm.find('textarea').attr('required','required');
+            elm.find('input').each(function (index, element) {
+                if ($(this).attr('type') == 'hidden') {
+                    $(this).removeAttr('required');
+                }
+            });
+        }
 
         /*---------------------------------------------------------------------
         List and Grid
@@ -437,6 +467,54 @@ Index Of Script
             opens: 'center'
         }, function(start, end, label) {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+
+        $('[data-input="daterange"]').daterangepicker({
+            opens: 'center',
+            minDate: moment(),
+            minYear: parseInt(moment().format('YYYY')),
+            maxYear: parseInt(moment().add(5, 'years').format('YYYY')),
+            locale: {
+                "format": "DD.MM.YYYY",
+                "separator": " - ",
+                "applyLabel": "Uygula",
+                "cancelLabel": "Vazgeç",
+                "fromLabel": "Dan",
+                "toLabel": "a",
+                "customRangeLabel": "Seç",
+                "daysOfWeek": [
+                    "Pt",
+                    "Sl",
+                    "Çr",
+                    "Pr",
+                    "Cm",
+                    "Ct",
+                    "Pz"
+                ],
+                "monthNames": [
+                    "Ocak",
+                    "Şubat",
+                    "Mart",
+                    "Nisan",
+                    "Mayıs",
+                    "Haziran",
+                    "Temmuz",
+                    "Ağustos",
+                    "Eylül",
+                    "Ekim",
+                    "Kasım",
+                    "Aralık"
+                ],
+                "firstDay": 1
+            },
+        }, function (start, end, label) {
+            let next = $('[data-input="daterange"]').next();
+            if (next.attr('name') == 'start_date') {
+                next.val(start.format('YYYY-MM-DD'));
+            }
+            if (next.next().attr('name') == 'end_date') {
+                next.val(end.format('YYYY-MM-DD'));
+            }
         });
 
         $('#view-event').on('click', function(e) {
@@ -653,6 +731,13 @@ Index Of Script
         })
     }
 
+    // clockpicker
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Tamam'
+    });
+
     // Enable all tooltips
     $('[data-toggle="tooltip"]').tooltip();
     // quill
@@ -681,6 +766,10 @@ Index Of Script
         }
     }
 
+    window.minDate = function(date, element) {
+        let min = $('#' + date).val();
+        $('#' + element).attr('min', min);
+    }
 
     $(".file-upload").on('change', function(){
         readURL(this);

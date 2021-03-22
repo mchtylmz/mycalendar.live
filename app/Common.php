@@ -107,6 +107,33 @@ if (! function_exists('clean_string')) {
      }
 }
 
+if (! function_exists('tel'))
+{
+	/**
+	 * tel
+	 *
+	 * @param mixed    $phone        URI string or array of URI segments
+	 * @param string   $title      The link title
+	 * @param mixed    $attributes Any attributes
+	 *
+	 * @return string
+	 */
+	function tel($phone, string $title = '', $attributes = ''): string
+	{
+		if ($title === '')
+		{
+			$title = $phone;
+		}
+
+		if ($attributes !== '')
+		{
+			$attributes = stringify_attributes($attributes);
+		}
+
+		return '<a href="tel:' . $phone . '"' . $attributes . '>' . $title . '</a>';
+	}
+}
+
 if (!function_exists('update_last_seen')){
 	function update_last_seen() : void
 	{

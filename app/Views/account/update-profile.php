@@ -120,6 +120,10 @@
                                         <label for="about"><?= lang('Account.form.about') ?></label>
                                         <textarea data-length="500" class="form-control" id="about" rows="3" maxlength="500" name="about" placeholder="..."><?= old('about') ?? auth_user()->about ?></textarea>
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="event_upcoming"><?= lang('Account.form.event_upcoming') ?></label>
+                                        <input type="number" step="1" min="1" class="form-control" id="event_upcoming" name="event_upcoming" value="<?= old('event_upcoming') ?? auth_user()->event_upcoming ?>" required>
+                                    </div>
                                     <div class="form-group col-md-12 row align-items-center">
                                         <label class="col-xl-3 col-lg-4 col-md-5 mb-0"
                                                for="sms_noti"><?= lang('Account.form.sms_notification') ?></label>

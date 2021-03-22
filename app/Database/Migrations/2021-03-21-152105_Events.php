@@ -34,6 +34,16 @@ class Events extends Migration
                 'constraint' => 11,
                 'null' => false
             ],
+            'location' => [
+                'type' => 'VARCHAR',
+                'constraint' => '30',
+                'null' => true
+            ],
+            'location_text' => [
+                'type' => 'VARCHAR',
+                'constraint' => '300',
+                'null' => true
+            ],
             'status' => [
                 'type' => 'ENUM',
                 'constraint' => ['0', '1', '2', '3'],
@@ -48,7 +58,27 @@ class Events extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['0', '1'],
                 'default' => '0',
-            ]
+            ],
+            'start_date' => [
+                'type' => 'DATE',
+                'null' => true,
+                'default' => null
+            ],
+            'end_date' => [
+                'type' => 'DATE',
+                'null' => true,
+                'default' => null
+            ],
+            'start_time' => [
+                'type' => 'TIME',
+                'null' => true,
+                'default' => null
+            ],
+            'end_time' => [
+                'type' => 'TIME',
+                'null' => true,
+                'default' => null
+            ],
         ]);
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");
         $this->forge->addField("created_at timestamp NULL DEFAULT current_timestamp()");

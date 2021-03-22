@@ -99,7 +99,13 @@ class Users extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['0', '1'],
                 'default' => '0',
-            ]
+            ],
+            'event_upcoming' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => true,
+                'default' => 7,
+            ],
         ]);
         $this->forge->addField("last_seen timestamp NULL DEFAULT NULL");
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");

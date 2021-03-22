@@ -2,10 +2,20 @@
     -webkit-animation: fa-spin 0.6s steps(8) infinite;
     animation: fa-spin 0.6s steps(8) infinite;
 }
-.dark .create-workform .search-dropdown-select .btn-group li .item {
+.dark .create-workform .search-dropdown-select .btn-group li .item,
+.dark .clockpicker-popover .popover-title,
+.dark .clockpicker-popover .popover-content,
+.dark .clockpicker-plate,
+.dark .clockpicker-button {
     background-color: #535f6b;
     color: #FFF !important;
 }
-.dark .create-workform .search-dropdown-select .search-input {
+.dark ckpicker-canvas-bearing, .clockpicker-canv {
+    fill: #FFF !important;
+    stroke: red !important;
+}
+.dark .create-workform .search-dropdown-select .search-input,
+.dark .clockpicker-tick,
+.dark .create-workform .bootstrap-select .dropdown-toggle, .dark .create-workform .form-control{
     color: #FFF !important;
 }

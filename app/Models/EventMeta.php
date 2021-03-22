@@ -16,16 +16,9 @@ class EventMeta extends Model
     protected $useTimestamps = false;
     protected $updatedField  = 'updated_at';
 
-    protected $validationRules    = [];
-    protected $dynamicRules       = [
-      'insert'   => [
+    protected $validationRules    = [
         'name'      => 'required|string|min_length[3]|max_length[500]',
         'event_id'  => 'required|numeric',
-      ],
-      'update'   => [
-        'name'      => 'required|string|min_length[3]|max_length[500]',
-        'event_id'  => 'numeric'
-      ]
     ];
     protected $validationMessages = [];
     protected $skipValidation     = false;
@@ -35,10 +28,6 @@ class EventMeta extends Model
     protected $beforeUpdate       = [];
     protected $afterUpdate        = [];
 
-    public function getRule(string $rule) : array
-  	{
-  		return $this->dynamicRules[$rule];
-  	}
 
 
 }

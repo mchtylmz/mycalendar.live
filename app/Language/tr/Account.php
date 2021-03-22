@@ -15,7 +15,8 @@ return [
         'phone' => 'Telefon Numarası',
         'about' => 'Hakkımda Kısa Bilgi',
         'email_notification' => 'Email Bildirimi',
-        'sms_notification' => 'SMS Bildirimi'
+        'sms_notification' => 'SMS Bildirimi',
+        'event_upcoming' => 'Yaklaşan Etkinlik Süresi'
     ],
     'profile' => [
         'editTitle' => 'Profili Düzenle',

@@ -11,7 +11,7 @@ class EventsModel extends Model
     protected $returnType     = 'App\Entities\EventsEntity';
     protected $useSoftDeletes = true;
     protected $allowedFields = [
-      'slug', 'title', 'content', 'owner', 'status', 'image', 'message_status', 'subscribe_status'
+      'slug', 'title', 'content', 'owner', 'status', 'location', 'location_text', 'message_status', 'subscribe_status', 'start_date', 'end_date', 'start_time', 'end_time'
     ];
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

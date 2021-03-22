@@ -203,14 +203,19 @@
         clearMarkers();
         markers = [];
     }
-</script>
-<script type="text/javascript">
     $("form").submit(function () {
         var btn_submit = "button[type=submit]";
         $(btn_submit)
             .attr('prev-text', $(btn_submit).text())
             .attr('disabled', 'disabled')
             .html('<i class="fas fa-spinner fa-pulse"></i>');
+        if (document.querySelector('#editor')) {
+            let myEditor = document.querySelector('#editor');
+            if ($(this).find('textarea[name=content]').length <= 0) {
+                $(this).append('<textarea style="display:none" name="content"></textarea>');
+            }
+            $(this).find('textarea[name=content]').val(myEditor.children[0].innerHTML);
+        }
     });
 </script>
 </body>

@@ -56,7 +56,7 @@ $routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Aut
 // User Logged Group
 $routes->group('', ['filter' => 'auth'], function ($routes) {
     // get
-    $routes->get('calendar', 'Home::index', ['as' => 'my.calendar']);
+    $routes->get('calendar', 'Events::index', ['as' => 'my.calendar']);
     // post
 
     // Event Group
@@ -66,6 +66,7 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         $routes->get('edit/(:num)', 'Events::edit/$1', ['as' => 'event.edit']);
         $routes->get('remove/(:num)', 'Events::remove/$1', ['as' => 'event.remove']);
         // post
+        $routes->post('new', 'Events::newPost');
     });
 
     // Account Group
