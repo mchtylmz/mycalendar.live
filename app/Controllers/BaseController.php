@@ -6,6 +6,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use \Config\Services;
 
 /**
  * Class BaseController
@@ -28,8 +29,9 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = ['form', 'url', 'text', 'html'];
+    protected $pager;
 
-	/**
+    /**
 	 * Constructor.
 	 *
 	 * @param RequestInterface  $request
@@ -48,5 +50,7 @@ class BaseController extends Controller
 		// $this->session = \Config\Services::session();
 		// db::connect
 		// $this->db = \Config\Database::connect();
+        // pager
+        $this->pager = Services::pager();
 	}
 }

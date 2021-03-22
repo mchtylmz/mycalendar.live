@@ -49,6 +49,7 @@ class Account extends BaseController
 			'instagram'  => $this->request->getPost('instagram'),
 			'youtube' 	 => $this->request->getPost('youtube'),
 			'linkedin' 	 => $this->request->getPost('linkedin'),
+			'event_upcoming' 	 => intval($this->request->getPost('event_upcoming') ?? 7),
 			'email_notification' => $this->request->getPost('email_notification')  ? '1':'0',
 			'sms_notification' 	 => $this->request->getPost('sms_notification')  ? '1':'0',
 		];
