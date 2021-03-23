@@ -23,7 +23,7 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 
 ## Demo
 
-[mycalendar.live](https://mycalendar.live){:target="_blank"}
+[mycalendar.live](https://mycalendar.live)
 - Email : (eklenecek)
 - Şifre : (eklenecek)
 
@@ -33,7 +33,7 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 
 ## Sunucu Gereksinimleri
 
-Aşağıdaki uzantıların yüklü olduğu PHP 7.3 veya üstü sürüm gereklidir:
+Aşağıdaki uzantıların yüklü olduğu PHP 7.3.1 veya üstü sürüm gereklidir:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
 - [libcurl](http://php.net/manual/en/curl.requirements.php) HTTP \ CURLRequest kitaplığını kullanmayı planlıyorsanız
