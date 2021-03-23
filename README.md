@@ -29,7 +29,7 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 
 ## Veritabanı Modeli
 
-![diagram](diagram.png?v=4&raw=true)
+![diagram](diagram-v4.png?raw=true)
 
 ## Sunucu Gereksinimleri
 
