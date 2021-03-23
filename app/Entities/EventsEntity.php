@@ -1,9 +1,25 @@
 <?php namespace App\Entities;
 
 use CodeIgniter\Entity;
+use Exception;
+use \App\Models\UserModel;
 
 class EventsEntity extends Entity
 {
+    public function getUser()
+    {
+        $user_id = $this->attributes['owner'];
+        $cache_name = "users_{$user_id}";
+        // is exists cache
+        $user = cache($cache_name);
+        if (!$user) {
+            $user = (new UserModel())->where('id', $user_id)->first();
+            if ($user)
+                cache()->save($cache_name, $user, 1800);
+        } // not found
+        return $user;
+    }
+
     public function getStartDate()
     {
         return date('d M', strtotime($this->attributes['start_date']));
@@ -24,45 +40,66 @@ class EventsEntity extends Entity
         return date('H:i', strtotime($this->attributes['end_time']));
     }
 
-    public function getLocation()
+    public function getMapsLink(array $maps)
     {
-        $event_meta = new \App\Models\EventMeta();
-        $meta = $event_meta
-            ->where('event_id', $this->attributes['id'])
-            ->where('name', $this->attributes['location'])
-            ->first();
-        switch ($this->attributes['location']) {
+        return anchor('https://www.google.com/maps/place/' . (trim($maps[0]) ?? '0,0'), $maps[1] ?? 'Google Maps', [
+            'title' => $maps[1] ?? 'Google Maps',
+            'target' => '_blank',
+        ]);
+    }
+
+    public function getPhoneLink(string $phone)
+    {
+        return tel($phone, $phone, ['title' => $phone]);
+    }
+
+    public function getUrl(string $link, string $key = 'site'): string
+    {
+        switch ($key) {
             case 'meet':
-                $meta_url = 'https://meet.google.com/';
-                break;
-            case 'zoom':
-                $meta_url = 'https://zoom.us/j/';
+                $uri = 'https://meet.google.com/' . $link;
+                $title = 'Google Meet';
                 break;
             case 'youtube':
-                $meta_url = 'https://youtube.com/';
+                $uri = 'https://youtube.com/' . $link;
+                $title = 'Youtube';
+                break;
+            case 'zoom':
+                $uri = 'https://zoom.us/j/' . $link;
+                $title = 'Zoom';
                 break;
             case 'twitch':
-                $meta_url = 'https://twitch.tv/';
-                break;
-            case 'phone':
-                return tel($meta->value, $this->attributes['location_text'], [
-                    'title' => $this->attributes['location_text'],
-                    'class' => 'text-dark'
-                ]);
-                break;
-            case 'maps':
-                $maps = unserialize($meta->value);
-                return anchor('https://www.google.com/maps/place/' . $maps[0], $maps[1], [
-                    'title' => $maps[1],
-                    'target' => '_blank',
-                    'class' => 'text-dark'
-                ]);
+                $uri = 'https://twitch.tv/' . $link;
+                $title = 'Twitch';
                 break;
         }
-        return anchor(($meta_url ?? site_url()) . $meta->value, $this->attributes['location_text'], [
-            'title' => $this->attributes['location_text'],
+        return anchor($uri ?? $link, $title ?? $this->attributes['title'], [
+            'title' => $title ?? $this->attributes['title'],
             'target' => '_blank',
-            'class' => 'text-dark'
         ]);
+    }
+
+    public function getLocation(string $key = 'maps')
+    {
+        try {
+            $location = json_decode($this->attributes['location'], true);
+            if ($location && is_array($location)) {
+                foreach (array_keys($location) as $key) :
+                    if (isset($location[$key]) && $location[$key]) {
+                        if ($key == 'maps') {
+                            if (empty($location['maps'][0])) continue;
+                            return $this->getMapsLink($location['maps']);
+                        }
+                        if ($key == 'phone') {
+                            return $this->getPhoneLink($location['phone']);
+                        }
+                        return $this->getUrl($location[$key], $key);
+                    }
+                endforeach;
+            }
+            return $this->getUrl('site');
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }

@@ -14,8 +14,61 @@
     fill: #FFF !important;
     stroke: red !important;
 }
+.link {
+    color: #535f6b;
+}
 .dark .create-workform .search-dropdown-select .search-input,
 .dark .clockpicker-tick,
-.dark .create-workform .bootstrap-select .dropdown-toggle, .dark .create-workform .form-control{
+.dark .create-workform .bootstrap-select .dropdown-toggle, .dark .create-workform .form-control,
+.dark .link,
+.dark .bootstrap-tagsinput input {
     color: #FFF !important;
+}
+.bootstrap-tagsinput .tag {
+    background-color: #535f6b;
+    padding: 1.5px 4px;
+}
+
+select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select.minimal {
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+select.minimal:focus {
+  background-image:
+    linear-gradient(45deg, #027dbf 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, #027dbf 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+  border-color: #027dbf;
+  outline: 0;
+}
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
 }

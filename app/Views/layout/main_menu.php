@@ -4,7 +4,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                     <i class="ri-menu-line wrapper-menu"></i>
-                    <a href="<?=site_url(route_to('my.calendar'))?>" class="header-logo">
+                    <a href="<?=site_url(auth_check() ? route_to('my.calendar'):'/')?>" class="header-logo">
                         <img src="../assets/images/logo.png" class="img-fluid rounded-normal light-logo <?=dark_mode() ? 'd-none':''?>" alt="logo">
                         <img src="../assets/images/logo-white.png" class="img-fluid rounded-normal darkmode-logo <?=dark_mode() ? '':'d-none'?>"
                              alt="logo">
@@ -13,7 +13,7 @@
                 <div class="iq-menu-horizontal">
                     <nav class="iq-sidebar-menu">
                         <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                            <a href="<?=site_url(route_to('my.calendar'))?>" class="header-logo">
+                            <a href="<?=site_url(auth_check() ? route_to('my.calendar'):'/')?>" class="header-logo">
                                 <img src="../assets/images/logo.png" class="img-fluid rounded-normal" alt="logo">
                             </a>
                             <div class="iq-menu-bt-sidebar">

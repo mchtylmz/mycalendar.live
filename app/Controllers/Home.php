@@ -8,6 +8,8 @@ class Home extends BaseController
 	{
 		$data['PageTitle'] = 'Etkinliklerim';
 
+		return redirect()
+                    ->route('event.edit', [5]);
 		return view('index', $data);
 	}
 

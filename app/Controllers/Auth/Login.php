@@ -16,13 +16,11 @@ class Login extends Auth
 		post_method();
 
 		if (!$this->validate($this->user->getRule('login'))) {
-			// error
 			return redirect()->back()->withInput()->with('error', lang('Auth.login.error'));
 		}
 
-		$user = $this->user->login($this->request->getPost('email'), $this->request->getPost('password'));
+		$user = $this->user->login($this->request->getPost('username'), $this->request->getPost('password'));
 		if (!$user) {
-			// error
 			return redirect()->back()->withInput()->with('error', lang('Auth.login.error'));
 		}
 

@@ -16,17 +16,27 @@ class Account extends BaseController
 		$this->user = new UserModel();
 	}
 
+	public function guestProfile(string $username)
+	{
+	    $user = $this->user->where('username', clean_string($username))->first();
+		if (!$user) {
+		    return redirect()->to('/');
+        }
+
+		$data['PageTitle'] = $user->getFullname();
+		$data['User'] = $user;
+		return view('account/guest-profile', $data);
+	}
+
 	public function profile()
 	{
 		$data['PageTitle'] = auth_user()->getFullname();
-
 		return view('account/profile', $data);
 	}
 
 	public function updateProfile()
 	{
 		$data['PageTitle'] = auth_user()->getFullname();
-
 		return view('account/update-profile', $data);
 	}
 
@@ -39,6 +49,7 @@ class Account extends BaseController
 
 		$new_data = [
 			'id'  	     => clean_number(session('user_id')),
+            'username'   => $this->request->getPost('username'),
 			'first_name' => $this->request->getPost('first_name'),
 			'last_name'  => $this->request->getPost('last_name'),
 			'phone' 	 => $this->request->getPost('phone'),
@@ -93,10 +104,13 @@ class Account extends BaseController
 			return redirect()->back()->with('error', lang('Account.changePassword.passwordMismatch'));
 		}
 
-		if (!$this->user->changePassword(auth_user()->id, $this->request->getPost('password'), $this->request->getPost('repassword'))) {
-			// error
-			return redirect()->back()->with('errors', $this->user->errors());
-		}
+		$change = $this->user->changePassword(
+		    auth_user()->id,
+            $this->request->getPost('password'),
+            $this->request->getPost('repassword')
+        );
+		if (!$change)
+		    return redirect()->back()->with('errors', $this->user->errors());
         // cache clean
         cache()->clean();
 		// success

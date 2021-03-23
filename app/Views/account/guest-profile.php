@@ -4,10 +4,7 @@
     <div class="container-fluid container">
         <div class="row mt-3">
             <div class="col-lg-4">
-                <?= view('account/profile-sidebar', [
-                    'User' => auth_user(),
-                    'showPhone' => true
-                ]) ?>
+                <?= view('account/profile-sidebar', ['User' => $User]) ?>
             </div>
             <div class="col-lg-8">
                 <div class="card card-block mb-3">

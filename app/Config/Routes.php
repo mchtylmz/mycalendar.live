@@ -37,6 +37,8 @@ $routes->get('/', 'Auth\Auth::index');
 $routes->group('event/(:any)/(:num)', function ($routes) {
     // get
 });
+// Guest User Profile
+$routes->get('my/(:any)', 'Account::guestProfile/$1', ['as' => 'guest.profile']);
 
 // Auth Group
 $routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Auth'], function ($routes) {

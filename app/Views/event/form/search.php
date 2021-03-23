@@ -1,10 +1,22 @@
-<div class="d-flex flex-wrap align-items-center mb-4">
-    <div class="iq-search-bar search-device mb-0 pr-3">
-        <input type="text" class="text search-input" placeholder="Ara..." name="q"
-               value="<?= service('request')->getGet('q') ?? '' ?>" required>
+<div class="row align-items-center p-2">
+    <div class="col-lg-3 mb-2">
+        <div class="iq-search-bar search-device mb-0" style="width: 100%;">
+        <select class="text search-input minimal" name="c">
+            <option value="">Tüm Kategoriler</option>
+            <?php foreach (categories() as $key => $cat) : ?>
+            <option value="<?=$cat['id']?>" <?= $c == $cat['id'] ? 'selected':''?>><?=$cat['name']?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
-    <div class="float-sm-right">
-        <button type="submit" class="btn btn-primary pr-5 position-relative" style="height: 40px;">
+    </div>
+    <div class="col-lg-7 mb-2">
+        <div class="iq-search-bar search-device mb-0" style="width: 100%;">
+        <input type="text" class="text search-input" placeholder="Ara..." name="q"
+               value="<?= $q ?? '' ?>" required>
+    </div>
+    </div>
+    <div class="col-lg-2 mb-2">
+        <button type="submit" class="btn btn-primary btn-block pr-5 position-relative" style="height: 40px;">
             Ara
             <span class="event-add-btn" style="height: 40px;"><i class="fas fa-search"></i></span>
         </button>

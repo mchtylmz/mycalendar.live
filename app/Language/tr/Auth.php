@@ -8,7 +8,7 @@ return [
     'success' => 'İşlem başarıyla tamamlandı!.',
 	// Auth - Login
 	'login' => [
-		'error'   => 'E-posta veya Şifre Hatalı!',
+		'error'   => 'E-posta/Kullanıcı Adı veya Şifre Hatalı!',
 		'success' => 'Başarıyla giriş yapıldı',
         'title'   => 'Giriş Yap'
 	],
@@ -19,7 +19,7 @@ return [
 	],
 	// Auth - forgotPassword
 	'forgotPassword' => [
-		'email'   => 'Eposta Adresiniz Hatalı!.',
+		'email'   => 'Eposta Adresi / Kullanıcı Adı Hatalı!.',
 		'success' => 'Şifre sıfırlama linkiniz mail adresine gönderildi',
         'title'   => 'Şifre Unuttum?'
 	],
@@ -32,6 +32,7 @@ return [
     // Form
     'form' => [
         'email' => 'E-posta Adresi',
+        'email_or_username' => 'E-posta / Kullanıcı Adı',
         'password' => 'Parolanız',
         'repassword' => 'Tekrar Parolanız',
         'first_name' => 'İsim',

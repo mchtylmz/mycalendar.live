@@ -134,6 +134,19 @@ if (! function_exists('tel'))
 	}
 }
 
+if (!function_exists('categories')){
+	function categories() : array
+	{
+        return [
+            ['id' => 1, 'name' => 'Deneme'],
+            ['id' => 2, 'name' => 'Deneme 1'],
+            ['id' => 3, 'name' => 'Deneme 2'],
+            ['id' => 4, 'name' => 'Deneme 3'],
+            ['id' => 5, 'name' => 'Deneme 4'],
+        ];
+	}
+}
+
 if (!function_exists('update_last_seen')){
 	function update_last_seen() : void
 	{

@@ -35,14 +35,13 @@ class Events extends Migration
                 'null' => false
             ],
             'location' => [
-                'type' => 'VARCHAR',
-                'constraint' => '30',
+                'type' => 'JSON',
                 'null' => true
             ],
-            'location_text' => [
-                'type' => 'VARCHAR',
-                'constraint' => '300',
-                'null' => true
+            'category' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => false
             ],
             'status' => [
                 'type' => 'ENUM',
@@ -58,6 +57,10 @@ class Events extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['0', '1'],
                 'default' => '0',
+            ],
+            'tags'=> [
+                'type' => 'TEXT',
+                'null' => true
             ],
             'start_date' => [
                 'type' => 'DATE',

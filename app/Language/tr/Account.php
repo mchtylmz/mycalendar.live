@@ -12,6 +12,7 @@ return [
         'first_name' => 'İsim',
         'last_name' => 'Soyisim',
         'email' => 'E-posta Adresi',
+        'username' => 'Kullanıcı Adı',
         'phone' => 'Telefon Numarası',
         'about' => 'Hakkımda Kısa Bilgi',
         'email_notification' => 'Email Bildirimi',

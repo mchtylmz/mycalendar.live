@@ -12,8 +12,8 @@
                             <div class="row pt-3 mb-3">
                                 <div class="col-lg-12">
                                     <div class="floating-input form-group">
-                                        <input class="form-control" type="text" name="email" id="email" value="<?=old('email')?>" autocomplete="off" required/>
-                                        <label class="form-label" for="email"><?=lang('Auth.form.email')?></label>
+                                        <input class="form-control" type="text" name="username" id="email" value="<?=old('email')?>" autocomplete="off" required/>
+                                        <label class="form-label" for="email"><?=lang('Auth.form.email_or_username')?></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">

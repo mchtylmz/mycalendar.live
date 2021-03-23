@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use \App\Models\EventsModel;
-use \App\Models\EventMeta;
 use \App\Models\EventMessageModel;
+use App\Models\EventSubscriberModel;
 use Exception;
 
 class Events extends BaseController
@@ -15,25 +15,24 @@ class Events extends BaseController
     protected $event;
 
     /**
-     * @var EventMeta
-     */
-    protected $event_meta;
-
-    /**
      * @var EventMessageModel
      */
     protected $event_message;
     /**
      * @var int
      */
-    private $perPage;
+    protected $perPage;
+    /**
+     * @var EventSubscriberModel
+     */
+    protected $event_subscriber;
 
     public function __construct()
 	{
 		$this->event = new EventsModel();
-		$this->event_meta = new EventMeta();
 		$this->event_message = new EventMessageModel();
-		$this->perPage = 9;
+		$this->event_subscriber = new EventSubscriberModel();
+		$this->perPage = 2;
 	}
 
 	public function index()
@@ -49,6 +48,9 @@ class Events extends BaseController
 		    $data['active_tab'] = '4';
         }
 
+		$search_category = service('request')->getGet('c');
+		$search_title = service('request')->getGet('q');
+
 		/*
 		 * dd(
 		    $this->event->join('event_meta', 'event_meta.event_id = events.id', 'LEFT')->findAll()
@@ -56,7 +58,7 @@ class Events extends BaseController
 		*/
         $data['events_all'] = $this->event
             ->where('owner', auth_user()->id)
-            ->orderBy('id', 'DESC')
+            ->orderBy('events.id', 'DESC')
             ->paginate($this->perPage, 'all');
 
         $events_upcoming =  new EventsModel();
@@ -74,7 +76,6 @@ class Events extends BaseController
 	public function new()
 	{
 		$data['PageTitle'] = 'Yeni Etkinlik Oluştur';
-
 		return view('event/new', $data);
 	}
 
@@ -86,15 +87,25 @@ class Events extends BaseController
 		$this->event->setValidationRules($getRule);
 
         $new_data = [
-            'slug' => generate_permalink($this->request->getPost('title')),
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
             'owner' => auth_user()->id,
             'status' => intval($this->request->getPost('status') ?? 0),
-            'location' => $this->request->getPost('location_id'),
-            'location_text' => $this->request->getPost('location'),
+            'location' => json_encode([
+                'maps' => [
+                    $this->request->getPost('latlng'),
+                    $this->request->getPost('address')
+                ],
+                'phone'   => $this->request->getPost('phone'),
+                'meet'    => $this->request->getPost('meet'),
+                'youtube' => $this->request->getPost('youtube'),
+                'twitch'  => $this->request->getPost('twitch'),
+                'zoom'    => $this->request->getPost('zoom')
+            ]),
             'message_status' => $this->request->getPost('message_status'),
             'subscribe_status' => $this->request->getPost('subscribe_status'),
+            'category' => $this->request->getPost('category'),
+            'tags' => $this->request->getPost('tags'),
             'start_date' => date('Y-m-d', strtotime($this->request->getPost('start_date'))),
             'end_date' => date('Y-m-d', strtotime($this->request->getPost('end_date'))),
             'start_time' => date('H:i', strtotime($this->request->getPost('start_time'))),
@@ -103,23 +114,6 @@ class Events extends BaseController
 
 		try {
             if (!$this->event->insert($new_data))
-                return redirect()->back()->withInput()->with('errors', $this->event->errors());
-
-            $meta_data = [
-                'event_id' => $this->event->getInsertID(),
-                'name'  => $this->request->getPost('location_id'),
-                'value' => $this->request->getPost($this->request->getPost('location_id'))
-            ];
-            // maps
-            if ($meta_data['name'] == 'maps') {
-                $meta_data['value'] = serialize([
-                    $this->request->getPost('latlng'),
-                    $this->request->getPost('address')
-                ]);
-            }
-
-            // meta insert
-            if (!$this->event_meta->insert($meta_data))
                 return redirect()->back()->withInput()->with('errors', $this->event->errors());
         } catch (Exception $e) {
             return redirect()->back()->withInput()->with('error', $e->getMessage());

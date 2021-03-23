@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Models\EventMessageModel;
 
 class EventsModel extends Model
 {
@@ -11,7 +12,7 @@ class EventsModel extends Model
     protected $returnType     = 'App\Entities\EventsEntity';
     protected $useSoftDeletes = true;
     protected $allowedFields = [
-      'slug', 'title', 'content', 'owner', 'status', 'location', 'location_text', 'message_status', 'subscribe_status', 'start_date', 'end_date', 'start_time', 'end_time'
+      'slug', 'title', 'content', 'owner', 'status', 'location', 'message_status', 'subscribe_status', 'start_date', 'end_date', 'start_time', 'end_time', 'tags', 'category'
     ];
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -47,10 +48,7 @@ class EventsModel extends Model
 
     public function slug(array $data)
     {
-      if (!isset($data['data']['slug'])) {
-        $data['data']['slug'] = generate_permalink($data['data']['title']);
-      }
-      $data['data']['slug'] = generate_permalink($data['data']['slug']);
+      $data['data']['slug'] = generate_permalink($data['data']['slug'] ?? $data['data']['title']);
       // update slug
       return $data;
     }
@@ -58,10 +56,18 @@ class EventsModel extends Model
     public function clear(array $data)
     {
       if (isset($data['purge']) && $data['purge']) {
-          $event_id = intval($data['id'] ?? 0);
-        // meta ve message sil
+          // message clear
+          $event_message = new EventMessageModel();
+          $event_message->where('event_id', $data['id'] ?? 0)->delete();
+          // subscriber clear
+          // $this->where('id', 12)->delete();
       }
       return $data;
     }
 
+    public function withSubscriber()
+    {
+      $this->join('event_subscriber', 'event_subscriber.event_id = events.id', 'LEFT');
+      return $this;
+    }
 }

@@ -4,20 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EventMeta extends Model
+class EventSubscriberModel extends Model
 {
-    protected $table          = 'event_meta';
+    protected $table          = 'event_subscriber';
     protected $primaryKey     = 'id';
-    protected $returnType     = 'App\Entities\EventMetaEntity';
+    protected $returnType     = 'App\Entities\EventSubscriberEntity';
     protected $useSoftDeletes = false;
     protected $allowedFields = [
-      'event_id', 'name', 'value'
+      'event_id', 'user_id', 'request_subscribe', 'request_message'
     ];
     protected $useTimestamps = false;
+    protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
     protected $validationRules    = [
-        'name'      => 'required|string|min_length[3]|max_length[500]',
+        'user_id'   => 'required|numeric',
         'event_id'  => 'required|numeric',
     ];
     protected $validationMessages = [];

@@ -2,7 +2,7 @@
 
 use CodeIgniter\Entity;
 
-class EventMetaEntity extends Entity
+class EventSubscriberEntityEntity extends Entity
 {
 
 }

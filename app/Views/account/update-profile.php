@@ -47,7 +47,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">twitter.com/</span>
                                 </div>
-                                <input type="text" class="form-control" name="factwitterebook"
+                                <input type="text" class="form-control" name="twitter"
                                        value="<?= old('twitter') ?? auth_user()->twitter ?>">
                             </div>
                         </div>
@@ -96,6 +96,11 @@
                         <div class="new-user-info">
                             <form>
                                 <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="username"><?= lang('Account.form.username') ?></label>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                               value="<?= old('username') ?? auth_user()->username ?>" required>
+                                    </div>
                                     <div class="form-group col-md-6">
                                         <label for="fname"><?= lang('Account.form.first_name') ?></label>
                                         <input type="text" class="form-control" id="fname" name="first_name"

@@ -4,12 +4,12 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class EventMessage extends Migration
+class EventSubscriber extends Migration
 {
 	public function up()
 	{
 		$this->forge->addField([
-            'message_id' => [
+            'id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
@@ -25,19 +25,25 @@ class EventMessage extends Migration
                 'constraint' => 11,
                 'null' => false
             ],
-            'message' => [
-                'type' => 'TEXT',
-                'null' => false
-            ]
+            'request_subscribe' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1'],
+                'default' => '1',
+            ],
+            'request_message' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1'],
+                'default' => '0',
+            ],
         ]);
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");
         $this->forge->addField("created_at timestamp NULL DEFAULT current_timestamp()");
-        $this->forge->addKey('message_id', true);
-        $this->forge->createTable('event_message', false, ['ENGINE' => 'InnoDB']);
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('event_subscriber', false, ['ENGINE' => 'InnoDB']);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('event_message');
+		$this->forge->dropTable('event_subscriber');
 	}
 }
