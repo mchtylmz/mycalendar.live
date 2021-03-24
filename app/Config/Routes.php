@@ -7,9 +7,8 @@ $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
-	require SYSTEMPATH . 'Config/Routes.php';
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
+    require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /**
@@ -32,13 +31,22 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Auth\Auth::index');
-// Event Group
-$routes->group('event/(:any)/(:num)', function ($routes) {
-    // get
+$routes->get('/', 'Home::index');
+
+
+// Public Group
+$routes->group('', function ($routes) {
+    // Event Group
+    $routes->group('event/(:any)/(:num)', function ($routes) {
+        // get
+    });
+    // Guest User Profile
+    $routes->get('my/(:any)', 'Account::profile/$1', ['as' => 'user.profile']);
+    // Category Detail
+    $routes->get('category/(:any)', 'Home::category/$1', ['as' => 'category']);
+    // Contact
+    $routes->get('contact', 'Home::contact', ['as' => 'contact']);
 });
-// Guest User Profile
-$routes->get('my/(:any)', 'Account::guestProfile/$1', ['as' => 'guest.profile']);
 
 // Auth Group
 $routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Auth'], function ($routes) {
@@ -68,13 +76,13 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         $routes->get('edit/(:num)', 'Events::edit/$1', ['as' => 'event.edit']);
         $routes->get('remove/(:num)', 'Events::remove/$1', ['as' => 'event.remove']);
         // post
-        $routes->post('new', 'Events::newPost');
+        $routes->post('new', 'Events::store');
+        $routes->post('edit/(:num)', 'Events::store/$1');
     });
 
     // Account Group
     $routes->group('account', function ($routes) {
         // get
-        $routes->get('profile', 'Account::profile', ['as' => 'account.profile']);
         $routes->get('change-password', 'Account::changePassword', ['as' => 'account.changePassword']);
         $routes->get('update-profile', 'Account::updateProfile', ['as' => 'account.updateProfile']);
         $routes->get('logout', 'Account::logout', ['as' => 'account.logout']);
@@ -106,7 +114,6 @@ $routes->group(site_setting('admin_url'), ['filter' => 'admin', 'namespace' => '
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
-	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

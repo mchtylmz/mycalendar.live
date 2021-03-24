@@ -471,9 +471,9 @@ Index Of Script
 
         $('[data-input="daterange"]').daterangepicker({
             opens: 'center',
-            minDate: moment(),
-            minYear: parseInt(moment().format('YYYY')),
-            maxYear: parseInt(moment().add(5, 'years').format('YYYY')),
+            // minDate: moment(),
+            // minYear: parseInt(moment().format('YYYY')),
+            // maxYear: parseInt(moment().add(5, 'years').format('YYYY')),
             locale: {
                 "format": "DD.MM.YYYY",
                 "separator": " - ",
@@ -513,7 +513,7 @@ Index Of Script
                 next.val(start.format('YYYY-MM-DD'));
             }
             if (next.next().attr('name') == 'end_date') {
-                next.val(end.format('YYYY-MM-DD'));
+                next.next().val(end.format('YYYY-MM-DD'));
             }
         });
 
@@ -521,6 +521,8 @@ Index Of Script
             e.preventDefault()
             $('#view-btn').tab('show');
         })
+
+
 
         $(document).on('click', '[data-extra-toggle="copy"]', function (e) {
             e.preventDefault()
@@ -770,6 +772,25 @@ Index Of Script
         let min = $('#' + date).val();
         $('#' + element).attr('min', min);
     }
+
+    window.eventRemove = function (event_id, event_title) {
+        Swal.fire({
+            type: 'question',
+            title: "Siliniyor?",
+            text: event_title + " etkinliği siliniyor, onaylıyor musunuz? Bu işlemin geri döönüşü olmayabilir!.",
+            icon: "warning",
+            showConfirmButton: true,
+            confirmButtonText: 'Sil',
+            showCancelButton: true,
+            cancelButtonText: 'Vazgeç',
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    Swal.fire("Poof! Your imaginary file has been deleted!");
+                }
+            });
+    }
+
 
     $(".file-upload").on('change', function(){
         readURL(this);

@@ -26,8 +26,8 @@
                 <div class="col-lg-12">
                     <form method="GET" class="searchbox">
                         <?= view('event/form/search', [
-                                'c' => service('request')->getGet('c'),
-                                'q' => service('request')->getGet('q')
+                            'c' => service('request')->getGet('c'),
+                            'q' => service('request')->getGet('q')
                         ]); ?>
                     </form>
                 </div>

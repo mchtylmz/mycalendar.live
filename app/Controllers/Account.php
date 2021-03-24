@@ -12,58 +12,55 @@ class Account extends BaseController
     protected $user;
 
     public function __construct()
-	{
-		$this->user = new UserModel();
-	}
+    {
+        $this->user = new UserModel();
+    }
 
-	public function guestProfile(string $username)
-	{
-	    $user = $this->user->where('username', clean_string($username))->first();
-		if (!$user) {
-		    return redirect()->to('/');
+    public function profile(string $username)
+    {
+        if (auth_check()) {
+            $user = auth_user();
+        } else {
+            $user = $this->user->where('username', clean_string($username))->first();
+            if (!$user)
+                return redirect()->to('/');
         }
 
-		$data['PageTitle'] = $user->getFullname();
-		$data['User'] = $user;
-		return view('account/guest-profile', $data);
-	}
+        $data['PageTitle'] = $user->getFullname();
+        $data['User'] = $user;
+        return view('account/profile', $data);
+    }
 
-	public function profile()
-	{
-		$data['PageTitle'] = auth_user()->getFullname();
-		return view('account/profile', $data);
-	}
+    public function updateProfile()
+    {
+        $data['PageTitle'] = auth_user()->getFullname();
+        return view('account/update-profile', $data);
+    }
 
-	public function updateProfile()
-	{
-		$data['PageTitle'] = auth_user()->getFullname();
-		return view('account/update-profile', $data);
-	}
+    public function updateProfilePost()
+    {
+        post_method();
 
-	public function updateProfilePost()
-	{
-		post_method();
+        $getRule = $this->user->getRule('update');
+        $this->user->setValidationRules($getRule);
 
-		$getRule = $this->user->getRule('update');
-		$this->user->setValidationRules($getRule);
-
-		$new_data = [
-			'id'  	     => clean_number(session('user_id')),
-            'username'   => $this->request->getPost('username'),
-			'first_name' => $this->request->getPost('first_name'),
-			'last_name'  => $this->request->getPost('last_name'),
-			'phone' 	 => $this->request->getPost('phone'),
-			'email' 	 => $this->request->getPost('email'),
-			'about' 	 => $this->request->getPost('about'),
-			'facebook' 	 => $this->request->getPost('facebook'),
-			'twitter' 	 => $this->request->getPost('twitter'),
-			'instagram'  => $this->request->getPost('instagram'),
-			'youtube' 	 => $this->request->getPost('youtube'),
-			'linkedin' 	 => $this->request->getPost('linkedin'),
-			'event_upcoming' 	 => intval($this->request->getPost('event_upcoming') ?? 7),
-			'email_notification' => $this->request->getPost('email_notification')  ? '1':'0',
-			'sms_notification' 	 => $this->request->getPost('sms_notification')  ? '1':'0',
-		];
+        $new_data = [
+            'id' => clean_number(session('user_id')),
+            'username' => $this->request->getPost('username'),
+            'first_name' => $this->request->getPost('first_name'),
+            'last_name' => $this->request->getPost('last_name'),
+            'phone' => $this->request->getPost('phone'),
+            'email' => $this->request->getPost('email'),
+            'about' => $this->request->getPost('about'),
+            'facebook' => $this->request->getPost('facebook'),
+            'twitter' => $this->request->getPost('twitter'),
+            'instagram' => $this->request->getPost('instagram'),
+            'youtube' => $this->request->getPost('youtube'),
+            'linkedin' => $this->request->getPost('linkedin'),
+            'event_upcoming' => intval($this->request->getPost('event_upcoming') ?? 7),
+            'email_notification' => $this->request->getPost('email_notification') ? '1' : '0',
+            'sms_notification' => $this->request->getPost('sms_notification') ? '1' : '0',
+        ];
         // image
         if ($image = $this->request->getFile('image')) {
             if ($image->isValid() && !$image->hasMoved()) {
@@ -80,47 +77,47 @@ class Account extends BaseController
         }
         // cache clean
         cache()->clean();
-		// success
+        // success
         return redirect()->back()->with('success', lang('Account.success'));
-	}
+    }
 
-	public function changePassword()
-	{
-		$data['PageTitle'] = auth_user()->getFullname();
+    public function changePassword()
+    {
+        $data['PageTitle'] = auth_user()->getFullname();
 
-		return view('account/change-password', $data);
-	}
+        return view('account/change-password', $data);
+    }
 
-	public function changePasswordPost()
-	{
-		post_method();
+    public function changePasswordPost()
+    {
+        post_method();
 
         if (!password_verify($this->request->getPost('oldpassword'), auth_user()->password)) {
             return redirect()->back()->with('error', lang('Account.changePassword.oldPasswordNotVerify'));
         }
 
-		$getRule = $this->user->getRule('changePassword');
-		if (!$this->validate($getRule)) {
-			return redirect()->back()->with('error', lang('Account.changePassword.passwordMismatch'));
-		}
+        $getRule = $this->user->getRule('changePassword');
+        if (!$this->validate($getRule)) {
+            return redirect()->back()->with('error', lang('Account.changePassword.passwordMismatch'));
+        }
 
-		$change = $this->user->changePassword(
-		    auth_user()->id,
+        $change = $this->user->changePassword(
+            auth_user()->id,
             $this->request->getPost('password'),
             $this->request->getPost('repassword')
         );
-		if (!$change)
-		    return redirect()->back()->with('errors', $this->user->errors());
+        if (!$change)
+            return redirect()->back()->with('errors', $this->user->errors());
         // cache clean
         cache()->clean();
-		// success
+        // success
         return redirect()->route('account.changePassword')->with('success', lang('Account.changePassword.success'));
-	}
+    }
 
-	public function logout()
-	{
-		session()->remove(['user_id', 'user_appkey', 'logged_in']);
-		session()->destroy();
-		return redirect()->route('auth.login');
-	}
+    public function logout()
+    {
+        session()->remove(['user_id', 'user_appkey', 'logged_in']);
+        session()->destroy();
+        return redirect()->route('auth.login');
+    }
 }

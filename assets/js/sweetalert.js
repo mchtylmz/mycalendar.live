@@ -37,16 +37,20 @@
                 icon: 'error',
                 title: 'OOps!!',
                 text: 'Something went Wrong',
-                showConfirmButton: false,                
+                showConfirmButton: true,
+                showCancelButton: true
             })
         });
         $('#confirmation').on('click', function () {
             Swal.fire({
+                type: 'question',
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this imaginary file!",
                 icon: "warning",
-                buttons: true,
-                dangerMode: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Sil',
+                showCancelButton: true,
+                cancelButtonText: 'Vazgeç',
             })
             .then((willDelete) => {
                 if (willDelete) {

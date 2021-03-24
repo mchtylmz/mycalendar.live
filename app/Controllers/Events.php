@@ -38,6 +38,7 @@ class Events extends BaseController
 	public function index()
 	{
 		$data['PageTitle'] = 'Etkinliklerim';
+        $data['FixedTopNav'] = true;
 
 		$data['active_tab'] = '2';
 		if ($this->request->getGet('page_all')) {
@@ -79,14 +80,14 @@ class Events extends BaseController
 		return view('event/new', $data);
 	}
 
-	public function newPost()
+	public function store($event_id = null)
 	{
 	    post_method();
 
-	    $getRule = $this->event->getRule('insert');
+	    $getRule = $this->event->getRule($event_id ? 'update':'insert');
 		$this->event->setValidationRules($getRule);
 
-        $new_data = [
+        $event_data = [
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
             'owner' => auth_user()->id,
@@ -100,7 +101,9 @@ class Events extends BaseController
                 'meet'    => $this->request->getPost('meet'),
                 'youtube' => $this->request->getPost('youtube'),
                 'twitch'  => $this->request->getPost('twitch'),
-                'zoom'    => $this->request->getPost('zoom')
+                'zoom'    => $this->request->getPost('zoom'),
+                'instagram' => $this->request->getPost('instagram'),
+                'web' => $this->request->getPost('website')
             ]),
             'message_status' => $this->request->getPost('message_status'),
             'subscribe_status' => $this->request->getPost('subscribe_status'),
@@ -111,26 +114,42 @@ class Events extends BaseController
             'start_time' => date('H:i', strtotime($this->request->getPost('start_time'))),
             'end_time' => date('H:i', strtotime($this->request->getPost('end_time'))),
         ];
+        // event_id
+        if ($event_id = clean_number($event_id)) {
+            $event_data['id'] = $event_id;
+        }
 
 		try {
-            if (!$this->event->insert($new_data))
+            if (!$this->event->save($event_data))
                 return redirect()->back()->withInput()->with('errors', $this->event->errors());
         } catch (Exception $e) {
             return redirect()->back()->withInput()->with('error', $e->getMessage());
+        }
+
+        // redirect
+		if ($redirect = session('redirect_after_event_edit')) {
+		    session()->remove('redirect_after_event_edit');
+		    return redirect()->to($redirect);
         }
 
         // success
         return redirect()->route('my.calendar')->with('success', lang('Event.save.success'));
 	}
 
-	public function edit(int $id)
+	public function edit(int $event_id)
 	{
 		$data['PageTitle'] = 'Etkinlik Düzenle';
-		$event = $this->event->where('id', $id)->first();
+		$event = $this->event->where('id', clean_number($event_id))->first();
 		if (!$event) {
             return redirect()->back()->with('error', lang('Event.notFound'));
         }
+
 		$data['event'] = $event;
+		$data['PageTitle'] = $event->title .' - '. $data['PageTitle'];
+
+		if ($referrer = service('request')->getUserAgent()->getReferrer()) {
+	        session()->set('redirect_after_event_edit', $referrer);
+        }
 
 		return view('event/edit', $data);
 	}

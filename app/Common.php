@@ -137,13 +137,34 @@ if (! function_exists('tel'))
 if (!function_exists('categories')){
 	function categories() : array
 	{
-        return [
-            ['id' => 1, 'name' => 'Deneme'],
-            ['id' => 2, 'name' => 'Deneme 1'],
-            ['id' => 3, 'name' => 'Deneme 2'],
-            ['id' => 4, 'name' => 'Deneme 3'],
-            ['id' => 5, 'name' => 'Deneme 4'],
-        ];
+        $cache_name = "categories";
+        // is exists cache
+        $cache_value = cache($cache_name);
+        if (!$cache_value) {
+            $category = new \App\Models\CategoryModel();
+            $cache_value = $category->findAll();
+            // Save into the cache for 30 minutes
+            cache()->save($cache_name, $cache_value, 1800);
+        } // not found
+        return $cache_value;
+	}
+}
+
+if (!function_exists('category')){
+	function category(string $column, string $value)
+	{
+	    $cache_name = "category_{$column}_{$value}";
+        // is exists cache
+        $cache_value = cache($cache_name);
+        if (!$cache_value) {
+            $category = new \App\Models\CategoryModel();
+            $cache_value = $category
+                ->where(clean_string($column), clean_string($value))
+                ->first();
+            // Save into the cache for 30 minutes
+            cache()->save($cache_name, $cache_value, 1800);
+        } // not found
+        return $cache_value;
 	}
 }
 

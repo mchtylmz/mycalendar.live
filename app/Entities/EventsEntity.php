@@ -6,7 +6,7 @@ use \App\Models\UserModel;
 
 class EventsEntity extends Entity
 {
-    public function getUser()
+    public function getOwner()
     {
         $user_id = $this->attributes['owner'];
         $cache_name = "users_{$user_id}";
@@ -72,6 +72,18 @@ class EventsEntity extends Entity
                 $uri = 'https://twitch.tv/' . $link;
                 $title = 'Twitch';
                 break;
+            case 'instagram':
+                $uri = 'https://instagram.com/' . $link;
+                $title = '@' . $link;
+                break;
+            case 'web':
+                $uri = 'https://' . $link;
+                $title = str_replace(
+                    ['http', 'HTTPS', 'http', 'HTTP', 'www.', 'WWW.', '://'],
+                    ['', '', '', '', '', '', ''],
+                    $link
+                );
+                break;
         }
         return anchor($uri ?? $link, $title ?? $this->attributes['title'], [
             'title' => $title ?? $this->attributes['title'],
@@ -101,5 +113,10 @@ class EventsEntity extends Entity
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    public function edit(string $column)
+    {
+        return $this->original[$column];
     }
 }

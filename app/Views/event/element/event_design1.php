@@ -4,7 +4,7 @@
             <div class="d-flex flex-wrap align-items-center">
                 <div class="date mr-2">
                     <h5 class="text-info">
-                        <?= $event->getStartDate() ?> <br> <?= $event->getEndDate() ?>
+                        <?= $event->start_date ?> <br> <?= $event->end_date ?>
                     </h5>
                 </div>
                 <div class="border-left pl-2">
@@ -12,22 +12,22 @@
                         <h5 class="mb-3"><?= $event->title ?></h5>
                     </div>
                     <div class="media align-items-center">
-                        <?php if ($user = $event->getUser()) : ?>
+                        <?php if ($event->owner) : ?>
                             <p class="mb-0 font-weight-500 d-xl-block d-lg-block d-none pr-3">
                                 <i class="las la-user mr-1"></i>
-                                <a class="link" href="<?= site_url(route_to('guest.profile', $user->username)) ?>">
-                                    <?= $user->getFullname() ?>
+                                <a class="link" href="<?= site_url(route_to('user.profile', $event->owner->username)) ?>">
+                                    <?= $event->owner->getFullname() ?>
                                 </a>
                             </p>
                         <?php endif; ?>
                         <p class="mb-0 pr-3">
                             <i class="las la-clock mr-1"></i>
-                            <?= $event->getStartTime() ?> - <?= $event->getEndTime() ?>
+                            <?= $event->start_time ?> - <?= $event->end_time ?>
                         </p>
-                        <?php if ($location = $event->getLocation()) : ?>
+                        <?php if ($event->location) : ?>
                             <p class="mb-0">
                                 <i class="las la-map-marker mr-1"></i>
-                                <?= $location ?>
+                                <?= $event->location ?>
                             </p>
                         <?php endif; ?>
                     </div>
@@ -38,8 +38,8 @@
                    data-original-title="Edit" href="<?= site_url(route_to('event.edit', $event->id)) ?>">
                     <i class="ri-edit-box-line"></i>
                 </a>
-                <a class="badge" data-toggle="tooltip" data-placement="top" title="Sil"
-                   data-original-title="Delete" href="<?= site_url(route_to('event.remove', $event->id)) ?>">
+                <a class="badge" data-toggle="tooltip" data-placement="top" title="Sil" href="javascript:void(0)"
+                   data-original-title="Sil" onclick="eventRemove('<?=$event->id?>', '<?=$event->title?>')">
                     <i class="ri-delete-bin-line"></i>
                 </a>
             </div>

@@ -92,7 +92,13 @@
                 <div class="card m-0">
                     <div class="card-body p-0">
                         <div class="py-3">
-                            <a href="<?= site_url(route_to('account.profile')) ?>" class="iq-sub-card">
+                            <a href="<?= site_url(route_to('my.calendar')) ?>" class="iq-sub-card">
+                                <div class="media align-items-center">
+                                    <i class="ri-calendar-event-line mr-3"></i>
+                                    <h6>Etkinliklerim</h6>
+                                </div>
+                            </a>
+                            <a href="<?= site_url(route_to('user.profile', auth_user()->username)) ?>" class="iq-sub-card">
                                 <div class="media align-items-center">
                                     <i class="ri-group-line mr-3"></i>
                                     <h6>Hesabım</h6>

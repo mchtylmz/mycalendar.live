@@ -1,12 +1,12 @@
-<?=$this->extend("layout/header")?>
-<?=$this->section("page_content")?>
+<?= $this->extend("layout/header") ?>
+<?= $this->section("page_content") ?>
 <div class="content-page">
     <div class="container-fluid container">
         <div class="row mt-3">
             <div class="col-lg-4">
                 <?= view('account/profile-sidebar', [
-                    'User' => auth_user(),
-                    'showPhone' => true
+                    'User' => $User,
+                    'showPhone' => auth_check()
                 ]) ?>
             </div>
             <div class="col-lg-8">
@@ -81,4 +81,4 @@
         </div>
     </div>
 </div>
-<?=$this->endSection()?>
+<?= $this->endSection() ?>

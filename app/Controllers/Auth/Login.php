@@ -8,6 +8,9 @@ class Login extends Auth
 	public function index()
 	{
 	    $data['PageTitle'] = lang('Auth.login.title');
+	    if ($referrer = service('request')->getUserAgent()->getReferrer()) {
+	        session()->set('redirect_after_login', $referrer);
+        }
 		return view('auth/login', $data);
 	}
 
@@ -30,6 +33,12 @@ class Login extends Auth
 			'user_id'     => $user->id,
 			'user_appkey' => $user->app_key
 		]);
+
+		// redirect
+		if ($redirect = session('redirect_after_login')) {
+		    session()->remove('redirect_after_login');
+		    return redirect()->to($redirect);
+        }
 
 		// success
 		return redirect()->route('my.calendar');
