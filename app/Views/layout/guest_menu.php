@@ -1,4 +1,4 @@
-<a class="navbar-toggler" >
+<a class="navbar-toggler" href="<?=site_url(route_to('auth.login'))?>">
     <i class="ri-login-circle-line"></i>
 </a>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">

@@ -18,7 +18,7 @@ class Account extends BaseController
 
     public function profile(string $username)
     {
-        if (auth_check()) {
+        if (auth_check() && $username == auth_user()->username) {
             $user = auth_user();
         } else {
             $user = $this->user->where('username', clean_string($username))->first();
@@ -51,10 +51,13 @@ class Account extends BaseController
             'last_name' => $this->request->getPost('last_name'),
             'phone' => $this->request->getPost('phone'),
             'email' => $this->request->getPost('email'),
-            'about' => $this->request->getPost('about'),
+            'about' => $this->request->getPost('content'),
             'facebook' => $this->request->getPost('facebook'),
             'twitter' => $this->request->getPost('twitter'),
             'instagram' => $this->request->getPost('instagram'),
+            'whatsapp' => $this->request->getPost('whatsapp'),
+            'telegram' => $this->request->getPost('telegram'),
+            'discord' => $this->request->getPost('discord'),
             'youtube' => $this->request->getPost('youtube'),
             'linkedin' => $this->request->getPost('linkedin'),
             'event_upcoming' => intval($this->request->getPost('event_upcoming') ?? 7),
@@ -111,13 +114,15 @@ class Account extends BaseController
         // cache clean
         cache()->clean();
         // success
-        return redirect()->route('account.changePassword')->with('success', lang('Account.changePassword.success'));
+        return redirect()
+            ->route('account.changePassword')
+            ->with('success', lang('Account.changePassword.success'));
     }
 
     public function logout()
     {
         session()->remove(['user_id', 'user_appkey', 'logged_in']);
         session()->destroy();
-        return redirect()->route('auth.login');
+        return redirect()->to('/');
     }
 }

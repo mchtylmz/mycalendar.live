@@ -45,6 +45,8 @@ $routes->group('', function ($routes) {
     // Category Detail
     $routes->get('category/(:any)', 'Home::category/$1', ['as' => 'category']);
     // Contact
+    $routes->get('users', 'Home::users', ['as' => 'users']);
+    // Contact
     $routes->get('contact', 'Home::contact', ['as' => 'contact']);
 });
 

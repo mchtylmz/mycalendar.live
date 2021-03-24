@@ -66,8 +66,7 @@ class Users extends Migration
                 'null' => true
             ],
             'about' => [
-                'type' => 'VARCHAR',
-                'constraint' => '500',
+                'type' => 'TEXT',
                 'null' => true
             ],
             'facebook' => [
@@ -81,6 +80,21 @@ class Users extends Migration
                 'null' => true
             ],
             'instagram' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'whatsapp' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'telegram' => [
+                'type' => 'VARCHAR',
+                'constraint' => '500',
+                'null' => true
+            ],
+            'discord' => [
                 'type' => 'VARCHAR',
                 'constraint' => '500',
                 'null' => true

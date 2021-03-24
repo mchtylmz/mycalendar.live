@@ -1,22 +1,25 @@
-<div class="card card-block card-stretch">
+<div class="card card-block card-stretch <?=$class ?? ''?>">
     <div class="card-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="date mr-2">
                     <h5 class="text-info">
-                        <?= $event->start_date ?> <br> <?= $event->end_date ?>
+                        <?= $event->getStartDate() ?>
                     </h5>
                 </div>
                 <div class="border-left pl-2">
                     <div class="media align-items-top">
-                        <h5 class="mb-3"><?= $event->title ?></h5>
+                        <a href="">
+                            <h5 class="mb-2"><?= $event->title ?></h5>
+                        </a>
                     </div>
                     <div class="media align-items-center">
-                        <?php if ($event->owner) : ?>
+                        <?php if ($owner = $event->owner) : ?>
                             <p class="mb-0 font-weight-500 d-xl-block d-lg-block d-none pr-3">
                                 <i class="las la-user mr-1"></i>
-                                <a class="link" href="<?= site_url(route_to('user.profile', $event->owner->username)) ?>">
-                                    <?= $event->owner->getFullname() ?>
+                                <a class="link"
+                                   href="<?= site_url(route_to('user.profile', $owner->username)) ?>">
+                                    <?= $owner->getFullname() ?>
                                 </a>
                             </p>
                         <?php endif; ?>
@@ -24,25 +27,27 @@
                             <i class="las la-clock mr-1"></i>
                             <?= $event->start_time ?> - <?= $event->end_time ?>
                         </p>
-                        <?php if ($event->location) : ?>
+                        <?php if ($location = $event->getLocation()) : ?>
                             <p class="mb-0">
                                 <i class="las la-map-marker mr-1"></i>
-                                <?= $event->location ?>
+                                <?= $location ?>
                             </p>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
-            <div class="d-flex align-items-center list-action">
-                <a class="badge mr-3" data-toggle="tooltip" data-placement="top" title="Düzenle"
-                   data-original-title="Edit" href="<?= site_url(route_to('event.edit', $event->id)) ?>">
-                    <i class="ri-edit-box-line"></i>
-                </a>
-                <a class="badge" data-toggle="tooltip" data-placement="top" title="Sil" href="javascript:void(0)"
-                   data-original-title="Sil" onclick="eventRemove('<?=$event->id?>', '<?=$event->title?>')">
-                    <i class="ri-delete-bin-line"></i>
-                </a>
-            </div>
+            <?php if (isset($showButtons) && $showButtons && auth_check()) : ?>
+                <div class="d-flex align-items-center list-action">
+                    <a class="badge mr-3" data-toggle="tooltip" data-placement="top" title="Düzenle"
+                       data-original-title="Edit" href="<?= site_url(route_to('event.edit', $event->id)) ?>">
+                        <i class="ri-edit-box-line"></i>
+                    </a>
+                    <a class="badge" data-toggle="tooltip" data-placement="top" title="Sil" href="javascript:void(0)"
+                       data-original-title="Sil" onclick="eventRemove('<?= $event->id ?>', '<?= $event->title ?>')">
+                        <i class="ri-delete-bin-line"></i>
+                    </a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

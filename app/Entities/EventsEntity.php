@@ -3,6 +3,7 @@
 use CodeIgniter\Entity;
 use Exception;
 use \App\Models\UserModel;
+use \App\Models\CategoryModel;
 
 class EventsEntity extends Entity
 {
@@ -20,9 +21,19 @@ class EventsEntity extends Entity
         return $user;
     }
 
+    public function getCategory()
+    {
+        return category('id', $this->attributes['category']);
+    }
+
     public function getStartDate()
     {
-        return date('d M', strtotime($this->attributes['start_date']));
+        return turkish_long_date('d M', $this->attributes['start_date']);
+    }
+
+    public function getLongStartDate()
+    {
+        return turkish_long_date('d M, l', $this->attributes['start_date']);
     }
 
     public function getStartTime()
@@ -32,7 +43,12 @@ class EventsEntity extends Entity
 
     public function getEndDate()
     {
-        return date('d M', strtotime($this->attributes['end_date']));
+        return turkish_long_date('d M', $this->attributes['end_date']);
+    }
+
+    public function getLongEndDate()
+    {
+        return turkish_long_date('d M, l', $this->attributes['end_date']);
     }
 
     public function getEndTime()

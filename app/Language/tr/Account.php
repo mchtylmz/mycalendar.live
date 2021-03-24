@@ -14,7 +14,7 @@ return [
         'email' => 'E-posta Adresi',
         'username' => 'Kullanıcı Adı',
         'phone' => 'Telefon Numarası',
-        'about' => 'Hakkımda Kısa Bilgi',
+        'about' => 'Hakkında',
         'email_notification' => 'Email Bildirimi',
         'sms_notification' => 'SMS Bildirimi',
         'event_upcoming' => 'Yaklaşan Etkinlik Süresi'
@@ -23,8 +23,8 @@ return [
         'editTitle' => 'Profili Düzenle',
         'allowed' => 'yüklenebilir',
         'userInfo' => 'Kullanıcı Bilgileri',
-        'sms_notification' => 'Gelişmeleri SMS olarak al',
-        'email_notification' => 'Gelişmeleri email olarak al'
+        'sms_notification' => 'Etkinlik gelişmelerini sms olarak gönder',
+        'email_notification' => 'Etkinlik gelişmelerini e-posta olarak gönder'
     ],
     'changePassword' => [
         'title' => 'Şifre Değiştir',

@@ -26,7 +26,10 @@
                 <?php if ($events_all): ?>
                     <?php foreach ($events_all as $key => $event) : ?>
                         <div class="col-lg-12">
-                            <?= view('event/element/event_design1', ['event' => $event]); ?>
+                            <?= view('event/element/event_design1', [
+                                'event' => $event,
+                                'showButtons' => $event->owner->id == auth_user()->id
+                            ]); ?>
                         </div>
                     <?php endforeach; ?>
                     <div class="col-lg-12">
@@ -44,7 +47,10 @@
                 <?php if ($events_upcoming): ?>
                     <?php foreach ($events_upcoming as $key => $event) : ?>
                         <div class="col-lg-4 col-md-6">
-                            <?= view('event/element/event_design2', ['event' => $event]); ?>
+                            <?= view('event/element/event_design2', [
+                                'event' => $event,
+                                'showButtons' => $event->owner->id == auth_user()->id
+                            ]); ?>
                         </div>
                     <?php endforeach; ?>
                     <div class="col-lg-12">

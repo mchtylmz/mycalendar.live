@@ -4,8 +4,7 @@
         <div class="profile-card rounded">
             <img src="<?= $User->getImage() ?>" alt="profile-bg"
                  class="avatar-100 rounded d-block mx-auto img-fluid mb-3">
-            <h3 class="font-600 text-white text-center mb-0"><?= $User->getFullname() ?></h3>
-            <p class="text-white text-center mb-5"><?= $User->about ?></p>
+            <h3 class="font-600 text-white text-center mb-5 pb-2"><?= $User->getFullname() ?></h3>
         </div>
         <div class="pro-content rounded">
             <div class="d-flex align-items-center mb-3">
@@ -37,6 +36,21 @@
                     <?php if ($instagram = $User->instagram): ?>
                         <a target="_blank" href="https://instagram.com/<?= $instagram ?>">
                             <i class="fab fa-instagram"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($whatsapp = $User->whatsapp): ?>
+                        <a target="_blank" href="https://wa.me/<?= $whatsapp ?>">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($telegram = $User->telegram): ?>
+                        <a target="_blank" href="https://t.me/<?= $telegram ?>">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($discord = $User->discord): ?>
+                        <a target="_blank" href="https://discord.gg/<?= $discord ?>">
+                            <i class="fab fa-discord"></i>
                         </a>
                     <?php endif; ?>
                     <?php if ($youtube = $User->youtube): ?>

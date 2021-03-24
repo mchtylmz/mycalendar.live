@@ -43,6 +43,11 @@
                                 </ul>
                             </li>
                             <li class="">
+                                <a href="<?= site_url(route_to('users')) ?>" class="">
+                                    <span>Kullanıcılar</span>
+                                </a>
+                            </li>
+                            <li class="">
                                 <a href="<?= site_url(route_to('contact')) ?>" class="">
                                     <span>İletişim</span>
                                 </a>
