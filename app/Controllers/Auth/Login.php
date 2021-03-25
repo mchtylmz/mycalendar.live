@@ -41,7 +41,7 @@ class Login extends Auth
         }
 
 		// success
-		return redirect()->route('my.calendar');
+		return redirect()->route('my.events');
 	}
 
 }

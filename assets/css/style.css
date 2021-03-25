@@ -24,11 +24,40 @@
 .dark .bootstrap-tagsinput input {
     color: #FFF !important;
 }
+.dark .badge-color {
+    color: #535f6b !important;
+}
 .bootstrap-tagsinput .tag {
     background-color: #535f6b;
     padding: 1.5px 4px;
 }
-
+.social-ic a.facebook:before {
+    background-color: #3b5998 !important;
+}
+.social-ic a.twitter:before {
+    background-color: #00aced !important;
+}
+.social-ic a.instagram:before {
+    background-color: #E1306C !important;
+}
+.social-ic a.youtube:before {
+    background-color: #bb0000 !important;
+}
+.social-ic a.whatsapp:before {
+    background-color: #64D448 !important;
+}
+.social-ic a.telegram:before {
+    background-color: #0088cc !important;
+}
+.social-ic a.discord:before {
+    background-color: #7689d4 !important;
+}
+.social-ic a.linkedin:before {
+    background-color: #007bb6 !important;
+}
+div.social-ic:empty {
+  display: none !important;
+}
 select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

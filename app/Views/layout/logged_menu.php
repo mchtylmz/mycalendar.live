@@ -17,58 +17,21 @@
                 <div class="card shadow-none m-0">
                     <div class="card-body p-0 ">
                         <div class="cust-title p-3">
-                            <h5 class="mb-0">Notifications</h5>
+                            <h5 class="mb-0">Bildirimler</h5>
                         </div>
-                        <div class="p-2">
-                            <a href="#" class="iq-sub-card">
-                                <div class="media align-items-center cust-card p-2">
-                                    <div class="">
-                                        <img class="avatar-40 rounded-small"
-                                             src="../assets/images/user/u-1.jpg" alt="01">
-                                    </div>
-                                    <div class="media-body ml-3">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6 class="mb-0">Anne Effit</h6>
-                                            <small class="mb-0">02 Min Ago</small>
-                                        </div>
-                                        <small class="mb-0">Manager</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="iq-sub-card">
-                                <div class="media align-items-center cust-card p-2">
-                                    <div class="">
-                                        <img class="avatar-40 rounded-small"
-                                             src="../assets/images/user/u-2.jpg" alt="02">
-                                    </div>
-                                    <div class="media-body ml-3">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6 class="mb-0">Eric Shun</h6>
-                                            <small class="mb-0">05 Min Ago</small>
-                                        </div>
-                                        <small class="mb-0">Manager</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="iq-sub-card">
-                                <div class="media align-items-center cust-card p-2">
-                                    <div class="">
-                                        <img class="avatar-40 rounded-small"
-                                             src="../assets/images/user/u-3.jpg" alt="03">
-                                    </div>
-                                    <div class="media-body ml-3">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6 class="mb-0">Ken Tucky</h6>
-                                            <small class="mb-0">10 Min Ago</small>
-                                        </div>
-                                        <small class="mb-0">Employee</small>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="p-2 list-group">
+                            <?php for ($i = 0; $i < 10; $i++): ?>
+                        <a href="#" class="list-group-item list-group-item-action">
+                           <div class="d-flex w-100 justify-content-between text-right">
+                              <small>3 days ago</small>
+                           </div>
+                           <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                        </a>
+                            <?php endfor; ?>
                         </div>
                         <a class="right-ic btn-block position-relative p-3 border-top text-center"
                            href="#" role="button">
-                            See All Notification
+                            Tüm Bildirimler
                         </a>
                     </div>
                 </div>
@@ -98,10 +61,16 @@
                                     <h6>Yeni Etkinlik</h6>
                                 </div>
                             </a>
-                            <a href="<?= site_url(route_to('my.calendar')) ?>" class="iq-sub-card">
+                            <a href="<?= site_url(route_to('my.events')) ?>" class="iq-sub-card">
                                 <div class="media align-items-center">
                                     <i class="ri-calendar-event-line mr-3"></i>
                                     <h6>Etkinliklerim</h6>
+                                </div>
+                            </a>
+                            <a href="<?= site_url(route_to('my.calendar')) ?>" class="iq-sub-card">
+                                <div class="media align-items-center">
+                                    <i class="ri-calendar-check-fill mr-3"></i>
+                                    <h6>Takvimim</h6>
                                 </div>
                             </a>
                             <a href="<?= site_url(route_to('user.profile', auth_user()->username)) ?>" class="iq-sub-card">
@@ -110,25 +79,27 @@
                                     <h6>Hesabım</h6>
                                 </div>
                             </a>
-                            <a href="<?= site_url(route_to('account.changePassword')) ?>" class="iq-sub-card">
-                                <div class="media align-items-center">
-                                    <i class="ri-lock-password-line mr-3"></i>
-                                    <h6>Şifre Değiştir</h6>
-                                </div>
-                            </a>
                             <a href="<?= site_url(route_to('account.updateProfile')) ?>" class="iq-sub-card">
                                 <div class="media align-items-center">
                                     <i class="ri-settings-5-line mr-3"></i>
                                     <h6>Profili Güncelle</h6>
                                 </div>
                             </a>
+                            <a href="<?= site_url(route_to('account.changePassword')) ?>" class="iq-sub-card">
+                                <div class="media align-items-center">
+                                    <i class="ri-lock-password-line mr-3"></i>
+                                    <h6>Şifre Değiştir</h6>
+                                </div>
+                            </a>
                             <?php if (auth_user()->role == 'admin'): ?>
+                                <!--
                                 <a href="<?= site_url(route_to('admin')) ?>" class="iq-sub-card">
                                     <div class="media align-items-center">
                                         <i class="ri-dashboard-fill mr-3"></i>
                                         <h6>Yönetim Paneli</h6>
                                     </div>
                                 </a>
+                                -->
                             <?php endif; ?>
                         </div>
                         <a class="right-ic p-3 border-top btn-block position-relative text-center"

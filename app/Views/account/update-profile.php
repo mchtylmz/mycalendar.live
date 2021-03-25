@@ -154,7 +154,7 @@
                                         <div class="form-group col-md-12">
                                             <label for="about"><?= lang('Account.form.about') ?></label>
                                             <div id="editor"
-                                                 style="height: 360px !important;">
+                                                 style="height: 300px !important;">
                                                 <?= html_entity_decode(old('about') ?? auth_user()->about) ?>
                                             </div>
                                         </div>
@@ -188,6 +188,60 @@
                                                            value="1" <?= auth_user()->email_notification == '1' ? 'checked' : '' ?>>
                                                     <label class="custom-control-label"
                                                            for="email_noti"><?= lang('Account.profile.email_notification') ?></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 row align-items-center">
+                                            <label class="col-xl-3 col-lg-4 col-md-5 mb-0"
+                                                   for="phone_privacy"><?= lang('Account.form.phone_privacy') ?></label>
+                                            <div class="col-xl-9 col-lg-8 col-md-7">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="custom-control-input" id="phone_privacy0"
+                                                           name="phone_privacy"
+                                                           value="0" <?= auth_user()->phone_privacy == '0' ? 'checked' : '' ?>>
+                                                    <label class="custom-control-label"
+                                                           for="phone_privacy0"><?= lang('Account.profile.phone_privacy0') ?></label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="custom-control-input" id="phone_privacy1"
+                                                           name="phone_privacy"
+                                                           value="1" <?= auth_user()->phone_privacy == '1' ? 'checked' : '' ?>>
+                                                    <label class="custom-control-label"
+                                                           for="phone_privacy1"><?= lang('Account.profile.phone_privacy1') ?></label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="custom-control-input" id="phone_privacy2"
+                                                           name="phone_privacy"
+                                                           value="2" <?= auth_user()->phone_privacy == '2' ? 'checked' : '' ?>>
+                                                    <label class="custom-control-label"
+                                                           for="phone_privacy2"><?= lang('Account.profile.phone_privacy2') ?></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 row align-items-center">
+                                            <label class="col-xl-3 col-lg-4 col-md-5 mb-0"
+                                                   for="wa_privacy"><?= lang('Account.form.wa_privacy') ?></label>
+                                            <div class="col-xl-9 col-lg-8 col-md-7">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="custom-control-input" id="wa_privacy0"
+                                                           name="wa_privacy"
+                                                           value="0" <?= auth_user()->wa_privacy == '0' ? 'checked' : '' ?>>
+                                                    <label class="custom-control-label"
+                                                           for="wa_privacy0"><?= lang('Account.profile.wa_privacy0') ?></label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="custom-control-input" id="wa_privacy1"
+                                                           name="wa_privacy"
+                                                           value="1" <?= auth_user()->wa_privacy == '1' ? 'checked' : '' ?>>
+                                                    <label class="custom-control-label"
+                                                           for="wa_privacy1"><?= lang('Account.profile.wa_privacy1') ?></label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="radio" class="custom-control-input" id="wa_privacy2"
+                                                           name="wa_privacy"
+                                                           value="2" <?= auth_user()->wa_privacy == '2' ? 'checked' : '' ?>>
+                                                    <label class="custom-control-label"
+                                                           for="wa_privacy2"><?= lang('Account.profile.wa_privacy2') ?></label>
                                                 </div>
                                             </div>
                                         </div>

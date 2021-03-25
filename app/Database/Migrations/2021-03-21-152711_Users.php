@@ -113,11 +113,25 @@ class Users extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['0', '1'],
                 'default' => '1',
+                'null' => true,
             ],
             'sms_notification' => [
                 'type' => 'ENUM',
                 'constraint' => ['0', '1'],
                 'default' => '0',
+                'null' => true,
+            ],
+            'phone_privacy' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1', '2'],
+                'default' => '0',
+                'null' => true,
+            ],
+            'wa_privacy' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1', '2'],
+                'default' => '0',
+                'null' => true,
             ],
             'event_upcoming' => [
                 'type' => 'INT',

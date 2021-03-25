@@ -33,7 +33,9 @@ class Home extends BaseController
         $data['PageTitle'] = 'Etkinlikler';
         $data['FixedTopNav'] = true;
 
-        $this->event->where('start_date >=', date('Y-m-d'));
+        $this->event
+            ->where('start_date >=', date('Y-m-d'))
+            ->where('start_time >=', date('H:i:s'));
         if (!auth_check()) {
             $this->event->where('status', '2');
         }
@@ -74,6 +76,7 @@ class Home extends BaseController
         $data['events'] = $this->event
             ->where('category', $category->id)
             ->where('start_date >=', date('Y-m-d'))
+            ->where('start_time >=', date('H:i:s'))
             ->orderBy('start_date', 'ASC')
             ->paginate($this->perPage);
 		$data['pager'] = $this->event->pager;
@@ -83,7 +86,7 @@ class Home extends BaseController
 
     public function users()
     {
-        $data['PageTitle'] = 'Kullanıcılar';
+        $data['PageTitle'] = 'Üyeler';
 
         $users = new UserModel();
         $data['users'] = $users
@@ -92,11 +95,5 @@ class Home extends BaseController
 		$data['pager'] = $users->pager;
 
         return view('users', $data);
-    }
-
-    public function contact()
-    {
-        $data['PageTitle'] = 'İletişim';
-        return view('contact', $data);
     }
 }

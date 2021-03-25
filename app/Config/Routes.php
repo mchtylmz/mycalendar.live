@@ -46,8 +46,6 @@ $routes->group('', function ($routes) {
     $routes->get('category/(:any)', 'Home::category/$1', ['as' => 'category']);
     // Contact
     $routes->get('users', 'Home::users', ['as' => 'users']);
-    // Contact
-    $routes->get('contact', 'Home::contact', ['as' => 'contact']);
 });
 
 // Auth Group
@@ -68,7 +66,8 @@ $routes->group('auth', ['filter' => 'guest', 'namespace' => 'App\Controllers\Aut
 // User Logged Group
 $routes->group('', ['filter' => 'auth'], function ($routes) {
     // get
-    $routes->get('calendar', 'Events::index', ['as' => 'my.calendar']);
+    $routes->get('my-events', 'Events::index', ['as' => 'my.events']);
+    $routes->get('my-calendar', 'Events::calendar', ['as' => 'my.calendar']);
     // post
 
     // Event Group

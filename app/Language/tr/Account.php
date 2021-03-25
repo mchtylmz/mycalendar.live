@@ -17,14 +17,22 @@ return [
         'about' => 'Hakkında',
         'email_notification' => 'Email Bildirimi',
         'sms_notification' => 'SMS Bildirimi',
-        'event_upcoming' => 'Yaklaşan Etkinlik Süresi'
+        'event_upcoming' => 'Yaklaşan Etkinlik Süresi',
+        'phone_privacy' => 'Telefon Numarası',
+        'wa_privacy' => 'WhatsApp Numarası'
     ],
     'profile' => [
         'editTitle' => 'Profili Düzenle',
         'allowed' => 'yüklenebilir',
         'userInfo' => 'Kullanıcı Bilgileri',
         'sms_notification' => 'Etkinlik gelişmelerini sms olarak gönder',
-        'email_notification' => 'Etkinlik gelişmelerini e-posta olarak gönder'
+        'email_notification' => 'Etkinlik gelişmelerini e-posta olarak gönder',
+        'phone_privacy0' => 'Sadece Ben',
+        'phone_privacy1' => 'Üyelere Özel',
+        'phone_privacy2' => 'Herkese Açık',
+        'wa_privacy0' => 'Sadece Ben',
+        'wa_privacy1' => 'Üyelere Özel',
+        'wa_privacy2' => 'Herkese Açık',
     ],
     'changePassword' => [
         'title' => 'Şifre Değiştir',

@@ -44,14 +44,16 @@
                             </li>
                             <li class="">
                                 <a href="<?= site_url(route_to('users')) ?>" class="">
-                                    <span>Kullanıcılar</span>
+                                    <span>Üyeler</span>
                                 </a>
                             </li>
+                            <?php if(auth_check()) : ?>
                             <li class="">
-                                <a href="<?= site_url(route_to('contact')) ?>" class="">
-                                    <span>İletişim</span>
+                                <a href="<?= site_url(route_to('my.calendar')) ?>" class="">
+                                    <span>Takvimim</span>
                                 </a>
                             </li>
+                            <?php endif; ?>
                         </ul>
                     </nav>
                 </div>
@@ -61,8 +63,7 @@
                             <div class="custom-switch-inner">
                                 <p class="mb-0"></p>
                                 <input type="checkbox" class="custom-control-input" id="dark-mode"
-                                       data-active="<?= dark_mode() ? 'true' : 'false' ?>" <?= dark_mode() ? 'checked' : '' ?>
-                                ">
+                                       data-active="<?= dark_mode() ? 'true' : 'false' ?>" <?= dark_mode() ? 'checked' : '' ?>">
                                 <label class="custom-control-label" for="dark-mode" data-mode="toggle">
                                     <span class="switch-icon-left"><i class="a-left ri-moon-clear-line"></i></span>
                                     <span class="switch-icon-right"><i class="a-right ri-sun-line"></i></span>

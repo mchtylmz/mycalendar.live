@@ -11,7 +11,7 @@ class UserModel extends Model
     protected $returnType = 'App\Entities\UserEntity';
     protected $useSoftDeletes = true;
     protected $allowedFields = [
-        'username', 'first_name', 'last_name', 'phone', 'email', 'role', 'image', 'about', 'facebook', 'twitter', 'instagram', 'whatsapp', 'telegram', 'discord', 'youtube', 'linkedin', 'email_notification', 'sms_notification', 'event_upcoming', 'app_key', 'password', 'reset_token', 'last_seen'
+        'username', 'first_name', 'last_name', 'phone', 'email', 'role', 'image', 'about', 'facebook', 'twitter', 'instagram', 'whatsapp', 'telegram', 'discord', 'youtube', 'linkedin', 'email_notification', 'sms_notification', 'phone_privacy', 'wa_privacy', 'event_upcoming', 'app_key', 'password', 'reset_token', 'last_seen'
     ];
     protected $useTimestamps = false;
     protected $createdField = 'created_at';

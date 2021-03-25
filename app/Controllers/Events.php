@@ -32,7 +32,7 @@ class Events extends BaseController
 		$this->event = new EventsModel();
 		$this->event_message = new EventMessageModel();
 		$this->event_subscriber = new EventSubscriberModel();
-		$this->perPage = 2;
+		$this->perPage = 9;
 	}
 
 	public function index()

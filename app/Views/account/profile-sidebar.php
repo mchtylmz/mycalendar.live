@@ -9,11 +9,17 @@
         <div class="pro-content rounded">
             <div class="d-flex align-items-center mb-3">
                 <div class="p-icon mr-3">
+                    <i class="las la-user-check"></i>
+                </div>
+                <p class="mb-0 eml"><?= $User->username ?></p>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <div class="p-icon mr-3">
                     <i class="las la-envelope-open-text"></i>
                 </div>
                 <p class="mb-0 eml"><?= $User->email ?></p>
             </div>
-            <?php if ($User->phone && $showPhone): ?>
+            <?php if ($User->phone && $showPhone && $User->getPrivacyPhone()): ?>
                 <div class="d-flex align-items-center mb-3">
                     <div class="p-icon mr-3">
                         <i class="las la-phone"></i>
@@ -21,45 +27,49 @@
                     <p class="mb-0"><?= $User->phone ?></p>
                 </div>
             <?php endif; ?>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mb-3">
                 <div class="social-ic d-inline-flex rounded">
                     <?php if ($facebook = $User->facebook): ?>
-                        <a target="_blank" href="https://facebook.com/<?= $facebook ?>">
+                        <a class="facebook" target="_blank" href="https://facebook.com/<?= $facebook ?>">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     <?php endif; ?>
                     <?php if ($twitter = $User->twitter): ?>
-                        <a target="_blank" href="https://twitter.com/<?= $twitter ?>">
+                        <a class="twitter" target="_blank" href="https://twitter.com/<?= $twitter ?>">
                             <i class="fab fa-twitter"></i>
                         </a>
                     <?php endif; ?>
                     <?php if ($instagram = $User->instagram): ?>
-                        <a target="_blank" href="https://instagram.com/<?= $instagram ?>">
+                        <a class="instagram" target="_blank" href="https://instagram.com/<?= $instagram ?>">
                             <i class="fab fa-instagram"></i>
                         </a>
                     <?php endif; ?>
-                    <?php if ($whatsapp = $User->whatsapp): ?>
-                        <a target="_blank" href="https://wa.me/<?= $whatsapp ?>">
+                    <?php if ($User->whatsapp && $User->getPrivacyWhatsapp()): ?>
+                        <a class="whatsapp" target="_blank" href="https://wa.me/<?= $User->whatsapp ?>">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     <?php endif; ?>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="social-ic d-inline-flex rounded">
                     <?php if ($telegram = $User->telegram): ?>
-                        <a target="_blank" href="https://t.me/<?= $telegram ?>">
+                        <a class="telegram" target="_blank" href="https://t.me/<?= $telegram ?>">
                             <i class="fab fa-telegram"></i>
                         </a>
                     <?php endif; ?>
                     <?php if ($discord = $User->discord): ?>
-                        <a target="_blank" href="https://discord.gg/<?= $discord ?>">
+                        <a class="discord" target="_blank" href="https://discord.gg/<?= $discord ?>">
                             <i class="fab fa-discord"></i>
                         </a>
                     <?php endif; ?>
                     <?php if ($youtube = $User->youtube): ?>
-                        <a target="_blank" href="https://youtube.com/<?= $youtube ?>">
+                        <a class="youtube" target="_blank" href="https://youtube.com/<?= $youtube ?>">
                             <i class="fab fa-youtube"></i>
                         </a>
                     <?php endif; ?>
                     <?php if ($linkedin = $User->linkedin): ?>
-                        <a target="_blank" href="https://www.linkedin.com/in/<?= $linkedin ?>">
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/<?= $linkedin ?>">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     <?php endif; ?>

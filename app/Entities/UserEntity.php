@@ -32,11 +32,34 @@ class UserEntity extends Entity
 		return $this->attributes['first_name'] .' '. $this->attributes['last_name'];
 	}
 
-	public function getImage()
+
+
+	public function getPrivacyPhone(): bool
+    {
+        return $this->PrivacyStatus('phone_privacy');
+    }
+
+    public function getPrivacyWhatsapp(): bool
+    {
+        return $this->PrivacyStatus('wa_privacy');
+    }
+
+    public function getImage()
 	{
 		if ($this->attributes['image']) {
 			return uploads_url($this->attributes['image']);
 		}
 		return get_gravatar($this->attributes['email']);
+	}
+
+	protected function PrivacyStatus(string $column) : bool
+	{
+		if ($this->attributes[$column] == '2')
+            return true;
+        if (auth_check() && $this->attributes[$column] == '1')
+            return true;
+        if (auth_check() && $this->attributes[$column] == '0' && $this->attributes['id'] == auth_user()->id)
+            return true;
+        return false;
 	}
 }

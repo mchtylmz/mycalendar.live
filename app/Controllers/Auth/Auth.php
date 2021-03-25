@@ -20,7 +20,7 @@ class Auth extends BaseController
 	public function index()
 	{
 		if (auth_check()) {
-			return redirect()->route('my.calendar');
+			return redirect()->route('my.events');
 		}
 		return redirect()->route('auth.login');
 	}
