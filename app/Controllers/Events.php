@@ -32,7 +32,7 @@ class Events extends BaseController
 		$this->event = new EventsModel();
 		$this->event_message = new EventMessageModel();
 		$this->event_subscriber = new EventSubscriberModel();
-		$this->perPage = 9;
+		$this->perPage = 6;
 	}
 
 	public function index()
@@ -52,11 +52,7 @@ class Events extends BaseController
 		$search_category = service('request')->getGet('c');
 		$search_title = service('request')->getGet('q');
 
-		/*
-		 * dd(
-		    $this->event->join('event_meta', 'event_meta.event_id = events.id', 'LEFT')->findAll()
-        );
-		*/
+
         $data['events_all'] = $this->event
             ->where('owner', auth_user()->id)
             ->orderBy('events.id', 'DESC')

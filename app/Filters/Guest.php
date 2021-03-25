@@ -11,7 +11,7 @@ class Guest implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         if(auth_check())
-          return redirect()->route('my.calendar');
+          return redirect()->route('my.events');
     }
 
     //--------------------------------------------------------------------

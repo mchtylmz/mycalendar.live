@@ -25,7 +25,7 @@ class Home extends BaseController
 	{
 		$this->event = new EventsModel();
 		$this->event_subscriber = new EventSubscriberModel();
-		$this->perPage = 18;
+		$this->perPage = 12;
 	}
 
     public function index()

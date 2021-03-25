@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class EventSubscriberModel extends Model
 {
     protected $table          = 'event_subscriber';
-    protected $primaryKey     = 'id';
+    protected $primaryKey     = 'subscribe_id';
     protected $returnType     = 'App\Entities\EventSubscriberEntity';
     protected $useSoftDeletes = false;
     protected $allowedFields = [

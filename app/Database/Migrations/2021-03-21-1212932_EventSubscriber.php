@@ -9,7 +9,7 @@ class EventSubscriber extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-            'id' => [
+            'subscribe_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
@@ -33,12 +33,12 @@ class EventSubscriber extends Migration
             'request_message' => [
                 'type' => 'ENUM',
                 'constraint' => ['0', '1'],
-                'default' => '0',
+                'default' => '1',
             ],
         ]);
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");
         $this->forge->addField("created_at timestamp NULL DEFAULT current_timestamp()");
-        $this->forge->addKey('id', true);
+        $this->forge->addKey('subscribe_id', true);
         $this->forge->createTable('event_subscriber', false, ['ENGINE' => 'InnoDB']);
 	}
 

@@ -16,7 +16,7 @@ class Admin implements FilterInterface
                 return redirect()->route('auth.login');
             }
             if (auth_user()->role != 'admin') {
-                return redirect()->route('my.calendar');
+                return redirect()->route('my.events');
             }
         } catch (\Exception $e) {
             return redirect()->to('/');

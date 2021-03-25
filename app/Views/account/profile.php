@@ -37,14 +37,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <?php if ($events = $User->events(3)): ?>
-                            <?php foreach ($events as $key => $event) :
-                                $event->owner = false; ?>
+                        <?php if ($events = $User->myEvents(3)): ?>
+                            <?php foreach ($events as $key => $event): ?>
                                 <?= view('event/element/event_design1', [
-                                    'event' => $event,
-                                    'showButtons' => false,
-                                    'class' => 'shadow-none mb-1 border'
-                                ]); ?>
+                                'event' => $event,
+                                'showButtons' => false,
+                                'showOwner' => false,
+                                'class' => 'shadow-none mb-1 border'
+                            ]); ?>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <?= view('event/element/event_not_found'); ?>
@@ -67,7 +67,18 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <?= view('event/element/event_not_found'); ?>
+                        <?php if ($events = $User->mySubscribers(3)): ?>
+                            <?php foreach ($events as $key => $event): ?>
+                                <?= view('event/element/event_design1', [
+                                'event' => $event,
+                                'showButtons' => false,
+                                'showOwner' => true,
+                                'class' => 'shadow-none mb-1 border'
+                            ]); ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <?= view('event/element/event_not_found'); ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <!-- Katıldığı Etkinlikler -->

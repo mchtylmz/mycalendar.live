@@ -1,3 +1,7 @@
+<?php
+$showOwner = $showOwner ?? true;
+$showButtons = $showButtons ?? true;
+?>
 <div class="card card-block card-stretch <?=$class ?? ''?>">
     <div class="card-body">
         <div class="d-flex flex-wrap align-items-center justify-content-between">
@@ -14,7 +18,7 @@
                         </a>
                     </div>
                     <div class="media align-items-center">
-                        <?php if ($owner = $event->owner) : ?>
+                        <?php if ($showOwner && $owner = $event->owner) : ?>
                             <p class="mb-0 font-weight-500 d-xl-block d-lg-block d-none pr-3">
                                 <i class="las la-user mr-1"></i>
                                 <a class="link"
@@ -36,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <?php if (isset($showButtons) && $showButtons && auth_check()) : ?>
+            <?php if ($showButtons && auth_check()) : ?>
                 <div class="d-flex align-items-center list-action">
                     <a class="badge mr-3" data-toggle="tooltip" data-placement="top" title="Düzenle"
                        data-original-title="Edit" href="<?= site_url(route_to('event.edit', $event->id)) ?>">

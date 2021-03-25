@@ -37,8 +37,18 @@ $routes->get('/', 'Home::index');
 // Public Group
 $routes->group('', function ($routes) {
     // Event Group
-    $routes->group('event/(:any)/(:num)', function ($routes) {
+    $routes->group('detail/(:any)/(:num)', function ($routes) {
         // get
+        $routes->get('', 'EventDetail::index/$1/$2', ['as' => 'eventDetail.index']);
+        $routes->get('messages', 'EventDetail::messages/$1/$2', ['as' => 'eventDetail.messages']);
+        $routes->get('users', 'EventDetail::users/$1/$2', ['as' => 'eventDetail.users']);
+        // Event Requests Filter Auth
+        $routes->group('', ['filter' => 'auth'], function ($routes) {
+            // get
+            $routes->get('requests', 'EventDetail::requests/$1/$2', ['as' => 'eventDetail.requests']);
+            // post
+            $routes->post('requests', 'EventDetail::requestPost/$1/$2');
+        });
     });
     // Guest User Profile
     $routes->get('my/(:any)', 'Account::profile/$1', ['as' => 'user.profile']);
@@ -93,15 +103,6 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     });
 });
 
-// Admin Logged Group
-$routes->group(site_setting('admin_url'), ['filter' => 'admin', 'namespace' => 'App\Controllers\Admin'], function ($routes) {
-    // get
-    $routes->get('', 'Admin::index', ['as' => 'admin']);
-    $routes->get('users', 'Users::index', ['as' => 'admin.users']);
-    $routes->get('events', 'Events::index', ['as' => 'admin.events']);
-    $routes->get('settings', 'Settings::index', ['as' => 'admin.settings']);
-    // post
-});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
