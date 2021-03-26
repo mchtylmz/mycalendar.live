@@ -38,7 +38,9 @@ class UserEntity extends Entity
         // is exists cache
         $events = cache($cache_name);
         if (!$events) {
-            $events = $this->eventsModel(false)->findAll($limit);
+            $events = $this->eventsModel(false)
+                ->orderBy('start_datetime', 'DESC')
+                ->findAll($limit);
             if ($events)
                 cache()->save($cache_name, $events, 1800);
         } // not found
@@ -53,24 +55,59 @@ class UserEntity extends Entity
         // is exists cache
         $events = cache($cache_name);
         if (!$events) {
-            $events = $this->eventsModel(true, false)->findAll($limit);
+            $events = $this->eventsModel(true, false)
+                ->orderBy('start_datetime', 'DESC')
+                ->findAll($limit);
             if ($events)
                 cache()->save($cache_name, $events, 1800);
         } // not found
         return $events;
     }
 
+    public function getEvents(string $tab = 'all'): EventsModel
+    {
+       $events = $this->eventsModel(true, true);
+       switch ($tab) {
+           case 'upcoming':
+               $events
+                   ->where('start_datetime >=', date('Y-m-d H:i:0'))
+                   ->where(
+                       'start_datetime <=',
+                       date('Y-m-d H:i:0', strtotime(($this->attributes['event_upcoming'] ?? 7) . ' days'))
+                   )
+                   ->orderBy('start_datetime', 'ASC');
+               break;
+           case 'past':
+               $events
+                   ->where('start_datetime <=', date('Y-m-d H:i:0'))
+                   ->orderBy('start_datetime', 'DESC');
+               break;
+           case 'waiting':
+               $events
+                   ->where('start_datetime >=', date('Y-m-d H:i:0'))
+                   ->where('request_subscribe', '0')
+                   ->orderBy('start_datetime', 'DESC');
+               break;
+           default:
+               $events->orderBy('start_datetime', 'DESC');
+       }
+       return $events;
+    }
+
     protected function eventsModel(bool $subscriber = true, bool $owner = true): EventsModel
     {
-        $eventsModel = (new EventsModel())
-            ->orderBy('start_date', 'DESC')
-            ->orderBy('start_time', 'ASC');
+        $eventsModel = (new EventsModel());
         if ($subscriber && $owner) {
             $eventsModel->withSubscriber()
+                ->groupStart()
                 ->orWhere('user_id', $this->attributes['id'])
-                ->orWhere('owner', $this->attributes['id']);
+                ->orWhere('owner', $this->attributes['id'])
+                ->groupEnd()
+                ->groupBy('event_id');
         } elseif ($subscriber) {
-            $eventsModel->withSubscriber()->where('user_id', $this->attributes['id']);
+            $eventsModel->withSubscriber()
+                ->where('user_id', $this->attributes['id'])
+                ->groupBy('event_id');
         } elseif ($owner) {
             $eventsModel->where('owner', $this->attributes['id']);
         }

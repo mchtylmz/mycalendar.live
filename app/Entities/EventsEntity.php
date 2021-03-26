@@ -3,10 +3,16 @@
 use CodeIgniter\Entity;
 use Exception;
 use \App\Models\UserModel;
-use \App\Models\CategoryModel;
+use \App\Models\EventsModel;
+use \App\Models\EventSubscriberModel;
 
 class EventsEntity extends Entity
 {
+    public function getRoute()
+    {
+        return route_to('eventDetail.index', $this->attributes['slug'], $this->attributes['id']);
+    }
+
     public function getOwner()
     {
         $user_id = $this->attributes['owner'];
@@ -28,32 +34,37 @@ class EventsEntity extends Entity
 
     public function getStartDate()
     {
-        return turkish_long_date('d M', $this->attributes['start_date']);
+        return turkish_long_date('d M', $this->attributes['start_datetime']);
     }
 
     public function getLongStartDate()
     {
-        return turkish_long_date('d M, l', $this->attributes['start_date']);
+        return turkish_long_date('d M, l', $this->attributes['start_datetime']);
     }
 
     public function getStartTime()
     {
-        return date('H:i', strtotime($this->attributes['start_time']));
+        return date('H:i', strtotime($this->attributes['start_datetime']));
     }
 
     public function getEndDate()
     {
-        return turkish_long_date('d M', $this->attributes['end_date']);
+        return turkish_long_date('d M', $this->attributes['end_datetime']);
     }
 
     public function getLongEndDate()
     {
-        return turkish_long_date('d M, l', $this->attributes['end_date']);
+        return turkish_long_date('d M, l', $this->attributes['end_datetime']);
     }
 
     public function getEndTime()
     {
-        return date('H:i', strtotime($this->attributes['end_time']));
+        return date('H:i', strtotime($this->attributes['end_datetime']));
+    }
+
+    public function getSubscriberCount()
+    {
+        return (new EventSubscriberModel())->where('event_id', $this->attributes['id'])->countAllResults();
     }
 
     public function getMapsLink(array $maps)
@@ -100,6 +111,8 @@ class EventsEntity extends Entity
                     $link
                 );
                 break;
+            default:
+                $uri = 'detail/'.$this->attributes['slug'].'/'.$this->attributes['id'];
         }
         return anchor($uri ?? $link, $title ?? $this->attributes['title'], [
             'title' => $title ?? $this->attributes['title'],

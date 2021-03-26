@@ -33,26 +33,14 @@ class Home extends BaseController
         $data['PageTitle'] = 'Etkinlikler';
         $data['FixedTopNav'] = true;
 
-        $this->event
-            ->where('start_date >=', date('Y-m-d'))
-            ->where('start_time >=', date('H:i:s'));
+        $this->event->where('start_datetime >=', date('Y-m-d H:i:s'));
         if (!auth_check()) {
             $this->event->where('status', '2');
         }
-		if ($search_category = service('request')->getGet('c')) {
-		    $this->event->where('category', clean_number($search_category));
-        }
-		if ($search_title = service('request')->getGet('q')) {
-		    $search_title = clean_string($search_title);
-		    $this->event->groupStart();
-		    $this->event->orLike('title', $search_title);
-		    $this->event->orLike('content', $search_title);
-		    $this->event->orLike('tags', $search_title);
-		    $this->event->groupEnd();
-        }
+		$this->event = $this->event_search($this->event);
 
 		$data['events'] = $this->event
-            ->orderBy('start_date', 'ASC')
+            ->orderBy('start_datetime', 'ASC')
             ->paginate($this->perPage);
 		$data['pager'] = $this->event->pager;
 
@@ -75,9 +63,8 @@ class Home extends BaseController
 
         $data['events'] = $this->event
             ->where('category', $category->id)
-            ->where('start_date >=', date('Y-m-d'))
-            ->where('start_time >=', date('H:i:s'))
-            ->orderBy('start_date', 'ASC')
+            ->where('start_datetime >=', date('Y-m-d H:i:s'))
+            ->orderBy('start_datetime', 'ASC')
             ->paginate($this->perPage);
 		$data['pager'] = $this->event->pager;
 

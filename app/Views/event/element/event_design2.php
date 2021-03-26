@@ -5,7 +5,7 @@ $showCategory = $showCategory ?? false;
 ?>
 <div class="card card-block card-stretch card-height">
     <div class="card-body rounded event-detail event-detail-danger">
-        <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
             <div>
                 <!-- <h1 class="text-info"></h1> -->
                 <h4 class="text-info"><?= $event->getLongStartDate() ?></h4>
@@ -23,15 +23,17 @@ $showCategory = $showCategory ?? false;
                 </div>
             <?php endif; ?>
         </div>
-        <a href="">
+        <a href="<?=site_url($event->getRoute())?>">
             <h4 class="my-2 mb-3"><?= $event->title ?></h4>
         </a>
-        <?php if ($showCategory) : ?>
-            <p class="mb-2">
-                <i class="las la-clock mr-1"></i>
-                <?= $event->category->name ?>
-            </p>
-        <?php endif; ?>
+        <p class="mb-2">
+            <i class="las la-users mr-1"></i>
+            <?= $event->getSubscriberCount() ?> üye katılıyor
+        </p>
+        <p class="mb-2">
+            <i class="las la-clock mr-1"></i>
+            <?= $event->start_time ?> - <?= $event->end_time ?>
+        </p>
         <?php if ($showOwner && $owner = $event->owner) : ?>
             <p class="mb-2 font-weight-500">
                 <i class="las la-user mr-1"></i>
@@ -40,10 +42,6 @@ $showCategory = $showCategory ?? false;
                 </a>
             </p>
         <?php endif; ?>
-        <p class="mb-2">
-            <i class="las la-clock mr-1"></i>
-            <?= $event->start_time ?> - <?= $event->end_time ?>
-        </p>
         <?php if ($location = $event->getLocation()) : ?>
             <p class="mb-2">
                 <i class="las la-map-marker mr-1"></i>

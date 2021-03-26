@@ -39,12 +39,11 @@
     </div>
     <div class="container">
         <div class="event-content">
-
             <?= view('event/element/tab', [
+                'tabs' => $tabs,
                 'active_tab' => $active_tab,
-                'events_all' => $events_all,
-                'pager' => $pager,
-                'pager_up' => $pager_up
+                'events' => $events,
+                'pages' => $pages
             ]); ?>
         </div>
     </div>

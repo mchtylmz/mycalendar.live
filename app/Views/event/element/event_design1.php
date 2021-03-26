@@ -13,7 +13,7 @@ $showButtons = $showButtons ?? true;
                 </div>
                 <div class="border-left pl-2">
                     <div class="media align-items-top">
-                        <a href="">
+                        <a href="<?=site_url($event->getRoute())?>">
                             <h5 class="mb-2"><?= $event->title ?></h5>
                         </a>
                     </div>

@@ -62,27 +62,9 @@ class Events extends Migration
                 'type' => 'TEXT',
                 'null' => true
             ],
-            'start_date' => [
-                'type' => 'DATE',
-                'null' => true,
-                'default' => null
-            ],
-            'end_date' => [
-                'type' => 'DATE',
-                'null' => true,
-                'default' => null
-            ],
-            'start_time' => [
-                'type' => 'TIME',
-                'null' => true,
-                'default' => null
-            ],
-            'end_time' => [
-                'type' => 'TIME',
-                'null' => true,
-                'default' => null
-            ],
         ]);
+		$this->forge->addField("start_datetime timestamp NULL DEFAULT NULL");
+		$this->forge->addField("end_datetime timestamp NULL DEFAULT NULL");
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");
         $this->forge->addField("created_at timestamp NULL DEFAULT current_timestamp()");
         $this->forge->addField("deleted_at timestamp NULL DEFAULT NULL");

@@ -49,23 +49,13 @@ class Events extends BaseController
 		    $data['active_tab'] = '4';
         }
 
-		$search_category = service('request')->getGet('c');
-		$search_title = service('request')->getGet('q');
-
-
-        $data['events_all'] = $this->event
-            ->where('owner', auth_user()->id)
-            ->orderBy('events.id', 'DESC')
-            ->paginate($this->perPage, 'all');
-
-        $events_upcoming =  new EventsModel();
-		$data['events_upcoming'] = $events_upcoming->paginate($this->perPage, 'up');
-		/*
-		 * $data['events_pendign'] = $this->event->paginate($this->perPage, 'pen');
-		$data['events_past'] = $this->event->paginate($this->perPage, 'past');
-		*/
-		$data['pager'] = $this->event->pager;
-		$data['pager_up'] = $events_upcoming->pager;
+		$data['tabs'] = ['all', 'upcoming', 'waiting', 'past'];
+        foreach ($data['tabs'] as $key => $value) {
+            $events_{$value} = auth_user()->getEvents($value);
+            $events_{$value} = $this->event_search($events_{$value});
+            $data['events'][$value] = $events_{$value}->paginate($this->perPage, $value);
+            $data['pages'][$value] = $events_{$value}->pager;
+        }
 
 		return view('event/index', $data);
 	}
@@ -83,6 +73,8 @@ class Events extends BaseController
 	    $getRule = $this->event->getRule($event_id ? 'update':'insert');
 		$this->event->setValidationRules($getRule);
 
+		$start_datetime = $this->request->getPost('start_date') .' '. $this->request->getPost('start_time');
+		$end_datetime = $this->request->getPost('end_date') .' '. $this->request->getPost('end_time');
         $event_data = [
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
@@ -105,10 +97,8 @@ class Events extends BaseController
             'subscribe_status' => $this->request->getPost('subscribe_status'),
             'category' => $this->request->getPost('category'),
             'tags' => $this->request->getPost('tags'),
-            'start_date' => date('Y-m-d', strtotime($this->request->getPost('start_date'))),
-            'end_date' => date('Y-m-d', strtotime($this->request->getPost('end_date'))),
-            'start_time' => date('H:i', strtotime($this->request->getPost('start_time'))),
-            'end_time' => date('H:i', strtotime($this->request->getPost('end_time'))),
+            'start_datetime' => date('Y-m-d H:i:00', strtotime($start_datetime)),
+            'end_datetime' => date('Y-m-d H:i:00', strtotime($end_datetime)),
         ];
         // event_id
         if ($event_id = clean_number($event_id)) {
@@ -129,7 +119,7 @@ class Events extends BaseController
         }
 
         // success
-        return redirect()->route('my.calendar')->with('success', lang('Event.save.success'));
+        return redirect()->route('my.events')->with('success', lang('Event.save.success'));
 	}
 
 	public function edit(int $event_id)
@@ -149,4 +139,6 @@ class Events extends BaseController
 
 		return view('event/edit', $data);
 	}
+
+
 }
