@@ -47,21 +47,15 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade show active" id="maps" role="tabpanel" aria-labelledby="maps-tab">
         <!-- Maps -->
         <div class="mb-3" id="maps">
-            <div class="input-group mb-4">
-                <input type="hidden" class="form-control" name="latlng" id="latlng" value="<?= old('latlng') ?? $latlng ?>">
-                <input type="text" class="form-control" name="address" placeholder="Şehir, Bina, Adres Yazınz.."
+            <input type="hidden" class="form-control" name="latlng" id="latlng" value="<?= old('latlng') ?? $latlng ?>">
+                <input type="hidden" class="form-control" name="address" placeholder="Şehir, Bina, Adres Yazınz.."
                        value="<?= old('address') ?? $address ?>" autocomplete="off" id="address_location">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" id="map_search">Haritada Ara</button>
-                </div>
-            </div>
-            <div id="map" style="width: 100%; height: 300px;"></div>
+            <div id="map" style="width: 100%; height: 360px;" data-latlng="<?= old('latlng') ?? $latlng ?>" data-address="<?= old('address') ?? $address ?>"></div>
         </div>
         <!-- Maps -->
     </div>
     <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
         <div class="form-group mb-3" id="phone">
-            <label class="title" for="other_location">Telefon Numarası</label>
             <input type="tel" class="form-control" name="phone" value="<?= old('phone') ?? $phone ?>" placeholder="905....."
                    autocomplete="off" id="phone_location">
         </div>
@@ -69,7 +63,7 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade" id="youtube" role="tabpanel" aria-labelledby="youtube-tab">
         <div class="mb-3" id="youtube">
             <?= view('event/form/url', [
-                'label' => 'Youtube URL',
+                // 'label' => 'Youtube URL',
                 'preUrl' => 'https://youtube.com/',
                 'name' => 'youtube',
                 'value' => old('youtube') ?? $youtube
@@ -79,7 +73,7 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade" id="meet" role="tabpanel" aria-labelledby="meet-tab">
         <div class="mb-3" id="meet">
             <?= view('event/form/url', [
-                'label' => 'Google Meet URL',
+                // 'label' => 'Google Meet URL',
                 'preUrl' => 'https://meet.google.com/',
                 'name' => 'meet',
                 'value' => old('meet') ?? $meet
@@ -89,7 +83,7 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade" id="twitch" role="tabpanel" aria-labelledby="twitch-tab">
         <div class="mb-3" id="twitch">
             <?= view('event/form/url', [
-                'label' => 'Twitch URL',
+                // 'label' => 'Twitch URL',
                 'preUrl' => 'https://twitch.tv/',
                 'name' => 'twitch',
                 'value' => old('twitch') ?? $twitch
@@ -99,7 +93,7 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade" id="zoom" role="tabpanel" aria-labelledby="zoom-tab">
         <div class="mb-3" id="zoom">
             <?= view('event/form/url', [
-                'label' => 'Zoom URL',
+                // 'label' => 'Zoom URL',
                 'preUrl' => 'https://zoom.us/j/',
                 'name' => 'zoom',
                 'value' => old('zoom') ?? $zoom
@@ -109,7 +103,7 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade" id="instagram" role="tabpanel" aria-labelledby="instagram-tab">
         <div class="mb-3" id="instagram">
             <?= view('event/form/url', [
-                'label' => 'Instagram Hesabı',
+                // 'label' => 'Instagram Hesabı',
                 'preUrl' => 'https://instagram.com/@',
                 'name' => 'instagram',
                 'value' => old('instagram') ?? $instagram
@@ -119,7 +113,7 @@ $website   = $meta['web']    ?? '';
     <div class="tab-pane fade" id="website" role="tabpanel" aria-labelledby="website-tab">
         <div class="mb-3" id="website">
             <?= view('event/form/url', [
-                'label' => 'Website URL',
+                // 'label' => 'Website URL',
                 'preUrl' => 'https://',
                 'name' => 'website',
                 'value' => old('website') ?? $website

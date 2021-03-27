@@ -773,22 +773,46 @@ Index Of Script
         $('#' + element).attr('min', min);
     }
 
-    window.eventRemove = function (event_id, event_title) {
+    window.eventRemove = function (event_id, event_title, action) {
         Swal.fire({
             type: 'question',
             title: "Siliniyor?",
             text: event_title + " etkinliği siliniyor, onaylıyor musunuz? Bu işlemin geri döönüşü olmayabilir!.",
-            icon: "warning",
-            showConfirmButton: true,
-            confirmButtonText: 'Sil',
             showCancelButton: true,
+            dangerMode: true,
             cancelButtonText: 'Vazgeç',
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    Swal.fire("Poof! Your imaginary file has been deleted!");
-                }
-            });
+            cancelButtonClass: '#DD6B55',
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Sil!',
+        }).then((willDelete) => {
+            if (willDelete.value) {
+                $('body').append("<form class='form-inline remove-form' method='post' action='" + action + "'></form>");
+                $('body').find('.remove-form').append('<input name="'+_csrfname+'" type="hidden" value="'+_csrftoken+'">');
+                $('body').find('.remove-form').append('<input name="id" type="hidden" value="'+event_id+'">');
+                $('body').find('.remove-form').submit();
+            }
+        });
+    }
+
+    window.messageRemove = function (comment_id, action) {
+        Swal.fire({
+            type: 'question',
+            title: "Siliniyor?",
+            text: "Mesaj siliniyor, onaylıyor musunuz? Bu işlemin geri döönüşü olmayabilir!.",
+            showCancelButton: true,
+            dangerMode: true,
+            cancelButtonText: 'Vazgeç',
+            cancelButtonClass: '#DD6B55',
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Sil!',
+        }).then((willDelete) => {
+            if (willDelete.value) {
+                $('body').append("<form class='form-inline remove-form' method='post' action='" + action + "'></form>");
+                $('body').find('.remove-form').append('<input name="'+_csrfname+'" type="hidden" value="'+_csrftoken+'">');
+                $('body').find('.remove-form').append('<input name="comment_id" type="hidden" value="'+comment_id+'">');
+                $('body').find('.remove-form').submit();
+            }
+        });
     }
 
     $('form#subscribe').submit(function(e){

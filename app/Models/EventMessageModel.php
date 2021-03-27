@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class EventMessageModel extends Model
 {
     protected $table          = 'event_message';
-    protected $primaryKey     = 'id';
+    protected $primaryKey     = 'message_id';
     protected $returnType     = 'App\Entities\EventMessageEntity';
     protected $useSoftDeletes = false;
     protected $allowedFields = [

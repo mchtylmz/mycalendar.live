@@ -1,5 +1,7 @@
 <div class="form-group">
-    <label class="title mb-3" for="url"><?=$label ?? 'URL'?></label>
+    <?php if(isset($label) && $label) : ?>
+    <label class="title mb-3" for="url"><?=$label?></label>
+    <?php endif; ?>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="url"><?=$preUrl ?? site_url()?></span>

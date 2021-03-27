@@ -43,7 +43,14 @@ $routes->group('', function ($routes) {
         $routes->get('messages', 'EventDetail::messages/$1/$2', ['as' => 'eventDetail.messages']);
         $routes->get('users', 'EventDetail::users/$1/$2', ['as' => 'eventDetail.users']);
         // Event Requests Filter Auth
-        $routes->post('users', 'EventDetail::requestPost/$1/$2', ['filter' => 'auth']);
+        $routes->group('', ['filter' => 'auth'], function ($routes) {
+            // GET
+
+            // POST
+            $routes->post('users', 'EventDetail::requestPost/$1/$2');
+            $routes->post('messages', 'EventDetail::messagePost/$1/$2');
+        });
+
     });
     // Guest User Profile
     $routes->get('my/(:any)', 'Account::profile/$1', ['as' => 'user.profile']);
@@ -80,10 +87,10 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
         // get
         $routes->get('new', 'Events::new', ['as' => 'event.new']);
         $routes->get('edit/(:num)', 'Events::edit/$1', ['as' => 'event.edit']);
-        $routes->get('remove/(:num)', 'Events::remove/$1', ['as' => 'event.remove']);
         // post
         $routes->post('new', 'Events::store');
         $routes->post('edit/(:num)', 'Events::store/$1');
+        $routes->post('remove/(:num)', 'Events::remove/$1', ['as' => 'event.remove']);
     });
 
     // Account Group

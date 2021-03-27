@@ -21,12 +21,17 @@ class EventDetail extends BaseController
      * @var EventMessageModel
      */
     protected $event_message;
+    /**
+     * @var int
+     */
+    private $per_page;
 
     public function __construct()
 	{
 		$this->event = new EventsModel();
 		$this->event_subscriber = new EventSubscriberModel();
 		$this->event_message = new EventMessageModel();
+		$this->per_page = 12;
 	}
 
     public function index(string $slug, int $event_id)
@@ -44,9 +49,20 @@ class EventDetail extends BaseController
 
     public function messages(string $slug, int $event_id)
     {
-        d($slug);
-        d($event_id);
-        d('messages');
+        $data['FixedTopNav'] = true;
+
+        if (!$data['event'] = $this->findEvent($slug, $event_id)) {
+            dd('404');
+        }
+
+        $data['PageTitle'] = 'Mesajlar - '. $data['event']->title;
+        $data['messages'] = $this->event_message
+            ->where('event_id', $data['event']->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate($this->per_page);
+        $data['pager'] = $this->event_message->pager;
+
+        return view('event/detail/messages', $data);
     }
 
     public function users(string $slug, int $event_id)
@@ -57,12 +73,12 @@ class EventDetail extends BaseController
             dd('404');
         }
 
-        $data['PageTitle'] = $data['event']->title;
+        $data['PageTitle'] = 'Üyeler - ' . $data['event']->title;
         $data['Subscribers'] = $this->event_subscriber
             ->where('event_id', $data['event']->id)
             ->orderBy('request_subscribe', 'ASC')
             ->orderBy('updated_at', 'DESC')
-            ->paginate('12');
+            ->paginate($this->per_page);
         $data['pager'] = $this->event_subscriber->pager;
 
         return view('event/detail/users', $data);
@@ -70,6 +86,8 @@ class EventDetail extends BaseController
 
     public function requestPost(string $slug, int $event_id)
     {
+        post_method();
+
         if (!$event = $this->findEvent($slug, $event_id)) {
             dd('404');
         }
@@ -97,7 +115,7 @@ class EventDetail extends BaseController
         }
 
         $new_data = [
-            'event_id' => clean_number($event_id),
+            'event_id' => $event->id,
             'user_id' => auth_user()->id,
             'request_subscribe' => $event->subscribe_status
         ];
@@ -130,6 +148,46 @@ class EventDetail extends BaseController
 
         // error
         return redirect()->back()->with('error', lang('Event.subscribe.error'));
+    }
+
+    public function messagePost(string $slug, int $event_id)
+    {
+        post_method();
+
+        if (!$event = $this->findEvent($slug, $event_id)) {
+            dd('404');
+        }
+
+        // Delete
+        if ($message_id = clean_number($this->request->getPost('comment_id'))) {
+            if (auth_user()->id != $event->owner->id) {
+                return redirect()->back()->with('error', lang('Event.message.delete_error'));
+            }
+            $delete = $this->event_message
+                ->where('event_id', $event->id)
+                ->where('message_id', $message_id)
+                ->delete();
+            if (!$delete) {
+                return redirect()->back()->with('error', lang('Event.message.delete_error'));
+            }
+            return redirect()->back()->with('success', lang('Event.message.delete_success'));
+        }
+
+        // New Message
+        $new_data = [
+            'event_id' => $event->id,
+            'user_id'  => auth_user()->id,
+            'message'  => clean_string($this->request->getPost('comment'))
+        ];
+        try {
+            if (!$this->event_message->save($new_data))
+                throw new Exception(lang('Event.message.error'));
+        } catch (Exception $e) {
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
+        }
+
+        // success
+        return redirect()->back()->with('success', lang('Event.message.success'));
     }
 
     private function findEvent(string $slug, int $event_id): object

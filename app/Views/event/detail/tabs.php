@@ -4,7 +4,7 @@
         <a class="nav-link <?= $active == 'index' ? 'active' : '' ?>" href="<?=site_url($route)?>">Detaylar</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link <?= $active == 'message' ? 'active' : '' ?>"
+        <a class="nav-link <?= $active == 'messages' ? 'active' : '' ?>"
            href="<?=site_url($route_messages)?>">Mesajlar</a>
     </li>
     <li class="nav-item">

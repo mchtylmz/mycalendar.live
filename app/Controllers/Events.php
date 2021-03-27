@@ -142,5 +142,19 @@ class Events extends BaseController
 		return view('event/edit', $data);
 	}
 
+	public function remove(int $event_id)
+	{
+	    post_method();
+
+	    $event_id = clean_number($event_id);
+		if ($this->event->where('owner', auth_user()->id ?? 0)->delete($event_id)) {
+		    // cache clean
+            cache()->clean();
+            // success
+		    return redirect()->back()->with('success', lang('Event.delete.success'));
+        }
+        // error
+		return redirect()->back()->with('error', lang('Event.notFound'));
+	}
 
 }

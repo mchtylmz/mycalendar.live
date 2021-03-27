@@ -47,7 +47,7 @@ $showButtons = $showButtons ?? true;
                         <i class="ri-edit-box-line"></i>
                     </a>
                     <a class="badge" data-toggle="tooltip" data-placement="top" title="Sil" href="javascript:void(0)"
-                       data-original-title="Sil" onclick="eventRemove('<?= $event->id ?>', '<?= $event->title ?>')">
+                       data-original-title="Sil" onclick="eventRemove('<?= $event->id ?>', '<?= $event->title ?>', '<?=route_to('event.remove', $event->id)?>')">
                         <i class="ri-delete-bin-line"></i>
                     </a>
                 </div>

@@ -103,11 +103,11 @@ class UserEntity extends Entity
                 ->orWhere('user_id', $this->attributes['id'])
                 ->orWhere('owner', $this->attributes['id'])
                 ->groupEnd()
-                ->groupBy('event_id');
+                ->groupBy('id');
         } elseif ($subscriber) {
             $eventsModel->withSubscriber()
                 ->where('user_id', $this->attributes['id'])
-                ->groupBy('event_id');
+                ->groupBy('id');
         } elseif ($owner) {
             $eventsModel->where('owner', $this->attributes['id']);
         }
