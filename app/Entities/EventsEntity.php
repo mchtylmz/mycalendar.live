@@ -3,7 +3,6 @@
 use CodeIgniter\Entity;
 use Exception;
 use \App\Models\UserModel;
-use \App\Models\EventsModel;
 use \App\Models\EventSubscriberModel;
 
 class EventsEntity extends Entity
@@ -42,6 +41,11 @@ class EventsEntity extends Entity
         return turkish_long_date('d M, l', $this->attributes['start_datetime']);
     }
 
+    public function getFullStartDate()
+    {
+        return turkish_long_date('l, j F Y', $this->attributes['start_datetime']);
+    }
+
     public function getStartTime()
     {
         return date('H:i', strtotime($this->attributes['start_datetime']));
@@ -57,6 +61,11 @@ class EventsEntity extends Entity
         return turkish_long_date('d M, l', $this->attributes['end_datetime']);
     }
 
+    public function getFullEndDate()
+    {
+        return turkish_long_date('l, j F Y', $this->attributes['end_datetime']);
+    }
+
     public function getEndTime()
     {
         return date('H:i', strtotime($this->attributes['end_datetime']));
@@ -64,7 +73,26 @@ class EventsEntity extends Entity
 
     public function getSubscriberCount()
     {
-        return (new EventSubscriberModel())->where('event_id', $this->attributes['id'])->countAllResults();
+        $cache_name = "event_subscribe_count_{$this->attributes['id']}";
+        // is exists cache
+        $counts = cache($cache_name);
+        if (!$counts) {
+            $counts = (new EventSubscriberModel())->where('event_id', $this->attributes['id'])->countAllResults();
+            if ($counts)
+                cache()->save($cache_name, $counts, 1800);
+        } // not found
+        return $counts;
+    }
+
+    public function isSubscriber(int $user_id = null)
+    {
+        $subscriber = (new EventSubscriberModel())
+            ->select('request_subscribe')
+            ->where('event_id', $this->attributes['id'])
+            ->where('user_id', $user_id ?? auth_user()->id)
+            ->first();
+        if (!$subscriber) return false;
+        return $subscriber->request_subscribe;
     }
 
     public function getMapsLink(array $maps)
@@ -80,7 +108,7 @@ class EventsEntity extends Entity
         return tel($phone, $phone, ['title' => $phone]);
     }
 
-    public function getUrl(string $link, string $key = 'site'): string
+    public function getLink(string $link, string $key = 'site'): string
     {
         switch ($key) {
             case 'meet':
@@ -112,7 +140,7 @@ class EventsEntity extends Entity
                 );
                 break;
             default:
-                $uri = 'detail/'.$this->attributes['slug'].'/'.$this->attributes['id'];
+                $uri = $this->getRoute();
         }
         return anchor($uri ?? $link, $title ?? $this->attributes['title'], [
             'title' => $title ?? $this->attributes['title'],
@@ -120,27 +148,63 @@ class EventsEntity extends Entity
         ]);
     }
 
-    public function getLocation(string $key = 'maps')
+    public function getLocation()
     {
         try {
-            $location = json_decode($this->attributes['location'], true);
-            if ($location && is_array($location)) {
+            $location = $this->parseMeta();
+            if ($location) {
                 foreach (array_keys($location) as $key) :
-                    if (isset($location[$key]) && $location[$key]) {
-                        if ($key == 'maps') {
-                            if (empty($location['maps'][0])) continue;
-                            return $this->getMapsLink($location['maps']);
-                        }
-                        if ($key == 'phone') {
-                            return $this->getPhoneLink($location['phone']);
-                        }
-                        return $this->getUrl($location[$key], $key);
-                    }
+                    $link = $this->parseMeta($key);
+                    if ($link) return $link;
                 endforeach;
             }
-            return $this->getUrl('site');
+            return $this->getLink('detail');
         } catch (Exception $e) {
             return null;
+        }
+    }
+
+    public function parseMeta(string $key = '')
+    {
+        try {
+            $metas = json_decode($this->attributes['location'], true);
+            if (!$key)
+                return $metas;
+            if (isset($metas[$key]) && $metas[$key]) :
+                if ($key == 'maps') {
+                    if (empty($metas['maps'][0])) return null;
+                    return $this->getMapsLink($metas['maps']);
+                }
+                if ($key == 'phone') {
+                    return $this->getPhoneLink($metas['phone']);
+                }
+                return $this->getLink($metas[$key], $key);
+            endif;
+            return null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function instagramTags()
+    {
+        try {
+            $tags = explode(',', $this->attributes['tags']);
+            if ($tags) {
+                $instagramTags = [];
+                foreach ($tags as $key => $tag) {
+                    $tag = trim($tag);
+                    $instagramTags[] = anchor("https://www.instagram.com/explore/tags/{$tag}", "#{$tag}", [
+                        "title" => "#{$tag}",
+                        "target" => "_blank",
+                        "class" => "bg-secondary pt-1 pb-1 pl-2 pr-2 mb-2 d-inline-block"
+                    ]);
+                }
+                return implode(' ', $instagramTags);
+            }
+            return $this->attributes['tags'];
+        } catch (Exception $e) {
+            return $this->attributes['tags'];
         }
     }
 
@@ -148,4 +212,6 @@ class EventsEntity extends Entity
     {
         return $this->original[$column];
     }
+
+
 }

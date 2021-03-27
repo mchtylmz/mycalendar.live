@@ -111,6 +111,8 @@ class Events extends BaseController
         } catch (Exception $e) {
             return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
+        // cache clean
+        cache()->clean();
 
         // redirect
 		if ($redirect = session('redirect_after_event_edit')) {

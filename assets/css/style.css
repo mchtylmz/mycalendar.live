@@ -6,7 +6,8 @@
 .dark .clockpicker-popover .popover-title,
 .dark .clockpicker-popover .popover-content,
 .dark .clockpicker-plate,
-.dark .clockpicker-button {
+.dark .clockpicker-button,
+.dark .card.bg-white {
     background-color: #535f6b;
     color: #FFF !important;
 }
@@ -23,6 +24,9 @@
 .dark .link,
 .dark .bootstrap-tagsinput input {
     color: #FFF !important;
+}
+.dropdown-toggle.after-none:after {
+    display: none;
 }
 .dark .badge-color {
     color: #535f6b !important;

@@ -1,4 +1,4 @@
-<div class="card card-block card-stretch card-height">
+<div class="card card-block card-stretch card-height <?=$class ?? ''?>">
     <div class="card-body">
         <div class="subscriber-detail text-center">
             <div class="image mb-2 position-relative d-inline-block">
@@ -12,13 +12,13 @@
             </h5>
             <p class="mb-2"><?= $user->username ?></p>
             <?php if (isset($showButtons) && $showButtons && auth_check()) : ?>
-                <div class="d-flex align-items-center justify-content-center">
-                    <button class="btn btn-success rounded-small"><i class="ri-mail-line m-0"></i>
-                    </button>
-                    <div class="title bg-success-light rounded rounded-small ml-1">Enterprise</div>
-                </div>
+                <?php if (isset($subscribe) && $subscribe) : ?>
+                    <?= view('event/detail/user_buttons', [
+                            'subscribe' => $subscribe,
+                        'user_id' => $user->id
+                    ]) ?>
+                <?php endif; ?>
             <?php endif; ?>
-
         </div>
     </div>
 </div>

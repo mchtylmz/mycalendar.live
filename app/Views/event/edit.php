@@ -16,11 +16,11 @@
                         <?php echo form_open(route_to('event.edit', $event->id)); ?>
                         <?= view('event/form/event', [
                             'title' => $event->title,
-                            'category' => $event->category,
-                            'start_date' => date('d.m.Y', strtotime($event->edit('start_date'))),
-                            'end_date' => date('d.m.Y', strtotime($event->edit('end_date'))),
-                            'start_time' => $event->start_time,
-                            'end_time' => $event->end_time,
+                            'category' => $event->category->id,
+                            'start_date' => date('d.m.Y', strtotime($event->edit('start_datetime'))),
+                            'end_date' => date('d.m.Y', strtotime($event->edit('end_datetime'))),
+                            'start_time' => date('H:i', strtotime($event->edit('start_datetime'))),
+                            'end_time' => date('H:i', strtotime($event->edit('end_datetime'))),
                             'location' => $event->edit('location'),
                             'tags' => $event->tags,
                             'status' => $event->status,

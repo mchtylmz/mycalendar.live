@@ -33,7 +33,7 @@ class UserEntity extends Entity
     public function myEvents(int $limit = 4) : array
     {
         $cache_name = "users_{$this->attributes['id']}_myevents_{$limit}";
-         if (!auth_check())
+        if (!auth_check())
             $cache_name .= "_guest";
         // is exists cache
         $events = cache($cache_name);

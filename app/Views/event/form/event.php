@@ -95,7 +95,7 @@ $content = html_entity_decode(old('content') ?? ($content ?? ''));
                    name="message_status"
                    value="0" <?= $message_status == '0' ? 'checked' : '' ?> required>
             <label class="custom-control-label"
-                   for="private_msg">Sadece Ben, seçilen üyeler</label>
+                   for="private_msg">Sadece Ben</label>
         </div>
         <div class="w-100 custom-control custom-radio custom-radio-color-checked custom-control-inline mb-1">
             <input type="radio" class="custom-control-input bg-success" id="public_msg"

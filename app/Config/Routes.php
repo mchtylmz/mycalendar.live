@@ -43,12 +43,7 @@ $routes->group('', function ($routes) {
         $routes->get('messages', 'EventDetail::messages/$1/$2', ['as' => 'eventDetail.messages']);
         $routes->get('users', 'EventDetail::users/$1/$2', ['as' => 'eventDetail.users']);
         // Event Requests Filter Auth
-        $routes->group('', ['filter' => 'auth'], function ($routes) {
-            // get
-            $routes->get('requests', 'EventDetail::requests/$1/$2', ['as' => 'eventDetail.requests']);
-            // post
-            $routes->post('requests', 'EventDetail::requestPost/$1/$2');
-        });
+        $routes->post('users', 'EventDetail::requestPost/$1/$2', ['filter' => 'auth']);
     });
     // Guest User Profile
     $routes->get('my/(:any)', 'Account::profile/$1', ['as' => 'user.profile']);

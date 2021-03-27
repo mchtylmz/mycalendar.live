@@ -791,6 +791,49 @@ Index Of Script
             });
     }
 
+    $('form#subscribe').submit(function(e){
+        var $this = $(this);    // reference to the current scope
+        var confirm_msg = 'Etkinliğe katılıyorum, onaylıyor musunuz?';
+
+        var action = $this.find("input[name=action]").val();
+        if (action == 'left') {
+            confirm_msg = 'Etkinliğe katılmayacağım, onaylıyor musunuz?';
+        }
+        if (action == 'left_by_owner') {
+            confirm_msg = 'Üye etkinlikten çıkarılacaktır, onaylıyor musunuz?';
+        }
+        if (action == 'join_by_owner') {
+            confirm_msg = 'Üyenin etkinliğe katılması onaylanacaktır, işleme devam edilsin mi?';
+        }
+
+        var btn_submit = $this.find("button[type=submit]");
+        btn_submit.attr('subscribe', '1');
+        if (confirm(confirm_msg)) {
+            btn_submit.removeAttr('subscribe');
+            return true;
+        }
+
+        btn_submit.removeAttr('disabled').html(btn_submit.attr('prev-text'));
+        return false;
+    });
+
+    $("form").submit(function () {
+        var btn_submit = "button[type=submit]";
+        if ($(this).find(btn_submit).attr('subscribe') == undefined) {
+            $(btn_submit)
+            .attr('prev-text', $.trim($(btn_submit).text()))
+            .attr('disabled', 'disabled')
+            .html('<i class="fas fa-spinner fa-pulse"></i>');
+        }
+
+        if (document.querySelector('#editor')) {
+            let myEditor = document.querySelector('#editor');
+            if ($(this).find('textarea[name=content]').length <= 0) {
+                $(this).append('<textarea style="display:none" name="content"></textarea>');
+            }
+            $(this).find('textarea[name=content]').val(myEditor.children[0].innerHTML);
+        }
+    });
 
     $(".file-upload").on('change', function(){
         readURL(this);
