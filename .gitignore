@@ -2,5 +2,5 @@
 env
 .DS_Store
 Thumbs.db
-
+app/Config/Database.php
 /.idea
