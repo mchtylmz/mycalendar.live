@@ -31,11 +31,11 @@ class Database extends Config
 	 * @var array
 	 */
 	public $default = [
-		'DSN'      => 'pgsql:host=localhost;port=3306;dbname=calendar_live',
+		'DSN'      => 'pgsql:host=localhost;port=3306;dbname=database',
 		'hostname' => 'localhost',
-		'username' => 'calendar_live',
-		'password' => '24Ya2k@24Ya2k',
-		'database' => 'calendar_live',
+		'username' => 'username',
+		'password' => 'password',
+		'database' => 'database',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
