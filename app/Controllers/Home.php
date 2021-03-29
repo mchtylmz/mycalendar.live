@@ -33,6 +33,7 @@ class Home extends BaseController
         $data['PageTitle'] = 'Etkinlikler';
         $data['FixedTopNav'] = true;
 
+
         $this->event->where('start_datetime >=', date('Y-m-d H:i:s'));
         if (!auth_check()) {
             $this->event->where('status', '2');
@@ -83,4 +84,5 @@ class Home extends BaseController
 
         return view('users', $data);
     }
+
 }

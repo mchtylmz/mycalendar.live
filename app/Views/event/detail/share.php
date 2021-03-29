@@ -19,7 +19,7 @@
             Twitter
         </a>
         <a target="_blank" class="dropdown-item d-flex flex-wrap align-items-center pl-3"
-           href="whatsapp://send?text=<?= $title ?? '' ?> <?= current_url() ?>">
+           href="https://wa.me?text=<?= $title ?? '' ?> <?= current_url() ?>">
             <i class="fab fa-whatsapp mr-3"></i>
             Whatsapp
         </a>
@@ -33,7 +33,7 @@
             <i class="fab fa-linkedin-in mr-3"></i>
             Linkedin
         </a>
-        <a class="dropdown-item d-flex flex-wrap align-items-center pl-3" href="javascript:void(0)">
+        <a class="dropdown-item d-flex flex-wrap align-items-center pl-3" id="copyLink" href="<?= current_url() ?>">
             <i class="fa fa-link mr-3"></i>
             Linki Kopyala
         </a>

@@ -863,6 +863,27 @@ Index Of Script
         readURL(this);
     });
 
+    $('#copyLink').click(function (e) {
+        e.preventDefault();
+        var copyText = $(this).attr('href');
+
+        document.addEventListener('copy', function (e) {
+            e.clipboardData.setData('text/plain', copyText);
+            e.preventDefault();
+        }, true);
+
+        document.execCommand('copy');
+
+        Swal.fire({
+            icon: 'info',
+            title: 'Link Kopyalandı!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+        return false;
+    });
+
     $(".upload-button").on('click', function() {
        $(".file-upload").trigger('click');
     });

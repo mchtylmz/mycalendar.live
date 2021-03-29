@@ -5,19 +5,19 @@
  *
  * (c) CodeIgniter Foundation <admin@codeigniter.com>
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  */
 
 // Pager language settings
 return [
-	'pageNavigation'         => 'Sayfa Menüsü',
-	'first'                  => 'Birinci',
+	'pageNavigation'         => 'Sayfalama',
+	'first'                  => 'İlk',
 	'previous'               => 'Önceki',
 	'next'                   => 'Sonraki',
-	'last'                   => 'Sonuncu',
+	'last'                   => 'Son',
 	'older'                  => 'Eski',
 	'newer'                  => 'Yeni',
-	'invalidTemplate'        => '{0} is not a valid Pager template.',
-	'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
+	'invalidTemplate'        => '{0} geçersiz Sayfalama şablonu.',
+	'invalidPaginationGroup' => '{0} geçersiz Sayfalama grubu.',
 ];

@@ -94,6 +94,21 @@ class UserEntity extends Entity
        return $events;
     }
 
+    public function notifications(int $limit = 5)
+    {
+        $cache_name = "users_{$this->attributes['id']}_notifications_{$limit}";
+        // is exists cache
+        $notifications = cache($cache_name);
+        if (!$notifications) {
+            $notifications = notification()
+                ->where('user_id', $this->attributes['id'])
+                ->findAll($limit);
+            if ($notifications)
+                cache()->save($cache_name, $notifications, 1800);
+        } // not found
+        return $notifications;
+    }
+
     protected function eventsModel(bool $subscriber = true, bool $owner = true): EventsModel
     {
         $eventsModel = (new EventsModel());
