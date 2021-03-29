@@ -29,6 +29,11 @@ class Notifications extends Migration
                 'constraint' => '500',
                 'null' => true
             ],
+            'is_read' => [
+                'type' => 'ENUM',
+                'constraint' => ['0', '1'],
+                'default' => '0',
+            ],
         ]);
         $this->forge->addField("created_at timestamp NULL DEFAULT current_timestamp()");
         $this->forge->addKey('id', true);

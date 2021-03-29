@@ -884,6 +884,12 @@ Index Of Script
         return false;
     });
 
+    $('.notification-bell').click(function (e) {
+        if ($(this).data('count')) {
+            $.get(_base_url + 'api/notifications/read');
+        }
+    });
+
     $(".upload-button").on('click', function() {
        $(".file-upload").trigger('click');
     });

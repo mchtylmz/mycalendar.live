@@ -31,6 +31,20 @@ class Account extends BaseController
         return view('account/profile', $data);
     }
 
+    public function notifications()
+    {
+        $data['PageTitle'] = 'Bildirimler';
+        /*
+         *
+        $data['messages'] = notification()
+            ->where('event_id', $data['event']->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate($this->per_page);
+        $data['pager'] = $this->event_message->pager;
+        */
+        return view('account/notifications', $data);
+    }
+
     public function updateProfile()
     {
         $data['PageTitle'] = auth_user()->getFullname();

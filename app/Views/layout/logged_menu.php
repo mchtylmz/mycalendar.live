@@ -6,31 +6,38 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto navbar-list align-items-center">
         <li class="nav-item nav-icon dropdown">
-            <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
-               data-toggle="dropdown"
+            <a href="javascript:void(0)" class="search-toggle dropdown-toggle notification-bell"
+               id="dropdownMenuButton" data-toggle="dropdown" data-count="<?=auth_user()->notification_count?>"
                aria-haspopup="true" aria-expanded="false">
                 <i class="las la-bell"></i>
-                <span class="badge badge-primary count-mail rounded-circle">2</span>
+                <span class="badge badge-primary count-mail rounded-circle"><?=auth_user()->notification_count?></span>
                 <span class="bg-primary"></span>
             </a>
             <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <div class="card shadow-none m-0">
-                    <div class="card-body p-0 ">
-                        <div class="cust-title p-3">
+                    <div class="card-body p-0">
+                        <div class="cust-title p-3 text-center">
                             <h5 class="mb-0">Bildirimler</h5>
                         </div>
-                        <div class="p-2 list-group">
-                            <?php for ($i = 0; $i < 10; $i++): ?>
-                        <a href="#" class="list-group-item list-group-item-action">
-                           <div class="d-flex w-100 justify-content-between text-right">
-                              <small>3 days ago</small>
-                           </div>
-                           <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                        </a>
-                            <?php endfor; ?>
+                        <div class="p-0 list-group">
+                            <?php if ($notifications = auth_user()->notifications) : ?>
+                                <?php foreach ($notifications as $notification): ?>
+                                    <a href="<?= $notification->link ?>"
+                                       class="list-group-item list-group-item-action border border-bottom p-2">
+                                        <div class="d-flex w-100 justify-content-between text-right">
+                                            <small><?= $notification->timeago ?></small>
+                                        </div>
+                                        <p class="mb-1"><?= $notification->message ?></p>
+                                    </a>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <a class="list-group-item list-group-item-action border border-bottom p-2">
+                                    <p class="mt-1 mb-1 text-center">Gösterilecek bildirim yok!.</p>
+                                </a>
+                            <?php endif; ?>
                         </div>
                         <a class="right-ic btn-block position-relative p-3 border-top text-center"
-                           href="#" role="button">
+                           href="<?=site_url(route_to('account.notifications'))?>">
                             Tüm Bildirimler
                         </a>
                     </div>
@@ -71,6 +78,12 @@
                                 <div class="media align-items-center">
                                     <i class="ri-calendar-check-fill mr-3"></i>
                                     <h6>Takvimim</h6>
+                                </div>
+                            </a>
+                            <a href="<?= site_url(route_to('account.notifications')) ?>" class="iq-sub-card">
+                                <div class="media align-items-center">
+                                    <i class="ri-notification-line mr-3"></i>
+                                    <h6>Bildirimlerim</h6>
                                 </div>
                             </a>
                             <a href="<?= site_url(route_to('user.profile', auth_user()->username)) ?>" class="iq-sub-card">

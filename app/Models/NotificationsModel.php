@@ -10,7 +10,7 @@ class NotificationsModel extends Model
     protected $primaryKey     = 'id';
     protected $returnType     = 'App\Entities\NotificationEntity';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['user_id', 'message', 'link'];
+    protected $allowedFields = ['user_id', 'message', 'link', 'is_read'];
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
     protected $validationRules    = [

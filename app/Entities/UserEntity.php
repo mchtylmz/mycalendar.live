@@ -94,7 +94,7 @@ class UserEntity extends Entity
        return $events;
     }
 
-    public function notifications(int $limit = 5)
+    public function getNotifications(int $limit = 5)
     {
         $cache_name = "users_{$this->attributes['id']}_notifications_{$limit}";
         // is exists cache
@@ -102,7 +102,25 @@ class UserEntity extends Entity
         if (!$notifications) {
             $notifications = notification()
                 ->where('user_id', $this->attributes['id'])
+                ->where('is_read', '0')
+                ->orderBy('is_read', 'DESC')
                 ->findAll($limit);
+            if ($notifications)
+                cache()->save($cache_name, $notifications, 1800);
+        } // not found
+        return $notifications;
+    }
+
+    public function getNotificationCount()
+    {
+        $cache_name = "users_{$this->attributes['id']}_notificationcount";
+        // is exists cache
+        $notifications = cache($cache_name);
+        if (!$notifications) {
+            $notifications = notification()
+                ->where('user_id', $this->attributes['id'])
+                ->where('is_read', '0')
+                ->countAllResults();
             if ($notifications)
                 cache()->save($cache_name, $notifications, 1800);
         } // not found

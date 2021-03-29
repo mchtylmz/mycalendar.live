@@ -97,8 +97,8 @@ class EventsEntity extends Entity
 
     public function getMapsLink(array $maps)
     {
-        return anchor('https://www.google.com/maps/place/' . (trim($maps[0]) ?? '0,0'), $maps[1] ?? 'Google Maps', [
-            'title' => $maps[1] ?? 'Google Maps',
+        return anchor('https://www.google.com/maps/place/' . (trim($maps[0]) ?? '0,0'), 'Google Haritalar', [
+            'title' => 'Google Haritalar',
             'target' => '_blank',
         ]);
     }

@@ -98,6 +98,7 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     // Account Group
     $routes->group('account', function ($routes) {
         // get
+        $routes->get('notifications', 'Account::notifications', ['as' => 'account.notifications']);
         $routes->get('change-password', 'Account::changePassword', ['as' => 'account.changePassword']);
         $routes->get('update-profile', 'Account::updateProfile', ['as' => 'account.updateProfile']);
         $routes->get('logout', 'Account::logout', ['as' => 'account.logout']);
@@ -107,6 +108,12 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     });
 });
 
+// API Group
+$routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->group('notifications', function ($routes) {
+        $routes->get('read', 'Notifications::read', ['filter' => 'auth']);
+    });
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
