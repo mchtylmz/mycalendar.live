@@ -16,11 +16,6 @@ Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcılar�
 - İstendiği zaman etkinlikten çıkabilme
 - Etkinlikleri herkese açık veya gizli olarak düzenleme ile özel etkinlik oluşturabilme
 
-Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link ile kolayca katılımcı davet edebilirsiniz.
-
-> **Eklenmesi Düşünülen Özellikler**
-
-
 ## Demo
 
 [mycalendar.live](https://mycalendar.live)

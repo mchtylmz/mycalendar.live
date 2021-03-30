@@ -18,10 +18,7 @@ if (!function_exists('post_method')) {
 if (!function_exists('assets_url')) {
     function assets_url(string $assets): string
     {
-        // $assets .= '?v=1.0';
-        if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
-            $assets .= '?v=0.' . time();
-        }
+        $assets .= '?v=1.0';
         return site_url('assets/' . $assets);
     }
 }
