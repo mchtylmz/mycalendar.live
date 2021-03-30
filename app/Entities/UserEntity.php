@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use CodeIgniter\Entity;
 use \App\Models\EventsModel;
+use CodeIgniter\I18n\Time;
 
 class UserEntity extends Entity
 {
@@ -73,7 +74,7 @@ class UserEntity extends Entity
                    ->where('start_datetime >=', date('Y-m-d H:i:0'))
                    ->where(
                        'start_datetime <=',
-                       date('Y-m-d H:i:0', strtotime(($this->attributes['event_upcoming'] ?? 7) . ' days'))
+                       (new Time($this->attributes['event_upcoming'] ?? 7 . ' days'))->timestamp
                    )
                    ->orderBy('start_datetime', 'ASC');
                break;
@@ -129,7 +130,7 @@ class UserEntity extends Entity
 
     protected function eventsModel(bool $subscriber = true, bool $owner = true): EventsModel
     {
-        $eventsModel = (new EventsModel());
+        $eventsModel = new EventsModel();
         if ($subscriber && $owner) {
             $eventsModel->withSubscriber()
                 ->groupStart()

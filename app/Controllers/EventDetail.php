@@ -37,11 +37,7 @@ class EventDetail extends BaseController
     public function index(string $slug, int $event_id)
     {
         $data['FixedTopNav'] = true;
-
-        if (!$data['event'] = $this->findEvent($slug, $event_id)) {
-            dd('404');
-        }
-
+        $data['event'] = $this->findEvent($slug, $event_id);
         $data['PageTitle'] = $data['event']->title;
 
         return view('event/detail/index', $data);
@@ -50,12 +46,9 @@ class EventDetail extends BaseController
     public function messages(string $slug, int $event_id)
     {
         $data['FixedTopNav'] = true;
-
-        if (!$data['event'] = $this->findEvent($slug, $event_id)) {
-            dd('404');
-        }
-
+        $data['event'] = $this->findEvent($slug, $event_id);
         $data['PageTitle'] = 'Mesajlar - '. $data['event']->title;
+
         $data['messages'] = $this->event_message
             ->where('event_id', $data['event']->id)
             ->orderBy('created_at', 'DESC')
@@ -68,12 +61,9 @@ class EventDetail extends BaseController
     public function users(string $slug, int $event_id)
     {
         $data['FixedTopNav'] = true;
-
-        if (!$data['event'] = $this->findEvent($slug, $event_id)) {
-            dd('404');
-        }
-
+        $data['event'] = $this->findEvent($slug, $event_id);
         $data['PageTitle'] = 'Üyeler - ' . $data['event']->title;
+
         $data['Subscribers'] = $this->event_subscriber
             ->where('event_id', $data['event']->id)
             ->orderBy('request_subscribe', 'ASC')
@@ -88,9 +78,7 @@ class EventDetail extends BaseController
     {
         post_method();
 
-        if (!$event = $this->findEvent($slug, $event_id)) {
-            dd('404');
-        }
+        $event = $this->findEvent($slug, $event_id);
 
         // cache
         cache()->clean();
@@ -184,9 +172,7 @@ class EventDetail extends BaseController
     {
         post_method();
 
-        if (!$event = $this->findEvent($slug, $event_id)) {
-            dd('404');
-        }
+        $event = $this->findEvent($slug, $event_id);
 
         // Delete
         if ($message_id = clean_number($this->request->getPost('comment_id'))) {
@@ -240,6 +226,12 @@ class EventDetail extends BaseController
             if ($eventDetail)
                 cache()->save($cache_name, $eventDetail, 1800);
         } // not found
+
+        // Not found
+        if (!$eventDetail) {
+            show404();
+        }
+
         return $eventDetail;
     }
 }

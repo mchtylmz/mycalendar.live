@@ -22,33 +22,38 @@ class Events extends BaseController
 
     public function index()
     {
+        $start_date = strtotime($this->request->getGet('start'));
+        $end_date = strtotime($this->request->getGet('end'));
+
         if (auth_check()) {
-            $start_date = strtotime($this->request->getGet('start'));
-            $end_date = strtotime($this->request->getGet('end'));
-            $events = auth_user()->getEvents()
-                ->where('start_datetime >=', date('Y-m-d H:i:s', $start_date))
-                ->where('end_datetime <=', date('Y-m-d H:i:s', $end_date))
-                ->findAll();
-            if ($events) :
-                $data = [];
-                foreach ($events as $event) :
-                    $event_start = strtotime($event->start_datetime);
-                    $event_end = strtotime($event->end_datetime);
-                    for ($day = $event_start; $day <= $event_end; $day = $day + 86400) :
-                        $data[] = [
-                            'title'    => $event->title,
-                            'start'    => date('Y-m-d', $day) .' '. $event->getStartTime(),
-                            'end'      => date('Y-m-d', $day) .' '. $event->getEndTime(),
-                            'route'    => $event->route,
-                            'owner'    => view('event/element/owner_modal', ['user' => $event->owner]),
-                            'color'    => $event->category->color ?? '#465af7',
-                            'location' => $event->location,
-                            'category' => $event->category->name ?? ''
-                        ];
-                    endfor;
-                endforeach;;
-            endif;
+            $this->events = auth_user()->getEvents();
         }
+
+        $events = $this->events
+            ->where('start_datetime >=', date('Y-m-d H:i:s', $start_date))
+            ->where('end_datetime <=', date('Y-m-d H:i:s', $end_date))
+            ->findAll();
+
+        if ($events) :
+            $data = [];
+            foreach ($events as $event) :
+                $event_start = strtotime($event->start_datetime);
+                $event_end = strtotime($event->end_datetime);
+                for ($day = $event_start; $day <= $event_end; $day = $day + 86400) :
+                    $data[] = [
+                        'title' => $event->title,
+                        'start' => date('Y-m-d', $day) . ' ' . $event->getStartTime(),
+                        'end' => date('Y-m-d', $day) . ' ' . $event->getEndTime(),
+                        'route' => $event->route,
+                        'owner' => view('event/element/owner_modal', ['user' => $event->owner]),
+                        'color' => $event->category->color ?? '#465af7',
+                        'location' => $event->location,
+                        'category' => $event->category->name ?? ' - '
+                    ];
+                endfor;
+            endforeach;;
+        endif;
+
         return $this->respond($data ?? [], 200);
     }
 

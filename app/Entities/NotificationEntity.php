@@ -23,7 +23,6 @@ class NotificationEntity extends Entity
 
     public function getTimeAgo()
     {
-        $time = Time::parse($this->attributes['created_at'], 'Europe/Istanbul', 'tr_TR');
-        return $time->humanize();
+        return Time::parse($this->attributes['created_at'], 'Europe/Istanbul', 'tr_TR')->humanize();
     }
 }

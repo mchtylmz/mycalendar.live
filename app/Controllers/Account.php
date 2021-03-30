@@ -23,7 +23,7 @@ class Account extends BaseController
         } else {
             $user = $this->user->where('username', clean_string($username))->first();
             if (!$user)
-                return redirect()->to('/');
+                show404();
         }
 
         $data['PageTitle'] = $user->getFullname();
@@ -77,8 +77,8 @@ class Account extends BaseController
             'event_upcoming' => intval($this->request->getPost('event_upcoming') ?? 7),
             'email_notification' => $this->request->getPost('email_notification') ? '1' : '0',
             'sms_notification' => $this->request->getPost('sms_notification') ? '1' : '0',
-            'phone_privacy' =>  intval($this->request->getPost('phone_privacy') ?? '0'),
-            'wa_privacy' => intval($this->request->getPost('wa_privacy')  ?? '0')
+            'phone_privacy' => intval($this->request->getPost('phone_privacy') ?? '0'),
+            'wa_privacy' => intval($this->request->getPost('wa_privacy') ?? '0')
         ];
         // image
         if ($image = $this->request->getFile('image')) {

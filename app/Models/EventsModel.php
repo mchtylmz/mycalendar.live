@@ -50,7 +50,6 @@ class EventsModel extends Model
     public function slug(array $data)
     {
         $data['data']['slug'] = generate_permalink($data['data']['slug'] ?? $data['data']['title']);
-        // update slug
         return $data;
     }
 
@@ -79,6 +78,22 @@ class EventsModel extends Model
           event_subscriber.updated_at as subscriber_updated_at, 
           event_subscriber.created_at as subscriber_created_at'
         )->join('event_subscriber', 'event_subscriber.event_id = events.id', 'LEFT');
+        return $this;
+    }
+
+    public function search()
+    {
+        if ($search_category = service('request')->getGet('c')) {
+            $this->where('category', clean_number($search_category));
+        }
+        if ($search_title = service('request')->getGet('q')) {
+            $search_title = clean_string($search_title);
+            $this->groupStart();
+            $this->orLike('title', $search_title);
+            $this->orLike('content', $search_title);
+            $this->orLike('tags', $search_title);
+            $this->groupEnd();
+        }
         return $this;
     }
 }

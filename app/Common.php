@@ -97,6 +97,7 @@ if (!function_exists('notification')) {
     }
 }
 
+
 if (!function_exists('clean_number')) {
     function clean_number($number): int
     {
@@ -175,6 +176,13 @@ if (!function_exists('category')) {
             cache()->save($cache_name, $cache_value, 1800);
         } // not found
         return $cache_value;
+    }
+}
+
+if (!function_exists('show404')) {
+    function show404()
+    {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
 }
 

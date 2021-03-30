@@ -8,9 +8,11 @@ class Login extends Auth
 	public function index()
 	{
 	    $data['PageTitle'] = lang('Auth.login.title');
+
 	    if ($referrer = service('request')->getUserAgent()->getReferrer()) {
 	        session()->set('redirect_after_login', $referrer);
         }
+
 		return view('auth/login', $data);
 	}
 

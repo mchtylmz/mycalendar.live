@@ -35,7 +35,6 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-
 // Public Group
 $routes->group('', function ($routes) {
     // Event Group
@@ -46,19 +45,15 @@ $routes->group('', function ($routes) {
         $routes->get('users', 'EventDetail::users/$1/$2', ['as' => 'eventDetail.users']);
         // Event Requests Filter Auth
         $routes->group('', ['filter' => 'auth'], function ($routes) {
-            // GET
-
-            // POST
             $routes->post('users', 'EventDetail::requestPost/$1/$2');
             $routes->post('messages', 'EventDetail::messagePost/$1/$2');
         });
-
     });
-    // Guest User Profile
+    // User Profile
     $routes->get('my/(:any)', 'Account::profile/$1', ['as' => 'user.profile']);
     // Category Detail
     $routes->get('category/(:any)', 'Home::category/$1', ['as' => 'category']);
-    // Contact
+    // Users
     $routes->get('users', 'Home::users', ['as' => 'users']);
 });
 
@@ -112,7 +107,7 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
     $routes->get('events', 'Events::index');
     $routes->group('notifications', function ($routes) {
-        $routes->get('read', 'Notifications::read', ['filter' => 'auth']);
+        $routes->get('read', 'Notifications::read');
     });
 });
 /*

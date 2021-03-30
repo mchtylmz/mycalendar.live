@@ -18,7 +18,7 @@ class Auth extends BaseController
 	}
 
 	public function index()
-	{
+    {
 		if (auth_check()) {
 			return redirect()->route('my.events');
 		}

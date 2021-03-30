@@ -32,8 +32,7 @@ class NotificationsModel extends Model
     public function send(array $data): bool
     {
         try {
-            notification()->save($data);
-            return true;
+            return notification()->save($data);
         } catch (\ReflectionException $e) {
             return false;
         }

@@ -46,10 +46,9 @@ class ForgotPassword extends Auth
 			'reset_token' => $user->reset_token
 		]);
 		if (!$sendEmail) {
-			// error
 			return redirect()->back()->withInput()->with('error', lang('Auth.email.errorPasswordSendLink'));
 		}
-		// success
+
         return redirect()->route('auth.login')->with('success', lang('Auth.forgotPassword.success'));
 	}
 

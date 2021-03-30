@@ -9,7 +9,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <?= view('layout/user', [
                                 'user' => $user,
-                                'showButtons' => $showButtons ?? false
+                            'showButtons' => $showButtons ?? false
                             ]); ?>
                         </div>
                     <?php endforeach; ?>

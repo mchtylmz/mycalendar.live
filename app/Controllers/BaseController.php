@@ -29,7 +29,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['form', 'url', 'text', 'html', 'inflector'];
+	protected $helpers = ['form', 'url', 'text', 'html'];
     protected $pager;
 
     /**
@@ -54,20 +54,4 @@ class BaseController extends Controller
         // pager
         $this->pager = Services::pager();
 	}
-
-	public function event_search(EventsModel $events): EventsModel
-    {
-        if ($search_category = service('request')->getGet('c')) {
-            $events->where('category', clean_number($search_category));
-        }
-        if ($search_title = service('request')->getGet('q')) {
-            $search_title = clean_string($search_title);
-            $events->groupStart();
-            $events->orLike('title', $search_title);
-            $events->orLike('content', $search_title);
-            $events->orLike('tags', $search_title);
-            $events->groupEnd();
-        }
-        return $events;
-    }
 }

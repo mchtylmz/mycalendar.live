@@ -31,8 +31,12 @@ class ResetPassword extends Auth
 			return redirect()->back()->withInput()->with('error', lang('Auth.invalidRequest'));
 		}
 
-		if (!$this->user->changePassword($user->id, $this->request->getPost('password'), $this->request->getPost('repassword'))) {
-			// error
+		$change = $this->user->changePassword(
+		    $user->id,
+            $this->request->getPost('password'),
+            $this->request->getPost('repassword')
+        );
+		if (!$change) {
 			return redirect()->back()->withInput()->with('errors', $this->user->errors());
 		}
 

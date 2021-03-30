@@ -22,10 +22,10 @@ class Notifications extends BaseController
 
 	public function read()
     {
-        $update_ids = [];
-        foreach (auth_user()->notifications as $notification) {
-            $update_ids[] = $notification->id;
-        }
+        $update_ids = array_map(function ($notification) {
+            return $notification->id ?? null;
+        }, auth_user()->notifications);
+
         if ($update_ids) {
             try {
                 $update = $this->notification->update($update_ids, ['is_read' => '1']);
@@ -35,6 +35,7 @@ class Notifications extends BaseController
                  }
             } catch (\ReflectionException $e) {}
         }
+
         return $this->failNotFound('Bildirim bulunamadı!.');
     }
 

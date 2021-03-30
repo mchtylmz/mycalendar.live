@@ -51,10 +51,12 @@ class Events extends BaseController
 
 		$data['tabs'] = ['all', 'upcoming', 'waiting', 'past'];
         foreach ($data['tabs'] as $key => $value) {
-            $events_{$value} = auth_user()->getEvents($value);
-            $events_{$value} = $this->event_search($events_{$value});
-            $data['events'][$value] = $events_{$value}->paginate($this->perPage, $value);
-            $data['pages'][$value] = $events_{$value}->pager;
+            $events = auth_user()
+                ->getEvents($value)
+                ->search()
+                ->paginate($this->perPage, $value);
+            $data['events'][$value] = $events;
+            $data['pages'][$value] = $events->pager;
         }
 
 		return view('event/index', $data);
@@ -63,8 +65,6 @@ class Events extends BaseController
 	public function calendar()
 	{
 		$data['PageTitle'] = 'Etkinlik Takvimi';
-
-
 		return view('event/calendar', $data);
 	}
 
@@ -83,6 +83,7 @@ class Events extends BaseController
 
 		$start_datetime = $this->request->getPost('start_date') .' '. $this->request->getPost('start_time');
 		$end_datetime = $this->request->getPost('end_date') .' '. $this->request->getPost('end_time');
+
         $event_data = [
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
@@ -93,11 +94,11 @@ class Events extends BaseController
                     $this->request->getPost('latlng'),
                     $this->request->getPost('address')
                 ],
-                'phone'   => $this->request->getPost('phone'),
-                'meet'    => $this->request->getPost('meet'),
+                'phone' => $this->request->getPost('phone'),
+                'meet' => $this->request->getPost('meet'),
                 'youtube' => $this->request->getPost('youtube'),
-                'twitch'  => $this->request->getPost('twitch'),
-                'zoom'    => $this->request->getPost('zoom'),
+                'twitch' => $this->request->getPost('twitch'),
+                'zoom' => $this->request->getPost('zoom'),
                 'instagram' => $this->request->getPost('instagram'),
                 'web' => $this->request->getPost('website')
             ]),
@@ -108,6 +109,7 @@ class Events extends BaseController
             'start_datetime' => date('Y-m-d H:i:00', strtotime($start_datetime)),
             'end_datetime' => date('Y-m-d H:i:00', strtotime($end_datetime)),
         ];
+
         // event_id
         if ($event_id = clean_number($event_id)) {
             $event_data['id'] = $event_id;
@@ -134,14 +136,13 @@ class Events extends BaseController
 
 	public function edit(int $event_id)
 	{
-		$data['PageTitle'] = 'Etkinlik Düzenle';
 		$event = $this->event->where('id', clean_number($event_id))->first();
 		if (!$event) {
             return redirect()->back()->with('error', lang('Event.notFound'));
         }
 
 		$data['event'] = $event;
-		$data['PageTitle'] = $event->title .' - '. $data['PageTitle'];
+		$data['PageTitle'] = $event->title .' - Etkinlik Düzenle';
 
 		if ($referrer = service('request')->getUserAgent()->getReferrer()) {
 	        session()->set('redirect_after_event_edit', $referrer);

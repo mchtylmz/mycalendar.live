@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \App\Models\EventsModel;
 use App\Models\EventSubscriberModel;
 use \App\Models\UserModel;
+use CodeIgniter\I18n\Time;
 
 class Home extends BaseController
 {
@@ -28,19 +29,18 @@ class Home extends BaseController
 		$this->perPage = 12;
 	}
 
-    public function index()
+    public function index(): string
     {
         $data['PageTitle'] = 'Etkinlikler';
         $data['FixedTopNav'] = true;
 
-
-        $this->event->where('start_datetime >=', date('Y-m-d H:i:s'));
         if (!auth_check()) {
             $this->event->where('status', '2');
         }
-		$this->event = $this->event_search($this->event);
 
 		$data['events'] = $this->event
+            ->where('start_datetime >=', date('Y-m-d H:i:s'))
+            ->search()
             ->orderBy('start_datetime', 'ASC')
             ->paginate($this->perPage);
 		$data['pager'] = $this->event->pager;
@@ -53,8 +53,9 @@ class Home extends BaseController
         $data['PageTitle'] = 'Etkinlikler';
 
         $category = category('slug', $slug);
-        if (!$category)
-            return redirect()->to('/');
+        if (!$category) {
+            show404();
+        }
 
         $data['PageTitle'] = $category->name;
 
@@ -83,6 +84,12 @@ class Home extends BaseController
 		$data['pager'] = $users->pager;
 
         return view('users', $data);
+    }
+
+    public function deneme() {
+        dd(
+            (new Time('7 days'))->timestamp
+        );
     }
 
 }
