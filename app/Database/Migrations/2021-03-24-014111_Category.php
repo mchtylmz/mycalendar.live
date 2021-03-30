@@ -25,6 +25,11 @@ class Category extends Migration
                 'constraint' => '90',
                 'null' => false
             ],
+            'color' => [
+                'type' => 'VARCHAR',
+                'constraint' => '10',
+                'default' => '#465af7'
+            ],
         ]);
         $this->forge->addField("updated_at timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()");
         $this->forge->addField("created_at timestamp NULL DEFAULT current_timestamp()");

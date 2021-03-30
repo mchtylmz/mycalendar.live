@@ -10,7 +10,7 @@ class CategoryModel extends Model
     protected $primaryKey     = 'id';
     protected $returnType     = 'App\Entities\CategoryEntity';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['slug', 'name'];
+    protected $allowedFields = ['slug', 'name', 'color'];
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -20,8 +20,8 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override(function() {
-	return view('errors/404');
+$routes->set404Override(function () {
+    return view('errors/404');
 });
 $routes->setAutoRoute(true);
 
@@ -110,6 +110,7 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
 
 // API Group
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->get('events', 'Events::index');
     $routes->group('notifications', function ($routes) {
         $routes->get('read', 'Notifications::read', ['filter' => 'auth']);
     });

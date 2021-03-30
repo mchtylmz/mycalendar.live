@@ -111,6 +111,16 @@ class EventDetail extends BaseController
             if (!$delete) {
                 return redirect()->back()->with('error', lang('Event.subscribe.error'));
             }
+            // Notifications
+            if ($action == 'left_by_owner') {
+                $message = "{$event->title} etkinliğinden çıkarıldınız!.";
+                notification()->send([
+                    'user_id' => $user_id,
+                    'message' => $message,
+                    'link' => route_to('eventDetail.users', $event->slug, $event->id)
+                ]);
+            }
+            // succcess
             return redirect()->back()->with('success', lang('Event.subscribe.left'));
         }
 
@@ -127,6 +137,18 @@ class EventDetail extends BaseController
             } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
+            // Notifications
+            $message = auth_user()->fullname . " üyesi {$event->title} etkinliğinize ";
+            if ($event->subscribe_status)
+                $message .= " katılacak";
+            else
+                $message .= " katılma talebi gönderdi";
+            notification()->send([
+                'user_id' => $event->owner->id,
+                'message' => $message,
+                'link' => route_to('eventDetail.users', $event->slug, $event->id)
+            ]);
+            // success join
             return redirect()->back()->with('success', lang('Event.subscribe.join'));
         }
 
@@ -143,6 +165,14 @@ class EventDetail extends BaseController
             } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
+            // Notifications
+            $message = "{$event->title} etkinliğinize katılma talebiniz onaylandı";
+            notification()->send([
+                'user_id' => $new_data['user_id'],
+                'message' => $message,
+                'link' => route_to('eventDetail.users', $event->slug, $event->id)
+            ]);
+            // succcess
             return redirect()->back()->with('success', lang('Event.subscribe.join'));
         }
 
@@ -185,6 +215,13 @@ class EventDetail extends BaseController
         } catch (Exception $e) {
             return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
+
+        $message = auth_user()->fullname . " üyesinden {$event->title} etkinliği için yeni mesajınız var!.";
+        notification()->send([
+            'user_id' => $event->owner->id,
+            'message' => $message,
+            'link' => route_to('eventDetail.messages', $event->slug, $event->id)
+        ]);
 
         // success
         return redirect()->back()->with('success', lang('Event.message.success'));

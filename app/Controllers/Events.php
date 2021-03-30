@@ -60,6 +60,14 @@ class Events extends BaseController
 		return view('event/index', $data);
 	}
 
+	public function calendar()
+	{
+		$data['PageTitle'] = 'Etkinlik Takvimi';
+
+
+		return view('event/calendar', $data);
+	}
+
 	public function new()
 	{
 		$data['PageTitle'] = 'Yeni Etkinlik Oluştur';
