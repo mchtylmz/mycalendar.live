@@ -24,8 +24,8 @@ Etkinliklerinizi herkese açık paylaşarak, etkinliğe özel oluşturulan link 
 ## Demo
 
 [mycalendar.live](https://mycalendar.live)
-- Email : (eklenecek)
-- Şifre : (eklenecek)
+- Email : test@mycalendar.live
+- Şifre : test123
 
 ## Veritabanı Modeli
 

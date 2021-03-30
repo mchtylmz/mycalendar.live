@@ -229,9 +229,8 @@ class EventDetail extends BaseController
 
         // private
         if (!auth_check() && $eventDetail->status == '1') {
-            redirect()->to('/');
-            exit;
-            return redirect()->back();
+            session()->setFlashdata('error', 'Etkinliği görüntülemek için üye girişi yapılmalıdır!.');
+            throw new \CodeIgniter\Router\Exceptions\RedirectException(route_to('auth.login'));
         }
 
         return $eventDetail;
