@@ -28,7 +28,7 @@ chdir(__DIR__);
 require realpath(FCPATH . 'app/Config/Paths.php') ?: FCPATH . '../app/Config/Paths.php';
 // ^^^ Change this if you move your application folder
 
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', 'production');
 
 $paths = new Config\Paths();
 

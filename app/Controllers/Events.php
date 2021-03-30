@@ -51,12 +51,11 @@ class Events extends BaseController
 
 		$data['tabs'] = ['all', 'upcoming', 'waiting', 'past'];
         foreach ($data['tabs'] as $key => $value) {
-            $events = auth_user()
+            $event_model = auth_user()
                 ->getEvents($value)
-                ->search()
-                ->paginate($this->perPage, $value);
-            $data['events'][$value] = $events;
-            $data['pages'][$value] = $events->pager;
+                ->search();
+            $data['events'][$value] = $event_model->paginate($this->perPage, $value);
+            $data['pages'][$value] = $event_model->pager;
         }
 
 		return view('event/index', $data);
