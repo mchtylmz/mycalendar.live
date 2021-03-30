@@ -105,7 +105,7 @@ class EventDetail extends BaseController
                 notification()->send([
                     'user_id' => $user_id,
                     'message' => $message,
-                    'link' => route_to('eventDetail.users', $event->slug, $event->id)
+                    'link' => $event->getRoute('users')
                 ]);
             }
             // succcess
@@ -128,13 +128,13 @@ class EventDetail extends BaseController
             // Notifications
             $message = auth_user()->fullname . " üyesi {$event->title} etkinliğinize ";
             if ($event->subscribe_status)
-                $message .= " katılacak";
+                $message .= " katılıyor.";
             else
-                $message .= " katılma talebi gönderdi";
+                $message .= " katılma talebi gönderdi.";
             notification()->send([
                 'user_id' => $event->owner->id,
                 'message' => $message,
-                'link' => route_to('eventDetail.users', $event->slug, $event->id)
+                'link' => $event->getRoute('users')
             ]);
             // success join
             return redirect()->back()->with('success', lang('Event.subscribe.join'));
@@ -158,7 +158,7 @@ class EventDetail extends BaseController
             notification()->send([
                 'user_id' => $new_data['user_id'],
                 'message' => $message,
-                'link' => route_to('eventDetail.users', $event->slug, $event->id)
+                'link' => $event->getRoute('users')
             ]);
             // succcess
             return redirect()->back()->with('success', lang('Event.subscribe.join'));
@@ -206,7 +206,7 @@ class EventDetail extends BaseController
         notification()->send([
             'user_id' => $event->owner->id,
             'message' => $message,
-            'link' => route_to('eventDetail.messages', $event->slug, $event->id)
+            'link' => $event->getRoute('messages')
         ]);
 
         // success
@@ -215,21 +215,23 @@ class EventDetail extends BaseController
 
     private function findEvent(string $slug, int $event_id): object
     {
-		$cache_name = "eventDetail_{$slug}_{$event_id}";
-        // is exists cache
-        $eventDetail = cache($cache_name);
-        if (!$eventDetail) {
-            $eventDetail = $this->event
+        $eventDetail = myCache("eventDetail_{$slug}_{$event_id}", function () use ($slug, $event_id) {
+            return $this->event
                 ->where('slug', clean_string($slug))
                 ->where('id', clean_number($event_id))
                 ->first();
-            if ($eventDetail)
-                cache()->save($cache_name, $eventDetail, 1800);
-        } // not found
+        });
 
         // Not found
         if (!$eventDetail) {
             show404();
+        }
+
+        // private
+        if (!auth_check() && $eventDetail->status == '1') {
+            redirect()->to('/');
+            exit;
+            return redirect()->back();
         }
 
         return $eventDetail;

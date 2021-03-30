@@ -86,10 +86,4 @@ class Home extends BaseController
         return view('users', $data);
     }
 
-    public function deneme() {
-        dd(
-            (new Time('7 days'))->timestamp
-        );
-    }
-
 }

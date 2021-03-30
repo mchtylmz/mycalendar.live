@@ -33,36 +33,18 @@ class UserEntity extends Entity
 
     public function myEvents(int $limit = 4) : array
     {
-        $cache_name = "users_{$this->attributes['id']}_myevents_{$limit}";
-        if (!auth_check())
-            $cache_name .= "_guest";
-        // is exists cache
-        $events = cache($cache_name);
-        if (!$events) {
-            $events = $this->eventsModel(false)
-                ->orderBy('start_datetime', 'DESC')
-                ->findAll($limit);
-            if ($events)
-                cache()->save($cache_name, $events, 1800);
-        } // not found
-        return $events;
+        $user = $this->eventsModel(false);
+        return myCache("users_{$this->attributes['id']}_myevents_{$limit}", function () use ($user, $limit) {
+            return $user->orderBy('start_datetime', 'DESC')->findAll($limit);
+        }, true);
     }
 
     public function mySubscribers(int $limit = 4) : array
     {
-        $cache_name = "users_{$this->attributes['id']}_mysubcribers_{$limit}";
-        if (!auth_check())
-            $cache_name .= "_guest";
-        // is exists cache
-        $events = cache($cache_name);
-        if (!$events) {
-            $events = $this->eventsModel(true, false)
-                ->orderBy('start_datetime', 'DESC')
-                ->findAll($limit);
-            if ($events)
-                cache()->save($cache_name, $events, 1800);
-        } // not found
-        return $events;
+        $user = $this->eventsModel(true, false);
+        return myCache("users_{$this->attributes['id']}_mysubcribers_{$limit}", function () use ($user, $limit) {
+            return $user->orderBy('start_datetime', 'DESC')->findAll($limit);
+        }, true);
     }
 
     public function getEvents(string $tab = 'all'): EventsModel
@@ -74,7 +56,7 @@ class UserEntity extends Entity
                    ->where('start_datetime >=', date('Y-m-d H:i:0'))
                    ->where(
                        'start_datetime <=',
-                       (new Time($this->attributes['event_upcoming'] ?? 7 . ' days'))->timestamp
+                       (new Time(($this->attributes['event_upcoming'] ?? 7) . ' days'))->toDateTimeString()
                    )
                    ->orderBy('start_datetime', 'ASC');
                break;
@@ -97,35 +79,25 @@ class UserEntity extends Entity
 
     public function getNotifications(int $limit = 5)
     {
-        $cache_name = "users_{$this->attributes['id']}_notifications_{$limit}";
-        // is exists cache
-        $notifications = cache($cache_name);
-        if (!$notifications) {
-            $notifications = notification()
-                ->where('user_id', $this->attributes['id'])
+        $user_id = $this->attributes['id'];
+        return myCache("users_{$user_id}_notifications_{$limit}", function () use ($user_id, $limit) {
+            return notification()
+                ->where('user_id', $user_id)
                 ->where('is_read', '0')
                 ->orderBy('is_read', 'DESC')
                 ->findAll($limit);
-            if ($notifications)
-                cache()->save($cache_name, $notifications, 1800);
-        } // not found
-        return $notifications;
+        }, true);
     }
 
     public function getNotificationCount()
     {
-        $cache_name = "users_{$this->attributes['id']}_notificationcount";
-        // is exists cache
-        $notifications = cache($cache_name);
-        if (!$notifications) {
-            $notifications = notification()
-                ->where('user_id', $this->attributes['id'])
+        $user_id = $this->attributes['id'];
+        return myCache("users_{$user_id}_notificationcount", function () use ($user_id) {
+            return notification()
+                ->where('user_id', $user_id)
                 ->where('is_read', '0')
                 ->countAllResults();
-            if ($notifications)
-                cache()->save($cache_name, $notifications, 1800);
-        } // not found
-        return $notifications;
+        });
     }
 
     protected function eventsModel(bool $subscriber = true, bool $owner = true): EventsModel

@@ -34,14 +34,14 @@ class Account extends BaseController
     public function notifications()
     {
         $data['PageTitle'] = 'Bildirimler';
-        /*
-         *
-        $data['messages'] = notification()
-            ->where('event_id', $data['event']->id)
-            ->orderBy('created_at', 'DESC')
-            ->paginate($this->per_page);
-        $data['pager'] = $this->event_message->pager;
-        */
+
+        $notifications = notification()
+                ->where('user_id', auth_user()->id)
+                ->orderBy('created_at', 'DESC');
+
+        $data['notifications'] = $notifications->paginate(12);
+        $data['pager'] = $notifications->pager;
+
         return view('account/notifications', $data);
     }
 

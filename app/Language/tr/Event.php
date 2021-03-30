@@ -8,8 +8,8 @@ return [
     ],
     'subscribe' => [
         'error' => 'İşlem tamamlanamadı!.',
-        'left' => 'ayrılma',
-        'join' => 'Katılma'
+        'left' => 'Etkinlikten çıkıldı!.',
+        'join' => 'Etkinliğe katılma başarılı!.'
     ],
     'delete' => [
         'success' => 'Etkinlik başarıyla silindi!.'

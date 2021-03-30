@@ -20,9 +20,11 @@
                             ])?>
                         </div>
                         <div class="card-body m-0 p-3">
-                            <?=view('event/detail/messages/send', [
-                                'showInput' => auth_check() && ($event->message_status == '1' || $event->owner->id == auth_user()->id)
-                            ])?>
+                            <?php if (!$event->isPast()): ?>
+                                <?= view('event/detail/messages/send', [
+                                    'showInput' => auth_check() && ($event->message_status == '1' || $event->owner->id == auth_user()->id)
+                                ]) ?>
+                            <?php endif; ?>
                             <div class="row mb-3">
                                 <?php if ($messages): ?>
                                     <?php foreach ($messages as $key => $message) : ?>

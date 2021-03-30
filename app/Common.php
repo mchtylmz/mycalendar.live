@@ -18,6 +18,7 @@ if (!function_exists('post_method')) {
 if (!function_exists('assets_url')) {
     function assets_url(string $assets): string
     {
+        // $assets .= '?v=1.0';
         if (defined('ENVIRONMENT') && ENVIRONMENT == 'development') {
             $assets .= '?v=0.' . time();
         }
@@ -60,33 +61,19 @@ if (!function_exists('user')) {
     function user(int $user_id)
     {
         $user_id = clean_number($user_id);
-        $cache_name = "users_{$user_id}";
-        // is exists cache
-        $user = cache($cache_name);
-        if (!$user) {
+        return myCache("users_{$user_id}", function () use($user_id) {
             $user = new \App\Models\UserModel();
-            $user = $user->where('id', $user_id)->first();
-            if ($user)
-                cache()->save($cache_name, $user, 1800);
-        } // not found
-        return $user;
+            return $user->where('id', $user_id)->first();
+        });
     }
 }
 
 if (!function_exists('site_setting')) {
     function site_setting(string $name): string
     {
-        $cache_name = "settings_$name";
-        // is exists cache
-        $cache_value = cache($cache_name);
-        if (!$cache_value) {
-            // settings value
-            $settingsModel = new \App\Models\SettingsModel;
-            $cache_value = $settingsModel->get($name);
-            // Save into the cache for 30 minutes
-            cache()->save($cache_name, $cache_value, 1800);
-        } // not found
-        return $cache_value;
+        return myCache("settings_{$name}", function () use($name) {
+            return (new \App\Models\SettingsModel())->get($name);
+        });
     }
 }
 
@@ -148,34 +135,39 @@ if (!function_exists('tel')) {
 if (!function_exists('categories')) {
     function categories(): array
     {
-        $cache_name = "categories";
-        // is exists cache
-        $cache_value = cache($cache_name);
-        if (!$cache_value) {
-            $category = new \App\Models\CategoryModel();
-            $cache_value = $category->findAll();
-            // Save into the cache for 30 minutes
-            cache()->save($cache_name, $cache_value, 1800);
-        } // not found
-        return $cache_value;
+        return myCache("categories", function () {
+            return (new \App\Models\CategoryModel())->findAll();
+        });
     }
 }
 
 if (!function_exists('category')) {
     function category(string $column, string $value)
     {
-        $cache_name = "category_{$column}_{$value}";
-        // is exists cache
-        $cache_value = cache($cache_name);
-        if (!$cache_value) {
+        return myCache("category_{$column}_{$value}", function () use($column, $value) {
             $category = new \App\Models\CategoryModel();
-            $cache_value = $category
+            return $category
                 ->where(clean_string($column), clean_string($value))
                 ->first();
-            // Save into the cache for 30 minutes
-            cache()->save($cache_name, $cache_value, 1800);
-        } // not found
-        return $cache_value;
+        });
+    }
+}
+
+if (!function_exists('myCache')) {
+    function myCache(string $key, $callback, bool $guest = false)
+    {
+        if ($guest && !auth_check()) {
+            $key = $key . '_guest';
+        }
+
+        $cache_data = cache($key);
+        if (!$cache_data) {
+            $cache_data = call_user_func($callback);
+            if ($cache_data)
+                cache()->save($key, $cache_data, 3600);
+        }
+
+        return $cache_data;
     }
 }
 

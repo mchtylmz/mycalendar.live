@@ -7,23 +7,14 @@ use \App\Models\EventSubscriberModel;
 
 class EventsEntity extends Entity
 {
-    public function getRoute()
+    public function getRoute(string $method = 'index')
     {
-        return route_to('eventDetail.index', $this->attributes['slug'], $this->attributes['id']);
+        return route_to("eventDetail.{$method}", $this->attributes['slug'], $this->attributes['id']);
     }
 
     public function getOwner()
     {
-        $user_id = $this->attributes['owner'];
-        $cache_name = "users_{$user_id}";
-        // is exists cache
-        $user = cache($cache_name);
-        if (!$user) {
-            $user = (new UserModel())->where('id', $user_id)->first();
-            if ($user)
-                cache()->save($cache_name, $user, 1800);
-        } // not found
-        return $user;
+        return user($this->attributes['owner']);
     }
 
     public function getCategory()
@@ -73,26 +64,33 @@ class EventsEntity extends Entity
 
     public function getSubscriberCount()
     {
-        $cache_name = "event_subscribe_count_{$this->attributes['id']}";
-        // is exists cache
-        $counts = cache($cache_name);
-        if (!$counts) {
-            $counts = (new EventSubscriberModel())->where('event_id', $this->attributes['id'])->countAllResults();
-            if ($counts)
-                cache()->save($cache_name, $counts, 1800);
-        } // not found
-        return $counts;
+        $event_id = $this->attributes['id'];
+        return myCache("event_subscribe_count_{$event_id}", function () use($event_id) {
+            return (new EventSubscriberModel())
+                ->where('event_id', $event_id)
+                ->countAllResults();
+        });
     }
 
     public function isSubscriber(int $user_id = null)
     {
-        $subscriber = (new EventSubscriberModel())
-            ->select('request_subscribe')
-            ->where('event_id', $this->attributes['id'])
-            ->where('user_id', $user_id ?? auth_user()->id)
-            ->first();
-        if (!$subscriber) return false;
-        return $subscriber->request_subscribe;
+        $event_id = $this->attributes['id'];
+        $user_id = $user_id ?? auth_user()->id;
+        return myCache("event_isSubscribe_{$event_id}_user_{$user_id}", function () use ($event_id, $user_id) {
+            $subscriber = (new EventSubscriberModel())
+                ->select('request_subscribe')
+                ->where('event_id', $event_id)
+                ->where('user_id', $user_id)
+                ->first();
+            if (!$subscriber)
+                return false;
+            return $subscriber->request_subscribe;
+        }, true);
+    }
+
+    public function isPast() : bool
+    {
+        return !(strtotime($this->attributes['start_datetime']) >= time());
     }
 
     public function getMapsLink(array $maps)
