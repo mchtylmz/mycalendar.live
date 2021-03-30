@@ -28,12 +28,6 @@ chdir(__DIR__);
 require realpath(FCPATH . 'app/Config/Paths.php') ?: FCPATH . '../app/Config/Paths.php';
 // ^^^ Change this if you move your application folder
 
-if (isset($_COOKIE['deneme'])) {
-    define('ENVIRONMENT', 'development');
-} else {
-    define('ENVIRONMENT', 'production');
-}
-
 $paths = new Config\Paths();
 
 // Location of the framework bootstrap file.
