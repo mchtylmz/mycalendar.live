@@ -1,18 +1,17 @@
 # mycalendar.live 
 Kişisel, takım veya grup olarak etkinlikleri organize etmeyi sağlamayı amaçlayan web projesidir.
 
-Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir.
+Etkinlik ile ilgili notları, mesajları ve katılan kullanıcıları gösteren veya düzenlemeyi kolaylaştıran web projesidir.
 > **Özellikler**
 - Kullanıcı girişi, üye olma, şifremi unuttum, profil sayfası
-- Etkinlik ekleme, düzenleme
+- Etkinlik ekleme, düzenleme, paylaşma
 - Yaklaşan etkinlikler ile ilgili sms, email ile bilgilendirme alma
 - Etkinlik için not, mesaj ekleme
 - Etkinlik katılımcı yönetimi
-- Etkinlik Google Meet, Youtube video veya canlı yayın, Zoom, Twitch, Dailymotion linki ekleme
-- Online etkinlik oluşturma, Fiziksel etkinlik için Google Maps ile konum seçebilme
+- Etkinlik Google Meet, Youtube video veya canlı yayın, Zoom, Twitch, Instagram, Website linki ekleme
+- Online etkinlik oluşturma, Fiziksel etkinlik için Yandex Maps ile konum seçebilme
 - Etkinlik takvimi ile etkinlikleri bir arada görme
 - Koyu mod özelliği ile kullanıcı dostu ekran deneyimi
-- Sınırsız etkinlik ekleme ve katılabilme ile kendi zamanını organize etme
 - İstendiği zaman etkinlikten çıkabilme
 - Etkinlikleri herkese açık veya gizli olarak düzenleme ile özel etkinlik oluşturabilme
 
@@ -21,6 +20,17 @@ Etkinlik ile ilgili notları, dosyaları, mesajları ve katılan kullanıcılar�
 [mycalendar.live](https://mycalendar.live)
 - Email : test@mycalendar.live
 - Şifre : test123
+
+## Son Kuıllanıcı Hikayeleri
+[kullanıcı tipi] olarak, [istenilen] ki [kazanım]
+
+- **Sisteme kayıt olunabilmesi - Son kullanıcı** olarak **sisteme kayıt olmak istiyorum** ki **siteyi kullanmaya başlyayaım**
+- **Sisteme giriş yapabilmesi - Son kullanıcı** olarak **sisteme giriş yapmak istiyorum** ki **hesabımı kullanmaya devam edebileyim**
+- **Kullanıcı, kendi bilgilerini değiştirmesi - Son kullanıcı** olarak **kayıt olduktan sonra bilgileri değiştirmek istiyorum** ki **yeni bilgileri kullanayım**
+- **Kullanıcı etkinlik oluşturması - Son kullanıcı** olarak **yeni etkinlik oluşturmak istiyorum** ki **başka üyelerle etkileşimde olayım**
+- **Kullanıcı etkinlik katılması - Son kullanıcı** olarak **istediğim etkinliklere katılmak istiyorum** ki **ilgilendiğim etkinlikleri takip edebileyim**
+- **Kullanıcı etkinlik çıkması - Son kullanıcı** olarak **katıldığım etkinlikden çıkmak istiyorum** ki **etkinliğe katılmak istemedğim zaman**
+- **Kullanıcı mesaj gönderme - Son kullanıcı** olarak **etkinlilere mesaj göndermek istiyorum** ki **etkinlik hakkında bilgi paylaşımında bulunabileyim**
 
 ## Veritabanı Modeli
 
